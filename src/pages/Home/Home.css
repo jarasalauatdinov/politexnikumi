@@ -1,0 +1,657 @@
+.home-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 503px;
+    border-radius: 24px;
+    background-color: #f2f5fd;
+    padding: 0 64px;
+    margin-bottom: 96px;
+}
+
+.home-place-l {
+    padding: 83.5px 0;
+}
+
+.home-place-l-wel {
+    max-width: 520px;
+}
+
+.home-place-l h3 {
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 20px;
+}
+
+.home-place-l p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 32px;
+}
+
+.home-place-l button {
+    padding: 13px 32px;
+    border-radius: 24px;
+}
+
+.home-place-btn-l {
+    color: white;
+    background-color: var(--blue);
+    text-decoration: none;
+    margin-right: 16px;
+    padding: 13px 32px;
+    border-radius: 24px;
+}
+
+.home-place-btn-l img {
+    width: 16px;
+    height: 16px;
+    transform: translateY(3.2px);
+}
+
+.home-place-btn-r {
+    background-color: white;
+    border: 1px solid #D1D5DB;
+}
+
+.home-wrapper {
+    position: relative;
+}
+
+.classroom-img {
+    max-width: 500px;
+}
+
+.home-p-c {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    align-items: center;
+    display: flex;
+    padding: 16px;
+    gap: 12px;
+}
+
+.h-p-card-top {
+    top: -16px;
+    right: -16px;
+}
+
+.home-p-c img {
+    padding: 10px;
+    border-radius: 9999px;
+    background-color: #DBEAFE;
+}
+
+.h-p-card-bottom {
+    bottom: 0;
+    left: -12px;
+}
+
+.home-p-c h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.home-p-c p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--kulren)
+}
+
+
+.home-news {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 96px;
+}
+
+.home-news-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 36px;
+}
+
+.home-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.home-news-top h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.home-news-btn {
+    padding: 11px 17px;
+    border-radius: 9999px;
+    border: 1px solid #E2E8F0;
+    background-color: #FFFFFF;
+    display: flex;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.home-n-l-card {
+    display: flex;
+    gap: 24px;
+    align-items: start;
+    border: 1px solid #E2E8F0;
+    background-color: white;
+    border-radius: 30px;
+    width: 800px;
+}
+
+.news-content {
+    margin: 25px 0;
+}
+
+.news-content span {
+    color: var(--kulren);
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+
+.news-content h3 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 26px;
+    max-width: 450px;
+    margin-bottom: 8px;
+}
+
+.news-content p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--kulren);
+    max-width: 416px;
+    margin-bottom: 26px;
+}
+
+.news-content button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 500;
+    gap: 7px;
+}
+
+.home-n-l-card .home-imgs {
+    width: 265px;
+    height: 228px;
+    object-fit: cover;
+    border-radius: 20px 0 0 20px;
+
+}
+
+
+.home-n-l-card span img {
+    width: 12px;
+    height: 12px;
+}
+
+.home-n-l-card button img {
+    width: 16px;
+    height: 16px;
+}
+
+
+.home-news-r {
+    width: 382px;
+    height: 452px;
+    background-color: white;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+}
+
+.home-news-r-p {
+    margin: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.home-news-r-p a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding:16px;
+    color: black;
+    margin: 0;
+}
+
+
+.home-n-r-head {
+    align-items: center;
+    padding: 24px 192px 16px 24px;
+    background-color: #EFF6FF;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+
+.home-news-r button {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 16px 0 16px 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.home-news-r img {
+    padding: 9px;
+    background-color: #DBEAFE;
+    margin-right: 16px;
+    border-radius: 12px;
+}
+
+.our-teachers {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 96px;
+}
+
+.teacher-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+
+.teacher-left h3 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.teacher-left p {
+    color: var(--kulren);
+    max-width: 615px;
+    margin-bottom: 48px;
+}
+
+.teacher-right {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    text-align: center;
+    gap: 30px;
+}
+
+
+.teacher-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.teacher-right img {
+    width: 100.9%;
+    margin-bottom: 24px;
+}
+
+.teacher-right h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #111827;
+}
+
+.teacher-right p {
+    color: var(--blue);
+    margin-bottom: 24px;
+}
+
+.about-school {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 96px;
+    gap: 48px;
+}
+
+.about-school-l {
+    position: relative;
+    background-color: white;
+    border-radius: 26px;
+    border: 1px solid #E2E8F0;
+}
+
+.school-build {
+    border-radius: 26px 26px 0 0;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.school-build-bac {
+    position: absolute;
+    border-radius: 26px 26px 0 0;
+    width: 100.1%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.about-school-l h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    margin: 0 0 18px 40px;
+}
+
+.about-school-l p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--kulren);
+    margin: 0 48px 20px 40px;
+}
+
+.about-school-peoples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 2fr));
+    gap: 16px;
+    margin: 0 32px 32px;
+}
+
+.about-school-peoples h5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 80px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--kulren);
+    background-color: #EFF6FF;
+    border-radius: 16px;
+}
+
+.about-school-peoples span {
+    color: var(--blue);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.about-school-l button {
+    display: flex;
+    gap: 7px;
+    color: white;
+    background-color: var(--blue);
+    align-items: center;
+    padding: 11px 24px;
+    border-radius: 9999px;
+    border: none;
+    margin: 0 40px 40px;
+}
+
+
+.about-school-r {
+    min-width: 583px;
+    max-height: 712px;
+    border-radius: 26px;
+    background-color: white;
+    border: 1px solid #E2E8F0;
+
+}
+
+.about-school-r-title {
+    background-color: #EFF6FF;
+    padding: 24px 0 16px 24px;
+    border-radius: 26px 26px 0 0;
+}
+
+.about-school-r-title h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.about-s-r-card {
+    background-color: white;
+    margin: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+.about-s-r-c-third {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 95px;
+}
+
+.about-s-r-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.about-s-r-card p {
+    display: flex;
+    align-items: center;
+    color: var(--kulren);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    gap: 8px;
+}
+
+.about-s-r-card img {
+    width: 16px;
+    height: 16px;
+}
+
+.about-school-r button {
+    width: 90%;
+    padding: 11px 0;
+    margin: 0 24px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 9999px;
+    border: 1px solid #E2E8F0;
+    background-color: white;
+}
+
+
+
+.photo-gallery {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 96px;
+}
+
+.gallery-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 33px;
+}
+
+.gallery-top h2 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.gallery-top button {
+    border: 1px solid #E2E8F0;
+    border-radius: 9999px;
+    padding: 0 17px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+
+.gallery-bottom {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(394px, 3fr));
+    gap: 16px;
+}
+
+.gallery-bottom img {
+    width: 100%;
+    height: 295px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 24px;
+}
+
+
+
+@media (max-width: 1279px) {
+    .home-news {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-n-l-card {
+        width: 100%;
+    }
+
+    .home-news-r {
+        width: 100%;
+    }
+
+    .teacher-right {
+        grid-template-columns: repeat(auto-fit, minmax(302px, 1fr));
+    }
+
+    .about-school {
+        flex-direction: column;
+    }
+
+    .about-school-peoples {
+        grid-template-columns: repeat(auto-fit, minmax(312px, 2fr))
+    }
+
+    .gallery-bottom {
+    grid-template-columns: repeat(auto-fit, minmax(309px, 3fr));
+    }
+
+    .gallery-bottom img{
+    height: 240px;
+    }
+}
+
+
+@media (max-width: 1012px) {
+    .home-wrapper {
+        display: none;
+    }
+
+    .home-place-btn-l {
+        margin-bottom: 16px;
+    }
+
+    .gallery-bottom {
+        grid-template-columns: repeat(auto-fit, minmax(229px, 3fr));
+        }
+
+    .gallery-bottom img{
+        height: 171px;
+    }
+
+    
+
+}
+
+
+@media (max-width: 687px) {
+
+    .home-page {
+        padding: 48px 96px 48px 48px;
+        min-height: 338px;
+    }
+
+    .home-place-l {
+        padding: 0;
+    }
+
+    .home-place-l h3 {
+        font-size: 36px;
+        line-height: 45px;
+    }
+
+    .home-page {
+        padding: 32px;
+    }
+
+    .home-n-l-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-n-l-card .home-imgs {
+        width: 100%;
+        height: 192px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .news-content {
+        padding: 0 25px;
+    }
+
+    .about-school-r {
+        min-width: 320px;
+    }
+
+    .about-school-peoples {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(144px, 2fr));
+    }
+
+    .about-school-peoples h5 {
+        min-width: 130px;
+        padding: 16px 10px;
+    }
+
+    .gallery-bottom {
+        grid-template-columns: repeat(auto-fit, minmax(176px, 2fr));
+        }
+
+    .gallery-bottom img{
+        height: 132px;
+    }
+}
+
+
+@media (min-width: 646px) and (max-width: 1084px) {
+    .home-place-l h3 {
+        font-size: 48px;
+        max-width: 504px;
+    }
+
+    .home-place-l p {
+        min-width: 300px;
+    }
+
+    .classroom-img {
+        max-width: 430px;
+    }
+
+    .home-place-btn-l {
+        margin-bottom: 16px;
+    }
+}
+

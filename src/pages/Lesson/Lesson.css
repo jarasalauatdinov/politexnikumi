@@ -1,0 +1,189 @@
+.lesson-top {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    margin-bottom: 36px;
+}
+
+.lesson-top h3 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--blue);
+}
+
+.lesson-top p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--kulren);
+}
+
+.lesson-card {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    
+}
+
+.lesson-card h3 {
+    display: flex;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.6px;
+    margin-bottom: 5px;
+    padding: 25px 25px 0;
+}
+
+.lesson-doc{
+    width: 22px;
+    }
+
+.lesson-desc {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--kulren);
+    margin-bottom: 36px;
+    padding: 0 25px;
+
+}
+
+.lesson-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 0 25px;
+}
+
+.lesson-block label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #020817;
+}
+
+.lesson-block select {
+    width: 120px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+
+}
+
+.lesson-class {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--kulren);
+}
+
+.lesson-class span {
+    font-size: 14px;
+    font-weight: 700;
+    font-weight: bold;
+    line-height: 20px;
+    color: #64748B;
+    padding-left: 5px;
+}
+
+.download-btn {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 14px;
+    display: flex;
+    gap: 8px;
+    color: white;
+    background-color: var(--blue);
+    border: 1px solid #E2E8F0;
+    padding: 11px 16px;
+}
+
+.download-btn:hover {
+    background-color: #1e40af;
+}
+
+.update-info {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--kulren);
+    border-top: 1px solid #E2E8F0;
+    padding: 25px;
+}
+
+.lesson-bottom{
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    border: 1px solid var(--border);
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    border-radius: 16px;
+}
+
+.lesson-bottom h3{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.6px;
+    margin-bottom: 6px;
+}
+
+.l-bottom-p{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--kulren);
+    margin-bottom: 26px;
+}
+
+.lesson-b-cards{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lesson-b-card{
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 15px;
+}
+
+.lesson-b-card h4{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.lesson-b-card img{
+    width: 20px;
+}
+
+@media (min-width: 768px) {
+    .lesson-block {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .lesson-b-cards{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+}

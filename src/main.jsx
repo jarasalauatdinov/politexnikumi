@@ -1,21 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
 import { MantineProvider } from "@mantine/core";
-import "macro-css";
+import { RouterProvider } from "react-router-dom";
 import "./index.css";
+import "macro-css";
+import "@mantine/core/styles.css";
+import { router } from "./Router/Router";
+import "./i18n";
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        // fontFamily: "Inter, sans-serif",
-        colorScheme: "light",
-      }}
-    >
-      <App />
+    <MantineProvider withGlobalStyles defaultColorScheme="light">
+      <RouterProvider router={router} />
     </MantineProvider>
   </StrictMode>
 );

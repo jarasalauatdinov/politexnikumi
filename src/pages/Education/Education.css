@@ -1,0 +1,98 @@
+.education {
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+    margin-bottom: 112px;
+}
+
+
+.education-top h3 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--blue);
+    margin-bottom: 19px;
+}
+
+.education p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--kulren);
+}
+
+.education-activities {
+    background-color: white;
+    border-radius: 12px;
+    padding-bottom: 25px;
+    border: 1px solid var(--border);
+}
+
+.education-activities h3{
+    text-align: start;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--blue);
+    margin: 25px 0;
+    padding: 0 25px;
+}
+
+.e-card {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #DBEAFE;
+    border-radius: 16px;
+    padding: 25px;
+    gap: 16px;
+}
+
+.education-cards {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    padding: 0 25px;
+
+}
+
+.e-cards{
+    min-width: 0;
+}
+
+.e-card-a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.e-card-a img{
+    width: 11px !important;
+    height: 12px !important;
+}
+
+.e-card img {
+    width: 36px;
+    height: 24px;
+}
+
+.e-cards  h4{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 5px;
+}
+
+.e-cards p{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.e-cards a{
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+}
+

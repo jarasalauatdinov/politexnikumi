@@ -1,0 +1,150 @@
+.s-faq-title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--blue);
+    margin-bottom: 19px;
+}
+
+.s-faq-p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--kulren);
+    margin-bottom: 36px;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 48px;
+}
+
+.faq-list h4 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: var(--blue);
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.contact-info h2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--blue);
+}
+
+
+.c-info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #F0F5FF;
+    width: 100%;
+    padding: 20px 16px;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.c-info-cards {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+}
+
+.c-info-bottom {
+    background-color: #F0F5FF;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.c-info-card img {
+    width: 40px;
+    margin-bottom: 12px;
+}
+
+.c-info-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.c-info-card a {
+    display: block;
+    font-size: 14px;
+    color: var(--kulren);
+    text-decoration: none;
+    margin-bottom: 4px;
+}
+
+.c-info-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+}
+
+.c-info-b-cards{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.c-info-b-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.c-info-b-card p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #4B5563;
+}
+
+
+@media(min-width: 768px) {
+
+
+    .c-info-cards {
+        margin: 0 auto;
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .c-info-card{
+        min-width: 212px;
+        width: 100%;
+    }
+
+    .c-info-b-cards{
+        flex-direction: row;
+        gap: 70px;
+    }
+}
+
+@media( min-width: 1024px) {
+    .c-info-b-cards{
+        gap: 100px;
+    }
+}
