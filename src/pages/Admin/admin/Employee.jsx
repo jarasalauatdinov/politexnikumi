@@ -79,13 +79,11 @@ const Employee = () => {
                     {employee.map((el) => (
                         <Table.Tr key={el.id}>
                             <Table.Td>{el.id}</Table.Td>
-                            <Table.Td>  <img
-          src={el.cover_image?.path}
-          alt={el.title?.[currentLang] || "No title"}
-          width={120}
-          height={80}
-          style={{ objectFit: "cover", borderRadius: 6 }}
-        /></Table.Td>
+                            <Table.Td>   
+                                <img src={el.photo.path}
+                                width={120} height={80}
+                                style={{ objectFit: "cover", borderRadius: 6 }}
+                            /></Table.Td>
                             <Table.Td>{el.full_name[currentLang]}</Table.Td>
                             <Table.Td>{el.phone}</Table.Td>
                             <Table.Td>{el.email}</Table.Td>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Link, NavLink } from "react-router";
+import { api } from "../../api/api";
+
 
 const newCard = [
   {
@@ -31,37 +33,24 @@ const newCard = [
   },
 ];
 
-const teacherCard = [
-  {
-    id: 1,
-    img: "/img/teacher-first.png",
-    title: "Dr. Sarah Johnson",
-    text: "Principal",
-  },
 
-  {
-    id: 2,
-    img: "/img/teacher-first.png",
-    title: "Dr. Sarah Johnson",
-    text: "Principal",
-  },
-
-  {
-    id: 3,
-    img: "/img/teacher-first.png",
-    title: "Dr. Sarah Johnson",
-    text: "Principal",
-  },
-
-  {
-    id: 4,
-    img: "/img/teacher-first.png",
-    title: "Dr. Sarah Johnson",
-    text: "Principal",
-  },
-];
 
 const Homepage = () => {
+  const [employees, setEmployees] = useState([]);
+  const currentLang = "ru"; // bu keyin i18n bilan avtomatik bo‘ladi
+
+  useEffect(() => {
+    async function fetchEmployees() {
+      try {
+        const { data } = await api.get("/employees");
+        setEmployees(data.data.items);
+      } catch (err) {
+        console.error("Error fetching employees:", err);
+      }
+    }
+    fetchEmployees();
+  }, []);
+
   return (
     <main>
       <div className="container">
@@ -173,18 +162,20 @@ const Homepage = () => {
 
         <section className="our-teachers" id="teachers">
           <div className="teacher-left">
-            <h3>Our Teachers</h3>
+            <h3>Наши учителя</h3>
             <p>
-              Meet our dedicated team of educators committed to providing the
-              highest quality education and support for our students.
+              Встречайте нашу преданную команду педагогов, которые готовы
+              обеспечить самое качественное образование для учеников.
             </p>
           </div>
           <div className="teacher-right">
-            {teacherCard.map((item) => (
-              <div key={item.id} className="teacher-card">
-                <img src={item.img} />
-                <h4>{item.title}</h4>
-                <p>{item.text}</p>
+            {employees.map((emp) => (
+              <div key={emp.id} className="teacher-card">
+                <img src={emp.photo?.path} alt={emp.full_name[currentLang]} />
+                <h4>{emp.full_name[currentLang]}</h4>
+                <p>{emp.position?.name[currentLang]}</p>
+                <p>{emp.email}</p>
+                <p>{emp.phone}</p>
               </div>
             ))}
           </div>
