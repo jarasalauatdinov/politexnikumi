@@ -1,6 +1,65 @@
 import React from "react";
 import "./Home.css";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+
+const newCard = [
+  {
+    id: 1,
+    img: "/img/home-news-first.jpg",
+    date: "5 мая 2025",
+    title: "Объявлены победители школьной олимпиады",
+    text: "Поздравляем всех участников и победителей нашей ежегодной школьной олимпиады.",
+    button: "Читать далее",
+  },
+
+  {
+    id: 2,
+    img: "/img/home-news-second.jpg",
+    date: "5 мая 2025",
+    title: "Объявлены победители школьной олимпиады",
+    text: "Поздравляем всех участников и победителей нашей ежегодной школьной олимпиады.",
+    button: "Читать далее",
+  },
+
+  {
+    id: 3,
+    img: "/img/home-news-third.jpg",
+    date: "5 мая 2025",
+    title: "Объявлены победители школьной олимпиады",
+    text: "Поздравляем всех участников и победителей нашей ежегодной школьной олимпиады.",
+    button: "Читать далее",
+  },
+];
+
+const teacherCard = [
+  {
+    id: 1,
+    img: "/img/teacher-first.png",
+    title: "Dr. Sarah Johnson",
+    text: "Principal",
+  },
+
+  {
+    id: 2,
+    img: "/img/teacher-first.png",
+    title: "Dr. Sarah Johnson",
+    text: "Principal",
+  },
+
+  {
+    id: 3,
+    img: "/img/teacher-first.png",
+    title: "Dr. Sarah Johnson",
+    text: "Principal",
+  },
+
+  {
+    id: 4,
+    img: "/img/teacher-first.png",
+    title: "Dr. Sarah Johnson",
+    text: "Principal",
+  },
+];
 
 const Homepage = () => {
   return (
@@ -15,15 +74,19 @@ const Homepage = () => {
                 к вызовам завтрашнего дня.
               </p>
             </div>
-            <a href="/Footer" className="home-place-btn-l">
-              Связаться с нами <img src="/img/right-btn.svg" alt="" />
-            </a>
-            <button className="home-place-btn-r">Узнать больше</button>
+            <div className="home-place-btns">
+              <NavLink to="/support#contact" className="home-place-btn-l">
+                Связаться с нами <img src="/img/right-btn.svg" alt="" />
+              </NavLink>
+              <NavLink to="/about" className="home-place-btn-r">
+                Узнать больше
+              </NavLink>
+            </div>
           </div>
 
           <div className="home-place-r">
             <div className="home-wrapper">
-              <img src="/img/classroom.svg" alt="" className="classroom-img" />
+              <img src="/img/polii.jpg" alt="" className="classroom-img" />
 
               <div className="home-p-c h-p-card-top ">
                 <img src="/img/cap.svg" alt="" />
@@ -54,84 +117,38 @@ const Homepage = () => {
             </div>
 
             <div className="home-news-list">
-              <div className="home-n-l-card">
-                <img
-                  src="/img/home-news-first.jpg"
-                  alt=""
-                  className="home-imgs"
-                />
+              {newCard.map((item) => (
+                <div key={item.id} className="home-n-l-card">
+                  <img src={item.img} className="home-imgs" />
 
-                <div className="news-content">
-                  <span>
-                    <img src="/img/black-calendar.svg" alt="" />5 мая 2025
-                  </span>
-                  <h3>Объявлены победители школьной олимпиады</h3>
-                  <p>
-                    Поздравляем всех участников и победителей нашей ежегодной
-                    школьной олимпиады.
-                  </p>
-                  <button>
-                    Читать далее <img src="/img/blue-right-btn.svg" alt="" />
-                  </button>
+                  <div className="news-content">
+                    <span>
+                      <img src="/img/black-calendar.svg" alt="" />5 мая 2025
+                    </span>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                    <Link to="/news">
+                      {item.button}
+                      <img src="/img/blue-right-btn.svg" alt="" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
-              <div className="home-n-l-card">
-                <img
-                  src="/img/home-news-second.jpg"
-                  alt=""
-                  className="home-imgs"
-                />
-                <div className="news-content">
-                  <span>
-                    <img src="/img/black-calendar.svg" alt="" />
-                    28 апреля 2025
-                  </span>
-                  <h3>Объявлены победители школьной олимпиады</h3>
-                  <p>
-                    Поздравляем всех участников и победителей нашей ежегодной
-                    школьной олимпиады.
-                  </p>
-                  <button>
-                    Читать далее <img src="/img/blue-right-btn.svg" alt="" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="home-n-l-card">
-                <img
-                  src="/img/home-news-third.jpg"
-                  alt=""
-                  className="home-imgs"
-                />
-                <div className="news-content">
-                  <span>
-                    <img src="/img/black-calendar.svg" alt="" />
-                    15 апреля 2025
-                  </span>
-                  <h3>Объявлены победители школьной олимпиады</h3>
-                  <p>
-                    Поздравляем всех участников и победителей нашей ежегодной
-                    школьной олимпиады.
-                  </p>
-                  <button>
-                    Читать далее <img src="/img/blue-right-btn.svg" alt="" />
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
-          </div>  
+          </div>
 
           <div className="home-news-r">
             <div className="home-n-r-head">
               <h3>Быстрые ссылки</h3>
             </div>
             <div className="home-news-r-p">
-              <NavLink   to="/news"
+              <NavLink
+                to="/lessons"
                 className={({ isActive }) =>
                   isActive ? "nav-item active" : "nav-item"
                 }
-                onClick={() => setIsMenuOpen(false)}>
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <img src="/img/calendar.svg" alt="" />
                 Расписание уроков
               </NavLink>
@@ -163,26 +180,13 @@ const Homepage = () => {
             </p>
           </div>
           <div className="teacher-right">
-            <div className="teacher-card">
-              <img src="/img/teacher-first.png" alt="" />
-              <h4>Dr. Sarah Johnson</h4>
-              <p>Principal</p>
-            </div>
-            <div className="teacher-card">
-              <img src="/img/teacher-second.png" alt="" />
-              <h4>Prof. Michael Chen</h4>
-              <p>Mathematics</p>
-            </div>
-            <div className="teacher-card">
-              <img src="/img/teacher-third.png" alt="" />
-              <h4>Dr. Emily Rodriguez</h4>
-              <p>Science</p>
-            </div>
-            <div className="teacher-card">
-              <img src="/img/teacher-fourth.png" alt="" />
-              <h4>Prof. David Kim</h4>
-              <p>Literature</p>
-            </div>
+            {teacherCard.map((item) => (
+              <div key={item.id} className="teacher-card">
+                <img src={item.img} />
+                <h4>{item.title}</h4>
+                <p>{item.text}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -222,9 +226,9 @@ const Homepage = () => {
               </h5>
             </div>
 
-            <button>
+            <NavLink to="/about" className="a-s-peoples-btn">
               Узнать больше о нас <img src="/img/right-btn.svg" alt="" />
-            </button>
+            </NavLink>
           </div>
 
           <div className="about-school-r" id="courses">

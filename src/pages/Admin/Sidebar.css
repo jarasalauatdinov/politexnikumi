@@ -1,0 +1,18 @@
+.sidebar-link {
+    padding: 7px 16px;
+    border-radius: 8px;
+    color: #333333;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #f0f4ff; 
+    color: #1d4ed8; 
+    transition: 0.5s;
+  }
+  
+  .sidebar-link.active {
+    background-color: #1d4ed8; 
+    color: #fff; 
+    transition: 0.1s;
+  }
+  

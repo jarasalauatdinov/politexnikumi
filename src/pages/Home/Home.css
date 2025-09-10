@@ -30,17 +30,27 @@
     margin-bottom: 32px;
 }
 
-.home-place-l button {
-    padding: 13px 32px;
+
+.home-place-btns {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .home-place-btn-r {
+    color: black;
+    background-color: white;
+    border: 1px solid #D1D5DB;
+    padding: 13px 28px;
     border-radius: 24px;
-}
+  }
 
 .home-place-btn-l {
     color: white;
     background-color: var(--blue);
     text-decoration: none;
-    margin-right: 16px;
-    padding: 13px 32px;
+    padding: 13px 28px;
     border-radius: 24px;
 }
 
@@ -50,17 +60,16 @@
     transform: translateY(3.2px);
 }
 
-.home-place-btn-r {
-    background-color: white;
-    border: 1px solid #D1D5DB;
-}
 
 .home-wrapper {
     position: relative;
 }
 
 .classroom-img {
-    max-width: 500px;
+    width: 500px;
+    max-height: 450px;
+    border-radius: 18px;
+
 }
 
 .home-p-c {
@@ -386,7 +395,7 @@
     line-height: 36px;
 }
 
-.about-school-l button {
+.a-s-peoples-btn {
     display: flex;
     gap: 7px;
     color: white;
@@ -396,6 +405,7 @@
     border-radius: 9999px;
     border: none;
     margin: 0 40px 40px;
+    justify-content: center;
 }
 
 
@@ -560,10 +570,6 @@
         display: none;
     }
 
-    .home-place-btn-l {
-        margin-bottom: 16px;
-    }
-
     .gallery-bottom {
         grid-template-columns: repeat(auto-fit, minmax(229px, 3fr));
         }
@@ -650,8 +656,6 @@
         max-width: 430px;
     }
 
-    .home-place-btn-l {
-        margin-bottom: 16px;
-    }
+  
 }
 

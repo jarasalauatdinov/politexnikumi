@@ -1,0 +1,281 @@
+:root[data-theme="dark"] p {
+  color: #c9c9c9;
+}
+
+:root[data-theme="dark"] h3 {
+  color: ghostwhite;
+}
+
+:root[data-theme="dark"] h4 {
+  color: white;
+}
+
+:root[data-theme="dark"] a {
+  color: ghostwhite;
+}
+
+:root[data-theme="dark"] input {
+  background-color: #2e2e2e;
+  border: none;
+}
+
+
+[data-theme="light"] body {
+  background-color: white;
+  color: black;
+}
+
+[data-theme="light"] .sidebar {
+  background-color: #e0e0e0;
+}
+
+[data-theme="light"] .nav-links li a {
+  color: black;
+}
+
+[data-theme="light"] .nav-links{
+  background-color: white;
+}
+
+
+[data-theme="dark"] body {
+  background-color: #111;
+  color: white;
+}
+
+[data-theme="dark"] .navbar {
+  background-color: #444;
+}
+
+[data-theme="dark"] .sidebar {
+  background-color: #333;
+}
+
+[data-theme="dark"] header {
+  background-color: #444;
+  box-shadow: 0 4px 6px rgba(255,255,255,0.1); 
+}
+
+[data-theme="dark"] main {
+  background-color: #333;
+}
+
+[data-theme="dark"] .nav-links li a {
+  color: white;
+}
+
+[data-theme="dark"] footer {
+  background-color: #333;
+}
+
+[data-theme="dark"] .navbar-left span {
+  color: white;
+}
+
+[data-theme="dark"] .home-page {
+  background-color: #222;
+}
+
+[data-theme="dark"] h3 {
+  color: white;
+}
+
+[data-theme="dark"] .home-n-l-card {
+  background-color: #222;
+  border: 1px solid black;
+}
+
+[data-theme="dark"] .home-news-r {
+  background-color: #222;
+  border: 1px solid black;
+}
+
+[data-theme="dark"] .home-news-r-p a {
+  color: ghostwhite;
+}
+
+[data-theme="dark"] .home-n-r-head {
+  background-color: #111;
+}
+
+
+[data-theme="dark"] .h-p-card-top {
+  background-color: #333;
+}
+
+[data-theme="dark"] .h-p-card-bottom {
+  background-color: #333;
+}
+
+[data-theme="dark"] .teacher-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .about-school-l {
+  background-color: #222;
+  border: none
+}
+
+[data-theme="dark"] .about-school-r {
+  background-color: #222;
+  border: 1px solid #222;
+}
+
+[data-theme="dark"] .about-school-r-title {
+  background-color: #333;
+}
+
+[data-theme="dark"] .about-s-r-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .home-place-l button {
+  background-color: #F1F3F5;
+}
+
+[data-theme="dark"] .home-news-btn {
+  background-color: #F1F3F5;
+}
+
+[data-theme="dark"] .about-school-peoples h5 {
+  background-color: #333;
+  color: #F1F3F5;
+}
+
+[data-theme="dark"] .about-school-r button {
+  background-color: #F1F3F5;
+}
+
+[data-theme="dark"] .footer-navs li {
+  color: #F1F3F5;
+}
+
+[data-theme="dark"] .mission-vision {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .leadership-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .facilities-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .lesson-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .lesson-class {
+  color: ghostwhite;
+}
+
+:root[data-theme="dark"] label {
+  color: ghostwhite;
+}
+
+:root[data-theme="dark"] span {
+  color: ghostwhite;
+}
+
+[data-theme="dark"] .download-btn {
+  border: none;
+}
+
+[data-theme="dark"] .update-info {
+  color: ghostwhite
+}
+
+[data-theme="dark"] .lesson-block select {
+  background-color: #2e2e2e;
+  border: none;
+}
+
+[data-theme="dark"] .lesson-b-card {
+  background-color: #222;
+  border: 1px solid black;
+}
+
+[data-theme="dark"] .education-activities {
+  background-color: #222;
+  border: 1px solid black;
+}
+
+[data-theme="dark"] .e-card {
+  background-color: #333;
+  border: none;
+}
+
+[data-theme="dark"] .school-rules {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .accordion-item button {
+  color: ghostwhite;
+}
+
+[data-theme="dark"] .school-hours {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .school-d-card {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .s-news-card {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .faq-list {
+  background-color: #222;
+  border: none;
+}
+
+[data-theme="dark"] .contact-info {
+  border: none;
+}
+
+[data-theme="dark"] .c-info-card {
+  background-color: #222;
+}
+
+[data-theme="dark"] .c-info-bottom {
+  background-color: #222;
+}
+
+[data-theme="dark"] .home-place-btn-l {
+  color: white !important;
+}
+
+
+[data-theme="dark"] .nav-links {
+  background-color: #444;
+}
+
+[data-theme="dark"] .news-search{
+  background-color: #2e2e2e;
+  border: none;
+}
+
+[data-theme="dark"] .nav-right-lang {
+  background-color: red;
+}
+
+.burger-btn img {
+  filter: invert(0); 
+  transition: filter 0.3s;
+}
+
+[data-theme="dark"] .burger-btn img {
+  filter: invert(1); 
+}
+
+:root[data-theme="dark"] .home-place-btn-r {
+  color: black;
+}
+

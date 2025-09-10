@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Select } from "@mantine/core";
+import { ActionIcon, Button, Menu, Select } from "@mantine/core";
+import "./Toggle.css";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { FiSun } from "react-icons/fi";
+import { Languages } from "lucide-react";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -16,7 +20,20 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
+
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -25,143 +42,90 @@ const Navbar = () => {
   };
 
   const languages = [
-    { value: "ru", label: "RU" },
-    { value: "en", label: "ENG" },
-    { value: "qr", label: "QR" },
-    { value: "uz", label: "UZ" },
+    { value: "qr", label: "QARAQALPAQ" },
+    { value: "ru", label: "РУССКИЙ" },
+    { value: "eng", label: "ENGLISH" },
+    { value: "uz", label: "UZBEK" },
   ];
 
-  const handleAdminLogin = () => {
-    const token = localStorage.getItem("adminToken");
-    if (token) {
-      navigate("/admin");
-    } else {
-      navigate("/login");
-    }
-  }
 
   return (
     <header>
-      <div className="container">
-        <nav className="navbar">
-          <div className="navbar-left">
-            <button className="burger-btn" onClick={toggleMenu}>
-              <img src="/img/menu.svg" alt="menu" />
-            </button>
-            <img src="/img/logo.svg" alt="" className="logo" />
-            <span>Politexnikum</span>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <button className="burger-btn" onClick={toggleMenu}>
+            <img src="/img/menu.svg" alt="menu" />
+          </button>
+          <Link to="/" className="nav-logo-icon">
+            <img src="/img/politex.png" alt="" className="logo" />
+          </Link>
+          <Link className="nav-logo" to="/">Politexnikum</Link>
+        </div>
+
+        <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+          {["/", "/about", "/lessons", "/education", "/rules", "/news", "/support"].map((path, idx) => (
+            <li key={idx}>
+              <NavLink
+                to={path}
+                className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t(["Úy", "Texnikum", "Sabaqliq", "Tálim", "Qaǵiydalar", "Jańaliqlar", "Jardem"][idx])}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+        <div className="navbar-right">
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <Menu shadow="md" width={120} >
+              <Menu.Target>
+                <Button variant="subtle" p={4}>
+                  <Languages size={20} />
+                </Button>
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                {languages.map((lang) => (
+                  <Menu.Item
+                    key={lang.value}
+                    onClick={() => i18n.changeLanguage(lang.value)}
+                  >
+                    {lang.label}
+                  </Menu.Item>
+                ))}
+              </Menu.Dropdown>
+            </Menu>
           </div>
 
-          <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("Home")}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("О школе")}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/lessons"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("Расписание")}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/education"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Обучение
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/rules"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Правила
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/news"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Новости
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/support"
-                className={({ isActive }) =>
-                  isActive ? "nav-item active" : "nav-item"
-                }
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Поддержка
-              </NavLink>
-            </li>
-          </ul>
+          <button className="nav-sun" onClick={toggleTheme}>
+            {theme === "light" ? (
 
-          <div className="navbar-right">
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <Select
-                value={i18n.language}
-                onChange={(val) => i18n.changeLanguage(val)}
-                data={languages}
-                size="sm"
+              <ActionIcon
+                variant="light"
+                color="black"
+                size="lg"
                 radius="md"
-                styles={{
-                  input: {
-                    fontWeight: 500,
-                    minWidth: 90,
-                    textAlign: "center",
-                  },
-                }}
-              />
-            </div>
+                style={{ transition: 'all 0.2s' }}
+              >
+                <MdOutlineDarkMode size={20} />
+              </ActionIcon>
+            ) : (
+              <ActionIcon
+                color="gray"
+                size="lg"
+                radius="md"
+                style={{ transition: 'all 0.2s' }}
+              >
+                <FiSun size={20} />
+              </ActionIcon>
+            )}
+          </button>
 
-            <button className="nav-sun" onClick={toggleTheme}>
-              {theme === "light" ? (
-                <img src="/img/sun.svg"  />
-              ) : (
-                <img src="/img/dark.svg"  className="dark-theme"/>
-              )}
-            </button>
-
-            <button className="nav-call" onClick={handleAdminLogin}>{t("login")}</button>
-          </div>
-        </nav>
-      </div>
+          <Link className="nav-call" to="/login">
+            {t("Kiriw")}
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 };

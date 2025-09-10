@@ -6,8 +6,8 @@ i18n
   .use(HttpBackend) 
   .use(initReactI18next)
   .init({
-    lng: "ru",
-    fallbackLng: "ru",
+    lng: "qr",
+    fallbackLng: "qr",
     debug: true,
 
     interpolation: {

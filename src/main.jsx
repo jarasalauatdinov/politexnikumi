@@ -9,10 +9,18 @@ import { router } from "./Router/Router";
 import "./i18n";
 
 
+import { AuthProvider } from "./context/auth-context.jsx";
+import ScrollToTop from "./components/Navbar/ScrollToTop.jsx";
+import { ModalsProvider } from "@mantine/modals";
+
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <AuthProvider>
     <MantineProvider withGlobalStyles defaultColorScheme="light">
-      <RouterProvider router={router} />
+      <ModalsProvider>
+        <RouterProvider router={router}>
+          <ScrollToTop />
+        </RouterProvider>
+      </ModalsProvider>
     </MantineProvider>
-  </StrictMode>
+  </AuthProvider>
 );

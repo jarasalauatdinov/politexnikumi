@@ -96,3 +96,8 @@
     font-weight: 400;
 }
 
+@media (max-width: 425px) {
+    .education-cards{
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+}

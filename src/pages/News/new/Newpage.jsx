@@ -33,8 +33,9 @@ const Newpage = () => {
   return (
     <main>
       <div className="container">
+        <div className="new-content">
         <button onClick={() => navigate(-1)} className="back-btn">
-          ← Назад
+          Назад
         </button>
 
         <div className="news-detail">
@@ -42,6 +43,7 @@ const Newpage = () => {
           <h5>{news.date}</h5>
           <h2>{news.title}</h2>
           <p>{news.fullText}</p>
+        </div>
         </div>
       </div>
     </main>

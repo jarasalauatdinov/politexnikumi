@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.css";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <div className="footer-container">
         <section className="footer-first">
           <h3>
-            <img src="/img/logo.svg" alt="logo" className="logo" />
+            <img src="/img/politex.png" alt="logo" className="logo" />
             Politexnikum
           </h3>
 
@@ -27,11 +28,15 @@ const Footer = () => {
           <h3>Quick Links</h3>
 
           <ul className="footer-navs">
-            <li>About Us</li>
-            <li>Education</li>
-            <li>News & Events</li>
-            <li>Support</li>
-            <li>Rules & Documents</li>
+            <NavLink to="/about">About Us</NavLink>
+            <NavLink to="/lessons">Lesson</NavLink>
+            <NavLink to="/education">Education</NavLink>
+            <nav>
+      <NavLink to="/news">News</NavLink> |{" "}
+      <NavLink to="/school">Events</NavLink>
+    </nav>
+            <NavLink to="/support">Support</NavLink>
+            <NavLink to="/rules">Rules & Documents</NavLink>
           </ul>
         </section>
 

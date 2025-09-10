@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Support.css";
 
 const Supportpage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+
+  if (location.hash) {
+    const el = document.querySelector(location.hash);
+    if (el){
+      el.scrollIntoView({ behavior: "smooth"});
+    }
+  }
+},
+  [location]);
 
   const supports = [
     {
@@ -76,7 +89,7 @@ const Supportpage = () => {
           </div>
         </section>
 
-        <section className="contact-info">
+        <section className="contact-info" id="contact">
           <h2>Контактная информация</h2>
 
           <div className="c-info-cards">
