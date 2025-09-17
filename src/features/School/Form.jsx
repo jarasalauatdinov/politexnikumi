@@ -1,113 +1,109 @@
-import { useForm } from '@mantine/form'
-import { Button, Flex, Stack, Textarea } from '@mantine/core';
-import { modals } from '@mantine/modals';
-
+import { useForm } from "@mantine/form";
+import { Button, TextInput, Textarea, Stack, Flex } from "@mantine/core";
+import { modals } from "@mantine/modals";
 
 const FormSchool = ({ submitFn, initialValues }) => {
     const form = useForm({
         initialValues,
     });
 
-
     const handleSubmit = async (values) => {
         await submitFn(values);
-        modals.closeAll();
     };
 
     return (
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <Stack>
-                <Textarea
+                <TextInput
                     label="Name (kk)"
-                    placeholder='Введите название'
+                    placeholder="name"
                     {...form.getInputProps("name.kk")}
                 />
-
-                <Textarea
+                <TextInput
+                    label="Name (uz)"
+                    placeholder="name"
+                    {...form.getInputProps("name.uz")}
+                />
+                <TextInput
                     label="Name (ru)"
-                    placeholder='Введите название'
+                    placeholder="name"
                     {...form.getInputProps("name.ru")}
                 />
-
-                <Textarea
+                <TextInput
                     label="Name (en)"
-                    placeholder='Введите название'
+                    placeholder="name"
                     {...form.getInputProps("name.en")}
-                />
-
-                <Textarea
-                    label="Name (uz)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("name.uz")}
                 />
 
                 <Textarea
                     label="History (kk)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("name.kk")}
+                    placeholder="history"
+                    minRows={2}
+                    {...form.getInputProps("history.kk")}
                 />
-
-                <Textarea
-                    label="History (ru)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("name.ru")}
-                />
-
-                <Textarea
-                    label="History (en)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("name.en")}
-                />
-
                 <Textarea
                     label="History (uz)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("name.uz")}
+                    placeholder="history"
+                    minRows={2}
+                    {...form.getInputProps("history.uz")}
+                />
+                <Textarea
+                    label="History (ru)"
+                    placeholder="history"
+                    minRows={2}
+                    {...form.getInputProps("history.ru")}
+                />
+                <Textarea
+                    label="History (en)"
+                    placeholder="history"
+                    minRows={2}
+                    {...form.getInputProps("history.en")}
                 />
 
-                <Textarea
+                <TextInput
                     label="Phone"
-                    placeholder='Введите название'
+                    placeholder="Phone number"
                     {...form.getInputProps("phone")}
                 />
 
-                <Textarea
+                <TextInput
                     label="Location"
-                    placeholder='Введите название'
-                    {...form.getInputProps("locataion")}
+                    placeholder="Location"
+                    {...form.getInputProps("location")}
                 />
 
                 <Textarea
                     label="Description (kk)"
-                    placeholder='Введите название'
+                    placeholder="Description"
+                    minRows={2}
                     {...form.getInputProps("description.kk")}
                 />
-
+                <Textarea
+                    label="Description (uz)"
+                    placeholder="Description"
+                    minRows={2}
+                    {...form.getInputProps("description.uz")}
+                />
                 <Textarea
                     label="Description (ru)"
-                    placeholder='Введите название'
+                    placeholder="Description"
+                    minRows={2}
                     {...form.getInputProps("description.ru")}
                 />
-
                 <Textarea
                     label="Description (en)"
-                    placeholder='Введите название'
+                    placeholder="Description"
+                    minRows={2}
                     {...form.getInputProps("description.en")}
                 />
 
-                <Textarea
-                    label="Description (uz)"
-                    placeholder='Введите название'
-                    {...form.getInputProps("description.uz")}
-                />
-
-                <Flex justify={end} gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Bikarlaw</Button>
-                    <Button type='submit'>Saqlaw</Button>
+                <Flex justify="end" gap={10}>
+                    <Button onClick={() => modals.closeAll()}>Отмена</Button>
+                    <Button type="submit">Сохранить</Button>
                 </Flex>
             </Stack>
         </form>
-    )
+    );
 };
 
 export default FormSchool;

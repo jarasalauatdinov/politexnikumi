@@ -1,29 +1,51 @@
-import React, { useContext } from "react";
-import { Navigate, Outlet } from "react-router";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
-import { Flex, Stack } from "@mantine/core";
+import React, { useContext, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { Sidebar } from "../Sidebar";
+import { Header } from "../Header";
+import { Container, Flex, Loader, Stack } from "@mantine/core";
 import { AuthContext } from "../../../context/auth-context";
-
+import { useTranslation } from "react-i18next";
 
 const Admin = () => {
-  const { isAuth } = useContext(AuthContext)
+    const { isAuth, loading } = useContext(AuthContext);
+    const { i18n } = useTranslation();
+    const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+    const handleLanguageChange = (lang) => {
+        i18n.changeLanguage(lang);
+        setCurrentLanguage(lang);
+    };
+    if (loading) {
+        return (
+            <Flex justify="center" align="center" w="100%" h="100vh">
+                <Loader size="lg" />
+            </Flex>
+        );
+    }
 
-  if (!isAuth) {
-    return <Navigate to="/login" replace />
-  }
+    if (!isAuth) {
+        return <Navigate to="/login" />;
+    }
 
-  return (
-    <>
-      <Flex>
-        <Sidebar />
-        <Stack>
-          <Header />
-          <Outlet />
-        </Stack>
-      </Flex>
-    </>
-  );
+    return (
+        <Flex>
+            <Sidebar />
+
+            <Stack style={{ flex: 1, height: "100vh" }}>
+                <Header onLanguageChange={handleLanguageChange} />
+                <Container
+                    fluid
+                    style={{
+                        height: "calc(100vh - 62px)",
+                        overflowY: "auto",
+                        width: "100%",
+                    }}
+                    p={20}
+                >
+                    <Outlet context={{ language: currentLanguage }} />
+                </Container>
+            </Stack>
+        </Flex>
+    );
 };
 
 export default Admin;

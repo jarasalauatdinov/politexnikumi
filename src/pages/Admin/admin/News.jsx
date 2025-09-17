@@ -1,121 +1,159 @@
 import { useEffect, useState } from "react";
-import { Button, Flex, Stack, Table, Title } from "@mantine/core";
+import { Button, Flex, Stack, Table, Title, Loader, Pagination } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { api } from "../../../api/api";
 import CreateNews from "../../../features/News/Create";
 import UpdateNews from "../../../features/News/Update";
 import DeleteNews from "../../../features/News/Delete";
-
-import { ActionIcon } from '@mantine/core';
-import { FiTrash2, FiEdit3 } from "react-icons/fi";
-
-
+import { useTranslation } from "react-i18next";
+import { notifications } from "@mantine/notifications";
 
 function News() {
   const [news, setNews] = useState([]);
-  const currentLang = "ru";
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
 
-  async function getNews() {
+  async function getNews(page = 1) {
+    setLoading(true);
     try {
-      const { data } = await api.get("/news");
+      const { data } = await api.get(`/news?page=${page}&per_page=10`);
       setNews(data.data.items);
+      setLastPage(data.data.pagination?.last_page || 1);
     } catch (error) {
-      console.error("Error fetching news:", error)
+      console.error("Error fetching news:", error);
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch news!",
+        color: "red",
+      });
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    getNews();
-  }, []);
+    getNews(page);
+  }, [page]);
 
   function createFn() {
     modals.open({
-      children: (
-        <CreateNews
-          getNews={getNews}
-        />
-      )
-    })
+      children: <CreateNews getNews={() => getNews(page)} />,
+    });
   }
 
   function updateFn(id) {
     modals.open({
-      children: (
-        <UpdateNews
-          id={id}
-          news={news}
-          setNews={setNews}
-        />
-      )
-    })
+      children: <UpdateNews id={id} getNews={() => getNews(page)} />,
+    });
   }
-  function deleteFn(id) {
+
+  const deleteFn = (id) => {
     modals.open({
       children: (
         <DeleteNews
           id={id}
           news={news}
           setNews={setNews}
+          getNews={getNews}
         />
       ),
     });
-  }
+  };
 
   return (
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
-        <Title>News</Title>
-        <Button onClick={createFn}>Create</Button>
+        <Title>{t("News")}</Title>
+        <Button onClick={createFn}>{t("Create")}</Button>
       </Flex>
-      <Table horizontalSpacing="xl" verticalSpacing="sm" highlightOnHover withTableBorder withColumnBorders>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Id</Table.Th>
-            <Table.Th>Title</Table.Th>
-            <Table.Th>Short Content</Table.Th>
-            <Table.Th>Content</Table.Th>
-            <Table.Th>Author</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {news.map((el) => (
-            <Table.Tr key={el.id}>
-              <Table.Td>
-                <img src={el.cover_image?.path}
-                  alt={el.title?.en || "No title"}
-                  width={120} height={80}
-                  style={{ objectFit: "cover", borderRadius: 6 }}
-                />
-              </Table.Td>
-              <Table.Td>{el.title?.[currentLang]}</Table.Td>
-              <Table.Td>{el.short_content?.[currentLang]}</Table.Td>
-              <Table.Td>{el.content?.[currentLang]}</Table.Td>
-              <Table.Td>{el.author?.full_name?.[currentLang]}</Table.Td>
-              <Table.Td>
-                <Flex gap={10}>
 
-                  <ActionIcon
-                    onClick={() => updateFn(el.id)}
-                  >
-                    <FiEdit3 size={18} />
-                  </ActionIcon>
-                  <ActionIcon
-                    color="red"
-                    onClick={() => deleteFn(el.id)}
-                  >
-                    <FiTrash2 size={18} />
-                  </ActionIcon>
-                </Flex>
-              </Table.Td>
+      {loading ? (
+        <Flex justify="center" align="center" style={{ height: "200px" }}>
+          <Loader variant="dots" />
+        </Flex>
+      ) : (
+        <Table
+          style={{
+            fontSize: "12px",
+            tableLayout: "auto",
+          }}
+          highlightOnHover
+          withTableBorder
+          withColumnBorders
+        >
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Id</Table.Th>
+              <Table.Th>Image</Table.Th>
+              <Table.Th>Title</Table.Th>
+              <Table.Th>Short Content</Table.Th>
+              <Table.Th>Content</Table.Th>
+              <Table.Th>Author</Table.Th>
+              <Table.Th>Tags</Table.Th>
+              <Table.Th>Actions</Table.Th>
             </Table.Tr>
-          ))}
-        </Table.Tbody>
+          </Table.Thead>
+          <Table.Tbody>
+            {news.map((el) => (
+              <Table.Tr key={el.id}>
+                <Table.Td>{el.id}</Table.Td>
+                <Table.Td>
+                  <img
+                    src={el.cover_image?.path}
+                    alt="cover"
+                    style={{ width: "100px", borderRadius: "8px" }}
+                  />
+                </Table.Td>
+                <Table.Td>{el.title?.[language]}</Table.Td>
+                <Table.Td>{el.short_content?.[language]}</Table.Td>
+                <Table.Td
+                  style={{
+                    maxWidth: "250px",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {el.content?.[language]}
+                </Table.Td>
+                <Table.Td>
+                  <div style={{ borderBottom: "1px solid black" }}>
+                    Name: {el.author?.full_name?.[language]}
+                  </div>
+                  <div style={{ borderBottom: "1px solid black" }}>
+                    Phone: {el.author?.phone}
+                  </div>
+                  <div>Birth Date: {el.author?.birth_date}</div>
+                </Table.Td>
+                <Table.Td>
+                  {el.tags?.map((tag) => tag.name).join(", ")}
+                </Table.Td>
+                <Table.Td>
+                  <Flex gap={10}>
+                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>
+                      {t("Delete")}
+                    </Button>
+                    <Button size="xs" onClick={() => updateFn(el.id)}>
+                      {t("Update")}
+                    </Button>
+                  </Flex>
+                </Table.Td>
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
+      )}
 
-      </Table>
+      <Flex justify="center" mt="md">
+        <Pagination total={lastPage} value={page} onChange={setPage} />
+      </Flex>
     </Stack>
   );
 }
-
 
 export default News;

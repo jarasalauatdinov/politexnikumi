@@ -1,83 +1,142 @@
-import React, { useEffect, useState } from 'react'
-import { api } from '../../../api/api';
-import { modals } from '@mantine/modals';
-import UpdateDoc from '../../../features/Document/Update';
-import DeleteDoc from '../../../features/Document/Delete';
-import { Button, Flex, Stack, Table, Title } from '@mantine/core';
+import { useEffect, useState } from "react";
+import { Button, Flex, Loader, Pagination, Stack, Table, Title } from "@mantine/core";
+import { modals } from "@mantine/modals";
+import { api } from "../../../api/api";
+import UploadDocument from "../../../features/Document/Upload";
+import DeleteDocument from "../../../features/Document/Delete";
+import UpdateDocument from "../../../features/Document/Update";
+import { useTranslation } from "react-i18next";
 
 function Document() {
-    const [documents, setDocs] = useState([]);
-    const currentLang = "qr";
+  const [documents, setDocuments] = useState([]);
+  const currentLang = "ru";
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
 
-    async function getDocs() {
-        try {
-            const { data } = await api.get("/documents");
-            setDocs(data.data.items);
-        } catch (error) {
-            console.error("Error fetching documents:", error)
-        }
-
+  async function getDocuments() {
+    setLoading(true);
+    try {
+      const { data } = await api.get(`/documents?page=${page}&per_page=10`);
+      setDocuments(data.data.items);
+      setLastPage(data.data.pagination.last_page);
+    } catch (error) {
+      console.error("Error fetching news:", error)
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch news!",
+        color: "red",
+      });
+    } finally {
+      setLoading(false);
     }
+  }
 
-    useEffect(() => {
-        getDocs();
-    }, []);
+  useEffect(() => {
+    getDocuments();
+  }, []);
 
-    function updateFn() {
-        modals.open({
-            children: (
-                <UpdateDoc
-                    id={id}
-                    documents={documents}
-                    getDocs={getDocs}
-                />
-            )
-        })
+  const createFn = () => {
+    modals.open({
+      children: <UploadDocument getDocuments={getDocuments} />,
+    });
+  };
+
+  const updateFn = (id) => {
+    modals.open({
+      children: <UpdateDocument id={id} getDocuments={getDocuments} />,
+    });
+  };
+
+  const deleteFn = (id) => {
+    modals.open({
+      children: (
+        <DeleteDocument
+          id={id}
+          documents={documents}
+          setDocuments={setDocuments}
+        />
+      ),
+    });
+  };
+
+  const handleDownload = async (id, fileName) => {
+    try {
+      const response = await api.get(`/documents/download/${id}`, {
+        responseType: "blob",
+      });
+
+      const blob = new Blob([response.data]);
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName || "document");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
     }
+  };
 
-    function deleteFn() {
-        modals.open({
-            children: (
-                <DeleteDoc
-                    id={id}
-                    documents={documents}
-                    getDocs={getDocs}
-                />
-            )
-        })
-    }
-
-
-    return (
-        <Stack p={20} w="100%">
-            <Flex justify={"space-between"} align="center">
-                <Title>Documents</Title>
-            </Flex>
-            <Table horizontalSpacing="xl" verticalSpacing="sm" highlightOnHover withTableBorder withColumnBorders>
-                <Table.Thead>
-                    <Table.Tr>
-                        <Table.Th>Name</Table.Th>
-                        <Table.Th>Path</Table.Th>
-                        <Table.Th>Description</Table.Th>
-                        <Table.Th>Actions</Table.Th>
-                    </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody>
-                    {documents.map((el) => (
-                        <Table.Tr key={el.id}>
-                            <Table.Td>{el.id}</Table.Td>
-                            <Table.Td>{el.name}</Table.Td>
-                            <Table.Td>{el.description}</Table.Td>
-                            <Flex gap={10} justify="center">
-                                <Button onClick={() => updateFn(el.id)}>Update</Button>
-                                <Button onClick={() => deleteFn(el.id)}>Delete</Button>
-                            </Flex>
-                        </Table.Tr>
-                    ))}
-                </Table.Tbody>
-            </Table>
-        </Stack>
-    )
+  return (
+    <Stack p={20} w="100%">
+      <Flex justify="space-between" align="center">
+        <Title>{t("sidebar.document")}</Title>
+        <Button onClick={createFn}>{t("Upload")}</Button>
+      </Flex>
+      {loading ? (
+        <Flex justify="center" align="center" style={{ height: "200px" }}>
+          <Loader variant="dots" />
+        </Flex>
+      ) : (
+        <Table highlightOnHover withTableBorder withColumnBorders>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Id</Table.Th>
+              <Table.Th>Name</Table.Th>
+              <Table.Th>Description</Table.Th>
+              <Table.Th>Download</Table.Th>
+              <Table.Th>Actions</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            {documents.map((el) => (
+              <Table.Tr key={el.id}>
+                <Table.Td>{el.id}</Table.Td>
+                <Table.Td>{el.name}</Table.Td>
+                <Table.Td>{el.description}</Table.Td>
+                <Table.Td>
+                  <Button onClick={() => handleDownload(el.id, el.name)}>Download</Button>
+                </Table.Td>
+                <Table.Td>
+                  <Flex gap={10}>
+                    <Button onClick={() => deleteFn(el.id)}>{t("Delete")}</Button>
+                    <Button
+                      onClick={() => {
+                        console.log("Update clicked, id:", el.id);
+                        updateFn(el.id);
+                      }}
+                    >
+                      {t("Update")}
+                    </Button>
+                  </Flex>
+                </Table.Td>
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
+      )}
+      <Flex justify="center" mt="md">
+        <Pagination total={lastPage} value={page} onChange={setPage} />
+      </Flex>
+    </Stack >
+  );
 }
 
-export default Document
+
+export default Document;

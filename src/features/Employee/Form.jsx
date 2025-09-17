@@ -1,77 +1,55 @@
-import { Button, FileInput, Flex, Input, Stack, Textarea, TextInput } from '@mantine/core'
-import { useForm } from '@mantine/form'
-import { modals } from '@mantine/modals';
-import React from 'react'
+import { Button, FileInput, Flex, Stack, TextInput, Select } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { modals } from "@mantine/modals";
 
-const FormEmployee = ({ submitFn, initialValues }) => {
-    const form = useForm({
-        initialValues,
-    });
+const FormEmployee = ({ submitFn, initialValues, positions }) => {
+  const form = useForm({ initialValues });
 
-    const handleSubmit = async (values) => {
-        await submitFn(values);
-        modals.closeAll();
-    }
+  const handleSubmit = async (values) => {
+    await submitFn(values);
+    modals.closeAll();
+  };
 
-    return (
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-            <Stack>
-                {["kk", "uz", "ru", "en"].map(lang => (
-                    <TextInput
-                        key={lang}
-                        label={`Full Name (${lang})`}
-                        placeholder="Введите имя"
-                        {...form.getInputProps(`full_name.${lang}`)}
-                    />
-                ))}
+  return (
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      <Stack>
+        {["kk", "uz", "ru", "en"].map((lang) => (
+          <TextInput
+            key={lang}
+            label={`Full Name (${lang})`}
+            {...form.getInputProps(`full_name.${lang}`)}
+          />
+        ))}
 
-                <TextInput
-                    label="Phone"
-                    placeholder="Введите телефон"
-                    {...form.getInputProps("phone")}
-                />
+        <TextInput label="Phone" {...form.getInputProps("phone")} />
+        <TextInput label="Email" {...form.getInputProps("email")} />
+        <TextInput label="Birth Date" type="date" {...form.getInputProps("birth_date")} />
 
-                <FileInput
-                    label="Photo"
-                    accept="image/png,image/jpeg"
-                    value={form.values.photo}
-                    onChange={(file) => form.setFieldValue("photo", file)}
-                />
+        {/* Position ID tanlash */}
+        <Select
+          label="Lavozim"
+          placeholder="Lavozimni tanlang"
+          data={positions.map((p) => ({
+            value: p.id.toString(),
+            label: p.name.uz, // kerak bo‘lsa currentLang qilib yuborasiz
+          }))}
+          {...form.getInputProps("position_id")}
+        />
 
-                <TextInput
-                    label="Email"
-                    placeholder="Введите email"
-                    {...form.getInputProps("email")}
-                />
+        <FileInput
+          label="Photo"
+          accept="image/*"
+          value={form.values.photo}
+          onChange={(file) => form.setFieldValue("photo", file)}
+        />
 
-                {["kk", "uz", "ru", "en"].map(lang => (
-                    <React.Fragment key={lang}>
-                        <TextInput
-                            label={`Position Name (${lang})`}
-                            placeholder="Введите название должности"
-                            {...form.getInputProps(`position.${lang}.name`)}
-                        />
-                        <Textarea
-                            label={`Position Description (${lang})`}
-                            placeholder="Введите описание должности"
-                            {...form.getInputProps(`position.${lang}.description`)}
-                        />
-                    </React.Fragment>
-                ))}
+        <Flex justify="end" gap={10}>
+          <Button onClick={() => modals.closeAll()}>Отмена</Button>
+          <Button type="submit">Сохранить</Button>
+        </Flex>
+      </Stack>
+    </form>
+  );
+};
 
-                <TextInput
-                    label="Birth Date"
-                    placeholder="YYYY-MM-DD"
-                    {...form.getInputProps("birth_date")}
-                />
-
-                <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Отмена</Button>
-                    <Button type="submit">Сохранить</Button>
-                </Flex>
-            </Stack>
-        </form>
-    )
-}
-
-export default FormEmployee
+export default FormEmployee;

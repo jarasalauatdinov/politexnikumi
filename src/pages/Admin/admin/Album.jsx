@@ -1,47 +1,52 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/api";
-import { Button, Flex, Group, Stack, Table, Title } from "@mantine/core";
+import { Button, Flex, Group, Pagination, Stack, Table, Title, Loader, Text, Notification } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { api } from "../../../api/api";
+import DeleteALbum from "../../../features/Album/Delete";
 import CreateAlbum from "../../../features/Album/Create";
 import UpdateAlbum from "../../../features/Album/Update";
 
 const Album = () => {
   const [albums, setAlbums] = useState([]);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  async function getAlbums() {
+  async function getAlbums(page = 1) {
+    setLoading(true);
     try {
-      const { data } = await api.get("/albums");
+      const { data } = await api.get(`/albums?page=${page}&per_page=10`);
       setAlbums(data.data.items);
+      setLastPage(data.data.pagination.last_page);
     } catch (error) {
       console.error("Error fetching albums:", error);
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
-    getAlbums();
-  }, []);
+    getAlbums(page);
+  }, [page]);
 
-  async function createFn() {
+  function createFn() {
     modals.open({
       title: "Create",
       children: <CreateAlbum getAlbums={getAlbums} />,
     });
   }
 
-  async function updateFn(id) {
+  function updateFn(id) {
     modals.open({
       title: "Update",
-      children: <UpdateAlbum id={id} getAlbums={getAlbums} />,
+      children: <UpdateAlbum id={id} albums={albums} setAlbums={setAlbums} />,
     });
   }
 
-  async function deleteFn(id) {
-    try {
-      await api.delete(`/albums/delete/${id}`);
-      getAlbums(); 
-    } catch (error) {
-      console.error("Error deleting album:", error);
-    }
+  function deleteFn(id) {
+    modals.open({
+      children: <DeleteALbum id={id} albums={albums} setAlbums={setAlbums} />,
+    });
   }
 
   return (
@@ -51,35 +56,68 @@ const Album = () => {
         <Button onClick={createFn}>Create</Button>
       </Flex>
 
-      <Table striped highlightOnHover withTableBorder withColumnBorders>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Title</Table.Th>
-            <Table.Th>Description</Table.Th>
-            <Table.Th>Actions</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>
-          {albums.map((album) => (
-            <Table.Tr key={album.id}>
-              <Table.Td>{album.title.ru}</Table.Td>
-              <Table.Td>{album.description.ru}</Table.Td>
-              <Table.Td>
-                <Group>
-                  <Button
-                    variant="outline"
-                    color="red"
-                    onClick={() => deleteFn(album.id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button onClick={() => updateFn(album.id)}>Update</Button>
-                </Group>
-              </Table.Td>
+      {loading ? (
+        <Flex justify="center" align="center" style={{ height: "200px" }}>
+          <Loader variant="dots" />
+        </Flex>
+      ) : (
+        <Table
+          highlightOnHover
+          withTableBorder
+          withColumnBorders
+        >
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Id</Table.Th>
+              <Table.Th>Title</Table.Th>
+              <Table.Th>Picture</Table.Th>
+              <Table.Th>Description</Table.Th>
+              <Table.Th>Actions</Table.Th>
             </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
+          </Table.Thead>
+          <Table.Tbody>
+            {albums
+              .filter((album) => album && album.id)
+              .map((album) => (
+                <Table.Tr key={album.id}>
+                  <Table.Td>{album.id}</Table.Td>
+                  <Table.Td>{album.title?.ru || "No title"}</Table.Td>
+                  <Table.Td>
+                    {album.photos_url && album.photos_url.length > 0 ? (
+                      <div style={{ display: "flex", gap: "10px" }}>
+                        {album.photos_url.map((photo, index) => (
+                          <img
+                            key={index}
+                            src={photo.path}
+                            alt={photo.name}
+                            width={80}
+                            height={60}
+                            style={{ objectFit: "cover", borderRadius: "6px" }}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <span>No photos</span>
+                    )}
+                  </Table.Td>
+                  <Table.Td>{album.description?.ru || "No description"}</Table.Td>
+                  <Table.Td>
+                    <Group>
+                      <Button onClick={() => deleteFn(album.id)}>
+                        Delete
+                      </Button>
+                      <Button onClick={() => updateFn(album.id)}>Update</Button>
+                    </Group>
+                  </Table.Td>
+                </Table.Tr>
+              ))}
+          </Table.Tbody>
+        </Table>
+      )}
+
+      <Flex justify="center" mt="md">
+        <Pagination total={lastPage} value={page} onChange={setPage} />
+      </Flex>
     </Stack>
   );
 };

@@ -1,61 +1,139 @@
-import { Stack, Title } from "@mantine/core";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import "./Sidebar.css";
-import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { Flex, Stack, Title, NavLink, ScrollArea } from "@mantine/core";
+import { Link, useLocation } from "react-router-dom";
+import {
+    Building,
+    Users,
+    Image as ImageIcon,
+    User,
+    Briefcase,
+    Newspaper,
+    FileText,
+    Home,
+    BookOpen,
+    Star,
+    Clock,
+    Target,
+    File,
+    Check,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { FaQuestion } from "react-icons/fa6"; 
 
-const Sidebar = () => {
-  const [openMain, setOpenMain] = useState(false);
 
-  return (
-    <Stack
-      gap={40}
-      p={20}
-      w={"240px"}
-      h={"100vh"}
-      style={{ borderRight: "1px solid grey" }}
-    >
-      <Title fz={18} c="blue"><MdOutlineAdminPanelSettings /> Politexnikumi</Title>
+export const Sidebar = () => {
+    const location = useLocation();
+    const { t } = useTranslation();
+    const links = [
+        {
+            to: "school", label: t("school"),
+            icon: <Building size={16} />
+        },
+        {
+            to: "position", label: t("position"),
+            icon: <Briefcase size={16} />
+        },
+        {
+            to: "album", label: t("album"),
+            icon: <ImageIcon size={16} />
+        },
+        {
+            to: "user", label: t("user"),
+            icon: <User size={16} />
+        },
+        {
+            to: "employee", label: t("employee"),
+            icon: <Users size={16} />
+        },
+        {
+            to: "news", label: t("news"),
+            icon: <Newspaper size={16} />
+        },
+        {
+            to: "document", label: t("document"),
+            icon: <FileText size={16} />
+        },
+        {
+            to: "rules", label: t("rules"),
+            icon: <BookOpen size={16} />
+        },
+        {
+            to: "club", label: t("club"),
+            icon: <Users size={16} />
+        },
+        {
+            to: "value", label: t("value"),
+            icon: <Star size={16} />
+        },
+        {
+            to: "faq", label: "FAQ",
+            icon: <FaQuestion />
+        },
+        {
+            to: "hours", label: t("choolhours"),
+            icon: <Clock size={16} />
+        },
+        {
+            to: "target", label: t("target"),
+            icon: <Target size={16} />
+        },
+        {
+            to: "history", label: t("history"),
+            icon: <BookOpen size={16} />
+        },
+        {
+            to: "information", label: t("information"),
+            icon: <File size={16} />
+        },
+        {
 
-      <Stack gap={5}>
-        <NavLink className="sidebar-link" to="school">School</NavLink>
-        <NavLink className="sidebar-link" to="position">Position</NavLink>
-        <NavLink className="sidebar-link" to="album">Album</NavLink>
-        <NavLink className="sidebar-link" to="users">User</NavLink>
-        <NavLink className="sidebar-link" to="employee">Employee</NavLink>
-        <NavLink className="sidebar-link" to="news">News</NavLink>
-        <NavLink className="sidebar-link" to="document">Document</NavLink>
+            to: "vacancy", label: t("vacancy"),
+            icon: <FileText size={16} />
+        },
+        {
+            to: "admin-schedule", label: t("schedule"),
+            icon: <FileText size={16} />
+        }
+    ];
 
-        {/* <div>
-          <div
-            className="sidebar-link"
-            style={{ cursor: "pointer", fontWeight: "bold" }}
-            onClick={() => setOpenMain(!openMain)}
-          >
-            Main {openMain ? "<close" : "<open"}
-          </div>
-          {openMain && (
-            <Stack pl={15} gap={5}>
-              <NavLink className="sidebar-link" to="home">Home</NavLink>
-              <NavLink className="sidebar-link" to="about">About</NavLink>
-              <NavLink className="sidebar-link" to="education">Education</NavLink>
-              <NavLink className="sidebar-link" to="schedule">Schedule</NavLink>
-            </Stack>
-          )}
-        </div> */}
+    return (
+        <Stack
+            gap={20}
+            h="100vh"
+            w="180px"
+            p={12}
+            style={{ borderRight: "1px solid #2C2E33" }}
+        >
+            <Title order={4} align="center" style={{ fontSize: 16 }}>
+                {t("politechnicum")}
+            </Title>
 
-        <NavLink className="sidebar-link" to="rule">Rule</NavLink>
-        <NavLink className="sidebar-link" to="value">Value</NavLink>
-        <NavLink className="sidebar-link" to="club">Club</NavLink>
-        <NavLink className="sidebar-link" to="faq">FAQ</NavLink>
-        <NavLink className="sidebar-link" to="schoolhours">School Hours</NavLink>
-        <NavLink className="sidebar-link" to="target">Target</NavLink>
-        <NavLink className="sidebar-link" to="history">History</NavLink>
-        <NavLink className="sidebar-link" to="information">Information</NavLink>
-        <NavLink className="sidebar-link" to="vacancy">Vacancy</NavLink>
-      </Stack>
-    </Stack>
-  );
+            <ScrollArea w={"auto"} h={"100%"} scrollbarSize={"hidden"} scrollbars="y">
+                <Stack gap={6}>
+                    {links.map((item) => (
+                        <NavLink
+                            key={item.to}
+                            label={item.label}
+                            component={Link}
+                            to={item.to}
+                            bdrs={4}
+                            leftSection={item.icon}
+                            active={location.pathname.includes(item.to)}
+                            styles={(theme) => ({
+                                active: {
+                                    backgroundColor: theme.colors.blue[7],
+                                    color: "white",
+                                },
+                                root: {
+                                    padding: "6px 10px",
+                                },
+                                label: {
+                                    fontSize: 14,
+                                },
+                            })}
+                        />
+                    ))}
+                </Stack>
+            </ScrollArea>
+        </Stack>
+    );
 };
-
-export default Sidebar;

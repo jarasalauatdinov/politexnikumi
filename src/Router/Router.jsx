@@ -17,13 +17,7 @@ import Newpage from "../pages/News/new/Newpage";
 
 import Admin from "../pages/Admin/admin/admin";
 import Users from "../pages/Admin/admin/Users";
-import FAQ from "../pages/Admin/client/FAQ";
-import History from "../pages/Admin/client/History";
 import SchoolHours from "../pages/Admin/client/SchoolHours";
-import Information from "../pages/Admin/client/Information";
-import Vacancy from "../pages/Admin/client/Vacancy";
-import Schedule from "../pages/Admin/client/Schedule";
-import Target from "../pages/Admin/client/Target";
 import Register from "../pages/Admin/auth/register";
 import Position from "../pages/Admin/admin/Position";
 import Login from "../pages/Admin/auth/Login";
@@ -36,6 +30,13 @@ import Document from "../pages/Admin/admin/Document";
 import Employee from "../pages/Admin/admin/Employee";
 import Value from "../pages/Admin/admin/Value";
 import Club from "../pages/Admin/admin/Club";
+import Faqs from "../pages/Admin/admin/Faqs";
+import Gallery from "../pages/Home/Gallery";
+import Schedule from "../pages/Admin/admin/Schedule";
+import Information from "../pages/Admin/admin/Information";
+import History from "../pages/Admin/admin/History";
+import Target from "../pages/Admin/admin/Target";
+
 
 export const router = createBrowserRouter([
   {
@@ -102,7 +103,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "FAQ",
-        element: <FAQ />,
+        element: <Faqs />,
       },
       {
         path: "schoolhours",
@@ -120,10 +121,7 @@ export const router = createBrowserRouter([
         path: "information",
         element: <Information />,
       },
-      {
-        path: "vacancy",
-        element: <Vacancy />,
-      },
+    
       {
         path: "schedule",
         element: <Schedule />,
@@ -136,7 +134,13 @@ export const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { path: "/", element: <Homepage /> },
+      { path: "/", 
+        element: <Homepage />,
+        children: [
+         { path: "gallery", element: <Gallery /> }
+        ]
+
+       },
       {
         path: "/about",
         element: <Schoolpage />,

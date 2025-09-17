@@ -9,54 +9,53 @@ const FormRules = ({ submitFn, initialValues }) => {
 
     const handleSubmit = async (values) => {
         await submitFn(values);
-        modals.closeAll();
     };
 
     return (
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <Stack>
                 <TextInput
-                    label="Kazakh (kk)"
-                    placeholder="Введите название"
+                    label="Title (kk)"
+                    placeholder="Title"
                     {...form.getInputProps("title.kk")}
                 />
                 <TextInput
-                    label="Uzbek (uz)"
-                    placeholder="Введите название"
+                    label="Title (uz)"
+                    placeholder="Title"
                     {...form.getInputProps("title.uz")}
                 />
                 <TextInput
-                    label="Russian (ru)"
-                    placeholder="Введите название"
+                    label="Title (ru)"
+                    placeholder="Title"
                     {...form.getInputProps("title.ru")}
                 />
                 <TextInput
-                    label="English (en)"
-                    placeholder="Введите название"
+                    label="Title (en)"
+                    placeholder="Title"
                     {...form.getInputProps("title.en")}
                 />
 
                 <Textarea
-                    label="Kazakh (kk)"
-                    placeholder="Введите описание"
+                    label="Text (kk)"
+                    placeholder="Text"
                     minRows={2}
                     {...form.getInputProps("text.kk")}
                 />
                 <Textarea
-                    label="Uzbek (uz)"
-                    placeholder="Введите описание"
+                    label="Text (uz)"
+                    placeholder="Text"
                     minRows={2}
                     {...form.getInputProps("text.uz")}
                 />
                 <Textarea
-                    label="Russian (ru)"
-                    placeholder="Введите описание"
+                    label="Text (ru)"
+                    placeholder="Text"
                     minRows={2}
                     {...form.getInputProps("text.ru")}
                 />
                 <Textarea
-                    label="English (en)"
-                    placeholder="Введите описание"
+                    label="Text (en)"
+                    placeholder="Text"
                     minRows={2}
                     {...form.getInputProps("text.en")}
                 />

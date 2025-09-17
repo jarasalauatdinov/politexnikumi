@@ -1,43 +1,62 @@
-import { useForm } from "@mantine/form";
-import { Button, TextInput, Textarea, Stack, Flex, FileInput } from "@mantine/core";
+import { useState } from "react";
+import { Stack, Button, Flex, Text, Loader } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { notifications } from "@mantine/notifications";
+import { Check, X } from "tabler-icons-react";
+import { api } from "../../api/api";
 
-const FormValue = ({ submitFn, initialValues }) => {
-  const form = useForm({ initialValues });
+const DeleteClub = ({ id, club, setClub, getClubs }) => {
+    const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (values) => {
-    await submitFn(values);
-    modals.closeAll();
-  };
+    const deleteFn = async () => {
+        setLoading(true);
+        try {
+            await api.delete(`/clubs/delete/${id}`);
 
-  return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
-      <Stack>
-        <TextInput {...form.getInputProps("name.kk")} label="Kazakh" />
-        <TextInput {...form.getInputProps("name.uz")} label="Uzbek" />
-        <TextInput {...form.getInputProps("name.ru")} label="Russian" />
-        <TextInput {...form.getInputProps("name.en")} label="English" />
+            if (getClubs) await getClubs();
+            else setClub(club.filter((c) => c.id !== id));
 
-        <Textarea {...form.getInputProps("text.kk")} label="Kazakh Text" />
-        <Textarea {...form.getInputProps("text.uz")} label="Uzbek Text" />
-        <Textarea {...form.getInputProps("text.ru")} label="Russian Text" />
-        <Textarea {...form.getInputProps("text.en")} label="English Text" />
+            modals.closeAll();
 
-        <FileInput
-          label="Upload photo"
-          placeholder="Pick image"
-          accept="image/*"
-          value={form.values.photo}
-          onChange={(file) => form.setFieldValue("photo", file)}
-        />
+            notifications.show({
+                title: "Success",
+                message: "Club deleted successfully!",
+                color: "teal",
+                icon: <Check />,
+            });
+        } catch (error) {
+            console.error("Error deleting club:", error);
 
-        <Flex justify="end" gap={10}>
-          <Button onClick={() => modals.closeAll()}>Cancel</Button>
-          <Button type="submit">Save</Button>
-        </Flex>
-      </Stack>
-    </form>
-  );
+            notifications.show({
+                title: "Error",
+                message: "Failed to delete club!",
+                color: "red",
+                icon: <X />,
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <Flex justify="center" align="center" style={{ height: "150px" }}>
+                <Loader variant="dots" />
+            </Flex>
+        );
+    }
+
+    return (
+        <Stack>
+            <Text>Are you sure you want to delete this club?</Text>
+            <Flex gap={10} justify="flex-end">
+                <Button onClick={() => modals.closeAll()}>Cancel</Button>
+                <Button color="red" onClick={deleteFn}>
+                    Delete
+                </Button>
+            </Flex>
+        </Stack>
+    );
 };
 
-export default FormValue;
+export default DeleteClub;

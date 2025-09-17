@@ -1,57 +1,53 @@
-import { Button, Stack, TextInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
-import { modals } from '@mantine/modals';
-import React, { useState } from 'react'
+import { Button, FileInput, Flex, Stack, Textarea, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { modals } from "@mantine/modals";
 
-const FormDoc = ({ submitFn, initialValues }) => {
-    const [value, setValue] = useState(null);
-
+const FormDocument = ({ submitFn, initialValues }) => {
     const form = useForm({
-        initialValues,
+        initialValues: {
+            name: initialValues?.name || "",
+            description: initialValues?.description || "",
+            file: initialValues?.file || null,
+        },
     });
 
-    const handleSubmit = async (values) => {
+    async function handleSubmit(values) {
         await submitFn(values);
-        modals.closeAll();
     }
+
     return (
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <Stack>
                 <TextInput
-                    label="Qaraqalpaq (kk)"
-                    placeholder='Add Name'
-                    {...form.getInputProps("name.kk")}
+                    label="Name"
+                    placeholder="Name"
+                    required
+                    {...form.getInputProps("name")}
                 />
-                <TextInput
-                    label="Uzbek (uz)"
-                    placeholder='Add Name'
-                    {...form.getInputProps("name.uz")}
-                />
-                <TextInput
-                    label="Russian (ru)"
-                    placeholder='Add Name'
-                    {...form.getInputProps("name.ru")}
-                />
-                <TextInput
-                    label="English (en)"
-                    placeholder='Add Name'
-                    {...form.getInputProps("name.en")}
+
+                <Textarea
+                    label="Description"
+                    placeholder="Description"
+                    required
+                    {...form.getInputProps("description")}
                 />
 
                 <FileInput
-                    label="Cover Image"
-                    accept="image/png,image/jpeg"
-                    value={value} onChange={setValue}
-                    {...form.getInputProps("cover_image")}
+                    label="File"
+                    placeholder="Upload file"
+                    clearable
+                    onChange={(file) => form.setFieldValue("file", file)}
                 />
 
                 <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Close</Button>
-                    <Button type="submit">Save</Button>
+                    <Button onClick={() => modals.closeAll()} variant="default">
+                        Отмена
+                    </Button>
+                    <Button type="submit">Сохранить</Button>
                 </Flex>
             </Stack>
         </form>
-    )
-}
+    );
+};
 
-export default FormDoc
+export default FormDocument;

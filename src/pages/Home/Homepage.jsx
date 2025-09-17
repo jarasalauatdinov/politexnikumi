@@ -37,7 +37,7 @@ const newCard = [
 
 const Homepage = () => {
   const [employees, setEmployees] = useState([]);
-  const currentLang = "ru"; // bu keyin i18n bilan avtomatik bo‘ladi
+  const currentLang = "kk"; 
 
   useEffect(() => {
     async function fetchEmployees() {
@@ -116,7 +116,7 @@ const Homepage = () => {
                     </span>
                     <h3>{item.title}</h3>
                     <p>{item.text}</p>
-                    <Link to="/news">
+                    <Link to="/news" className="news-c-a">
                       {item.button}
                       <img src="/img/blue-right-btn.svg" alt="" />
                     </Link>
@@ -258,7 +258,7 @@ const Homepage = () => {
                 School Gymnasium
               </p>
             </div>
-
+              
             <div className="about-s-r-card about-s-r-c-third">
               <h3>End of Year Concert</h3>
               <p>
@@ -284,9 +284,9 @@ const Homepage = () => {
         <section className="photo-gallery">
           <div className="gallery-top">
             <h2>Photo Gallery</h2>
-            <button>
+            <Link to="/gallery">
               View All Photos <img src="/img/black-right-btn.svg" alt="" />
-            </button>
+            </Link>
           </div>
           <div className="gallery-bottom">
             <img src="/img/gallery-one.jpg" alt="" />

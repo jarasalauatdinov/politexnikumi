@@ -1,63 +1,109 @@
 import { useEffect, useState } from "react";
-import { api } from "../../api/api";
 import FormClub from "./Form";
+import { Flex, Loader, Stack } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { modals } from "@mantine/modals";
+import { Check, X } from "lucide-react";
+import { api } from "../../api/api";
 
-const UpdateValue = ({ id, getValue }) => {
-  const [data, setData] = useState();
+const UpdateClub = ({ id, getClubs }) => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-  async function getValueById() {
-    try {
-      const { data } = await api.get(`/values/${id}`); // <-- GET ishlatildi
-      setData(data.data);
-    } catch (error) {
-      console.error("Error fetching value:", error);
+    const getClubById = async () => {
+        setLoading(true);
+        try {
+            const { data } = await api.get(`/clubs/${id}`);
+            setData(data.data);
+        } catch (error) {
+            console.error("Error fetching club:", error);
+            notifications.show({
+                title: "Error",
+                message: "Failed to fetch club!",
+                color: "red",
+                icon: <X />,
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getClubById();
+    }, [id]);
+
+    const updateFn = async (values) => {
+        setLoading(true);
+        try {
+            const formData = new FormData();
+
+            const fields = ["name", "text", "schedule"];
+            const langs = ["kk", "uz", "ru", "en"];
+
+            fields.forEach(field => {
+                langs.forEach(lang => {
+                    formData.append(`${field}[${lang}]`, values[field]?.[lang] || "");
+                });
+            });
+
+            if (values.photo) formData.append("photo", values.photo);
+
+            formData.append("status", values.status || "active");
+            formData.append("category", values.category || "");
+            formData.append("teacher_id", values.teacher_id || "");
+            formData.append("price", values.price || 0);
+
+            formData.append("_method", "PUT");
+
+            await api.post(`/clubs/update/${id}`, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            if (getClubs) await getClubs();
+            modals.closeAll();
+
+            notifications.show({
+                title: "Success",
+                message: "Club updated successfully!",
+                color: "teal",
+                icon: <Check />,
+            });
+        } catch (error) {
+            console.error("Error updating club:", error);
+            notifications.show({
+                title: "Error",
+                message: error?.response?.data?.message || "Failed to update club. Make sure all required fields are filled.",
+                color: "red",
+                icon: <X />,
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    if (loading || !data) {
+        return (
+            <Flex justify="center" align="center" style={{ height: "100%" }}>
+                <Stack align="center">
+                    <Loader variant="dots" size="lg" />
+                </Stack>
+            </Flex>
+        );
     }
-  }
 
-  useEffect(() => {
-    getValueById();
-  }, [id]);
-
-  async function updateFn(values) {
-    try {
-      const formData = new FormData();
-
-      formData.append("name[kk]", values.name.kk);
-      formData.append("name[uz]", values.name.uz);
-      formData.append("name[ru]", values.name.ru);
-      formData.append("name[en]", values.name.en);
-
-      formData.append("text[kk]", values.text.kk);
-      formData.append("text[uz]", values.text.uz);
-      formData.append("text[ru]", values.text.ru);
-      formData.append("text[en]", values.text.en);
-
-      if (values.photo) {
-        formData.append("photo", values.photo); // agar photo required bo‘lsa, doim yuborish
-      }
-
-      await api.put(`/values/update/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      getValue();
-      alert("Value updated successfully!");
-    } catch (error) {
-      console.error("Error updating value:", error.response?.data || error);
-      alert("Error updating value. Check all required fields (name/text/photo).");
-    }
-  }
-
-  return data ? (
-    <FormClub
-      submitFn={updateFn}
-      initialValues={{
-        name: { kk: data.name.kk, uz: data.name.uz, ru: data.name.ru, en: data.name.en },
-        text: { kk: data.text.kk, uz: data.text.uz, ru: data.text.ru, en: data.text.en },
-        photo: null,
-      }}
-    />
-  ) : null;
+    return (
+        <FormClub
+            key={id}
+            submitFn={updateFn}
+            initialValues={{
+                name: data.name || { kk: "", uz: "", ru: "", en: "" },
+                text: data.text || { kk: "", uz: "", ru: "", en: "" },
+                schedule: data.schedule || { kk: "", uz: "", ru: "", en: "" },
+                photo: null,
+            }}
+        />
+    );
 };
 
-export default UpdateValue;
+export default UpdateClub;

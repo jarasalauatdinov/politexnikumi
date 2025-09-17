@@ -1,41 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Rules.css";
+import { api } from "../../api/api";
 
 const Rulespage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [rules, setRules] = useState([]);
+  const currentLang = "kk"; // 
 
-  const rules = [
-    {
-      title: "Attendance and Punctuality",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      title: "Behavior and Discipline",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      title: "Uniform and Appearance",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      title: "Academic Integrity",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-    {
-      title: "School Facilities and Property",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ",
-    },
-    {
-      title: "Electronic Devices",
-      content:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    },
-  ];
+  useEffect(() => {
+    async function fetchRules() {
+      try {
+        const { data } = await api.get("/rules"); // endpointni o‘zingiz qo‘yasiz
+        setRules(data.data.items);
+      } catch (err) {
+        console.error("Error fetching rules:", err);
+      }
+    }
+    fetchRules();
+  }, []);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -59,9 +41,9 @@ const Rulespage = () => {
               School Rules
             </h4>
             {rules.map((rule, index) => (
-              <div key={index} className="accordion-item">
+              <div key={rule.id} className="accordion-item">
                 <button onClick={() => toggleAccordion(index)}>
-                  {rule.title}
+                  {rule.title?.[currentLang]}
                   <span
                     className={`arrow ${activeIndex === index ? "open" : ""}`}
                   >
@@ -70,7 +52,7 @@ const Rulespage = () => {
                 </button>
                 {activeIndex === index && (
                   <div className="accordion-content">
-                    <p>{rule.content}</p>
+                    <p>{rule.text?.[currentLang]}</p>
                   </div>
                 )}
               </div>

@@ -1,87 +1,112 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./lesson.css";
+import { api } from "../../api/api";
 
 function ScheduleCard() {
-  const [selectedClass, setSelectedClass] = useState("10A");
+  const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const [schedules, setSchedules] = useState([]);
 
-  const classes = [
-    "5A", "5B", "6A", "6B",
-    "7A", "7B", "8A", "8B",
-    "9A", "9B", "10A", "10B",
-    "11A", "11B"
-  ];
+  useEffect(() => {
+    async function fetchSchedules() {
+      try {
+        const { data } = await api.get("/schedules");
+        setSchedules(data.data.items);
+        if (data.data.items.length > 0) {
+          setSelectedSchedule(data.data.items[0]); // birinchi fayl default
+        }
+      } catch (err) {
+        console.error("Error fetching schedules:", err);
+      }
+    }
+    fetchSchedules();
+  }, []);
 
   const handleDownload = () => {
-    alert(`Скачивается расписание для класса: ${selectedClass}`);
+    if (selectedSchedule?.download_url) {
+      window.open(selectedSchedule.download_url, "_blank");
+    } else {
+      alert("Файл недоступен для скачивания");
+    }
   };
 
   return (
     <main>
       <div className="container">
-      <section className="lesson-card">
-        <h3>
-          <img className="lesson-doc" src="/img/lesson-doc.svg" alt="" />
-          Скачать расписание занятий
-        </h3>
+        <section className="lesson-card">
+          <h3>
+            <img className="lesson-doc" src="/img/lesson-doc.svg" alt="" />
+            Скачать расписание занятий
+          </h3>
 
-        <p className="lesson-desc">
-          Выберите класс и формат для скачивания расписания
-        </p>
+          <p className="lesson-desc">
+            Выберите файл и скачайте расписание
+          </p>
 
-        <div className="lesson-block">
-          <label>
-            Выберите класс: 
-            <select
-              value={selectedClass}
-              onChange={(e) => setSelectedClass(e.target.value)}
-            >
-              {classes.map((cls) => (
-                <option key={cls} value={cls}>
-                  {cls}
-                </option>
-              ))}
-            </select>
-          </label>
+          {schedules.length > 0 ? (
+            <div className="lesson-block">
+              <label>
+                Выберите файл:
+                <select
+                  value={selectedSchedule?.id || ""}
+                  onChange={(e) =>
+                    setSelectedSchedule(
+                      schedules.find((s) => s.id === Number(e.target.value))
+                    )
+                  }
+                >
+                  {schedules.map((sch) => (
+                    <option key={sch.id} value={sch.id}>
+                      {sch.description || sch.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
-        <div className="lesson-class">
-          Выбран класс: <span>{selectedClass}</span>
-        </div>
+              <div className="lesson-class">
+                Выбран файл: <span>{selectedSchedule?.description}</span>
+              </div>
 
-          <button className="download-btn" onClick={handleDownload}>
-            <img src="/img/download-icon.svg" alt="" />
-            Скачать расписание
-          </button>
-        </div>
-
-        <div className="update-info">
-          Последнее обновление расписаний: 15 сентября 2025
-        </div>
-      </section>
-
-      <section className="lesson-bottom">
-        <h3>Доступные расписания</h3>
-        <p className="l-bottom-p">
-          Список всех доступных для скачивания расписаний
-        </p>
-
-        <div className="lesson-b-cards">
-          {classes.map((cls) => (
-            <div
-              key={cls}
-              className={`lesson-b-card ${
-                selectedClass === cls ? "active" : ""
-              }`}
-              onClick={() => setSelectedClass(cls)}
-            >
-              <h4>
-                <img src="/img/lesson-doc.svg" alt="" />
-                Класс {cls}
-              </h4>
-              <p>Нажмите для выбора</p>
+              <button className="download-btn" onClick={handleDownload}>
+                <img src="/img/download-icon.svg" alt="" />
+                Скачать расписание
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
+          ) : (
+            <p>Загрузка расписаний...</p>
+          )}
+
+          <div className="update-info">
+            Последнее обновление расписаний:{" "}
+            {schedules[0]?.created_at
+              ? new Date(schedules[0].created_at).toLocaleDateString("ru-RU")
+              : "—"}
+          </div>
+        </section>
+
+        <section className="lesson-bottom">
+          <h3>Доступные расписания</h3>
+          <p className="l-bottom-p">
+            Список всех доступных для скачивания расписаний
+          </p>
+
+          <div className="lesson-b-cards">
+            {schedules.map((sch) => (
+              <div
+                key={sch.id}
+                className={`lesson-b-card ${
+                  selectedSchedule?.id === sch.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedSchedule(sch)}
+              >
+                <h4>
+                  <img src="/img/lesson-doc.svg" alt="" />
+                  {sch.description || sch.name}
+                </h4>
+                <p>{sch.size}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

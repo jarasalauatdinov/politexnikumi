@@ -1,96 +1,110 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/api";
-import { Button, Flex, Stack, Table, Title } from "@mantine/core";
+import { Button, Flex, Stack, Table, Title, Loader, Text, Pagination, Textarea } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import CreateValue from "../../../features/Value/Create";
+import { api } from "../../../api/api";
 import DeleteValue from "../../../features/Value/Delete";
 import UpdateValue from "../../../features/Value/Update";
+import CreateValue from "../../../features/Value/Create";
+import { useTranslation } from "react-i18next";
 
-function Value() {
-    const [value, setValue] = useState([]);
-    const currentLang = "en";
+const Value = () => {
+  const [value, setValue] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const currentLang = "ru";
+  const { t } = useTranslation();
 
-    async function getValue() {
-        try {
-            const { data } = await api.get("/values");
-            setValue(data.data.items);
-        } catch (error) {
-            console.error("Error fetching value:", error)
-        }
+  const getValue = async (page = 1) => {
+    setLoading(true);
+    try {
+      const { data } = await api.get(`/values?page=${page}&per_page=10`);
+      setValue(data.data.items);
+      setLastPage(data.data.pagination.last_page);
+    } catch (error) {
+      console.error("Error fetching Value:", error);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(() => {
-        getValue();
-    }, []);
+  useEffect(() => {
+    getValue(page);
+  }, [page]);
 
-    function createFn() {
-        modals.open({
-            children: (
-                <CreateValue
-                    getValue={getValue}
-                />
-            )
-        })
-    }
+  const createFn = () => {
+    modals.open({
+      children: <CreateValue getValue={getValue} />,
+    });
+  };
 
-    function deleteFn(id) {
-        modals.open({
-            children: (
-                <DeleteValue
-                    id={id}
-                    value={value}
-                    setValue={setValue}
-                />
-            )
-        })
-    }
+  const updateFn = (id) => {
+    modals.open({
+      children: <UpdateValue id={id} getValue={getValue} />,
+    });
+  };
 
-    function updateFn(id) {
-        modals.open({
-            children: (
-                <UpdateValue
-                    id={id}
-                    value={value}
-                    setValue={setValue}
-                />
-            )
-        })
-    }
+  const deleteFn = (id) => {
+    modals.open({
+      children: (
+        <DeleteValue
+          id={id}
+          value={value}
+          setValue={setValue}
+        />
+      ),
+    });
+  };
 
-    return (
-        <Stack p={20} w="100%">
-            <Flex justify="space-between" align="center">
-                <Title>Value</Title>
-                <Button onClick={createFn}>Create</Button>
-            </Flex>
-            <Table horizontalSpacing="xl" verticalSpacing="sm" highlightOnHover withTableBorder withColumnBorders>
-                <Table.Thead>
-                    <Table.Tr>
-                        <Table.Th>Id</Table.Th>
-                        <Table.Th>Name</Table.Th>
-                        <Table.Th>Text</Table.Th>
-                        <Table.Th>Actions</Table.Th>
-                    </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody>
-                    {value.map((el) => (
-                        <Table.Tr key={el.id}>
-                            <Table.Td>{el.id}</Table.Td>
-                            <Table.Td>{el.name[currentLang]}</Table.Td>
-                            <Table.Td>{el.text[currentLang]}</Table.Td>
-                            <Table.Td>
-                                <Flex gap={10}>
-                                    <Button onClick={() => deleteFn(el.id)}>Delete</Button>
-                                    <Button onClick={() => updateFn(el.id)}>Update</Button>
-                                </Flex>
-                            </Table.Td>
-                        </Table.Tr>
-                    ))}
-                </Table.Tbody>
-            </Table>
-        </Stack>
-    );
+  return (
+    <Stack p={20} w="100%">
+      <Flex justify="space-between" align="center">
+        <Title>{t("sidebar.value")}</Title>
+        <Button onClick={createFn}>{t("actions.create")}</Button>
+      </Flex>
+
+      {loading ? (
+        <Flex justify="center" align="center" style={{ height: "200px" }}>
+          <Loader variant="dots" />
+        </Flex>
+      ) : (
+        <Table
+          highlightOnHover
+          withTableBorder
+          withColumnBorders
+        >
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Id</Table.Th>
+              <Table.Th>Name</Table.Th>
+              <Table.Th>Text</Table.Th>
+              <Table.Th>Photo</Table.Th>
+              <Table.Th>Actions</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            {value.map((el) => (
+              <Table.Tr key={el.id}>
+                <Table.Td>{el.id}</Table.Td>
+                <Table.Td>{el.name[currentLang]}</Table.Td>
+                <Table.Td>{el.text[currentLang]}</Table.Td>
+                <Table.Td>{el.photo.path}</Table.Td>
+                <Table.Td>
+                  <Flex gap={10}>
+                    <Button onClick={() => deleteFn(el.id)}>{t("actions.delete")}</Button>
+                    <Button onClick={() => updateFn(el.id)}>{t("actions.update")}</Button>
+                  </Flex>
+                </Table.Td>
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
+      )}
+      <Flex justify="center" mt="md">
+        <Pagination total={lastPage} value={page} onChange={setPage} />
+      </Flex>
+    </Stack>
+  )
 }
 
-
-export default Value;
+export default Value
