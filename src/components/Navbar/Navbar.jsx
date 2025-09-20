@@ -42,9 +42,9 @@ const Navbar = () => {
   };
 
   const languages = [
-    { value: "qr", label: "QARAQALPAQ" },
+    { value: "kk", label: "QARAQALPAQ" },
     { value: "ru", label: "РУССКИЙ" },
-    { value: "eng", label: "ENGLISH" },
+    { value: "en", label: "ENGLISH" },
     { value: "uz", label: "UZBEK" },
   ];
 

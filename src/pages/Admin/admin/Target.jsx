@@ -58,7 +58,7 @@ const Target = () => {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>{t("Target")}</Title>
-        <Button onClick={() => createFn()}>{t("Create")}</Button>
+        <Button onClick={() => createFn()}>{t("btn.create")}</Button>
       </Flex>
 
       {loading ? (
@@ -91,8 +91,8 @@ const Target = () => {
                 <Table.Td>{el.description[currentLang]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("Delete")}</Button>
-                    <Button size="xs" onClick={() => updateFn(el.id)}>{t("Update")}</Button>
+                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button size="xs" onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>

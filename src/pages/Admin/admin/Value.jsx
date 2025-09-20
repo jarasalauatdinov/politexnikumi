@@ -8,67 +8,96 @@ import CreateValue from "../../../features/Value/Create";
 import { useTranslation } from "react-i18next";
 
 const Value = () => {
-  const [value, setValue] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const currentLang = "ru";
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  const [downloadingId, setDownloadingId] = useState(null);
 
-  const getValue = async (page = 1) => {
+  async function getDocuments() {
     setLoading(true);
     try {
-      const { data } = await api.get(`/values?page=${page}&per_page=10`);
-      setValue(data.data.items);
+      const { data } = await api.get(`/documents?page=${page}&per_page=10`);
+      setDocuments(data.data.items);
       setLastPage(data.data.pagination.last_page);
     } catch (error) {
-      console.error("Error fetching Value:", error);
+      console.error("Error fetching news:", error)
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch documents!",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
-    getValue(page);
-  }, [page]);
+    getDocuments();
+  }, []);
 
   const createFn = () => {
     modals.open({
-      children: <CreateValue getValue={getValue} />,
+      children: <UploadDocument getDocuments={getDocuments} />,
     });
   };
 
   const updateFn = (id) => {
     modals.open({
-      children: <UpdateValue id={id} getValue={getValue} />,
+      children: <UpdateDocument id={id} getDocuments={getDocuments} />,
     });
   };
 
   const deleteFn = (id) => {
     modals.open({
       children: (
-        <DeleteValue
+        <DeleteDocument
           id={id}
-          value={value}
-          setValue={setValue}
+          documents={documents}
+          setDocuments={setDocuments}
         />
       ),
     });
   };
 
+  const handleDownload = async (downloadUrl, fileName) => {
+    try {
+      const response = await axios.get(downloadUrl, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName || 'document');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
-        <Title>{t("sidebar.value")}</Title>
-        <Button onClick={createFn}>{t("actions.create")}</Button>
+        <Title>{t("sidebar.document")}</Title>
+        <Button onClick={createFn}>{t("btn.upload")}</Button>
       </Flex>
-
       {loading ? (
         <Flex justify="center" align="center" style={{ height: "200px" }}>
           <Loader variant="dots" />
         </Flex>
       ) : (
         <Table
+          style={{
+            fontSize: '12px',
+            tableLayout: 'auto',
+          }}
           highlightOnHover
           withTableBorder
           withColumnBorders
@@ -77,22 +106,34 @@ const Value = () => {
             <Table.Tr>
               <Table.Th>Id</Table.Th>
               <Table.Th>Name</Table.Th>
-              <Table.Th>Text</Table.Th>
-              <Table.Th>Photo</Table.Th>
+              <Table.Th>Description</Table.Th>
+              <Table.Th>Download</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {value.map((el) => (
+            {documents.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.name[currentLang]}</Table.Td>
-                <Table.Td>{el.text[currentLang]}</Table.Td>
-                <Table.Td>{el.photo.path}</Table.Td>
+                <Table.Td>{el.name}</Table.Td>
+                <Table.Td>{el.description}</Table.Td>
+                <Table.Td>
+                  <Button size="xs" w={100} variant="outline" onClick={() => handleDownload(el.download_url, el.name)}>
+                    {downloadingId === el.id ? <Flex p={18}><Loader size="xs" /></Flex> : t("btn.download")}
+                  </Button>
+                </Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button onClick={() => deleteFn(el.id)}>{t("actions.delete")}</Button>
-                    <Button onClick={() => updateFn(el.id)}>{t("actions.update")}</Button>
+                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button
+                      size="xs"
+                      onClick={() => {
+                        console.log("Update clicked, id:", el.id);
+                        updateFn(el.id);
+                      }}
+                    >
+                      {t("btn.update")}
+                    </Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>
@@ -103,7 +144,7 @@ const Value = () => {
       <Flex justify="center" mt="md">
         <Pagination total={lastPage} value={page} onChange={setPage} />
       </Flex>
-    </Stack>
+    </Stack >
   )
 }
 

@@ -1,0 +1,98 @@
+{
+  "Kiriw": "Kiriw",
+  "Úy": "Úy",
+  "Texnikum": "Texnikum",
+  "Sabaqliq": "Sabaqliq",
+  "Tálim": "Tálim",
+  "Qaǵiydalar": "Qaǵiydalar",
+  "Jańaliqlar": "Jańaliqlar",
+  "Jardem": "Jardem",
+
+  "politechnicum": "Politexnikum",
+  "home": "U'y",
+  "about": "Mektep haqqinda",
+  "education": "Ta'lim",
+  "rules": "Qag'iydalar",
+  "news": "Jan'aliqlar",
+  "support": "Qollaw",
+  "contact": "Baylanis",
+  "logout": "Shig'iw",
+  "sidebar": {
+    "album": "Albom",
+    "schedule": "Raspisanie",
+    "club": "Klub",
+    "history": "Tariyx",
+    "information": "Mag'lumat",
+    "school": "Mekteb",
+    "schoolhours": "Mekteb saatlari",
+    "target": "Maqset",
+    "vacancy": "Vakansiya",
+    "value": "Qiymet",
+    "position": "Lawazim",
+    "user": "Paydalanuwshi",
+    "employee": "Jumisshi",
+    "news": "Jan'aliqlar",
+    "document": "Hu'jjet",
+    "rules": "Qag'iydalar"
+  },
+  "btn": {
+    "create": "Jaratiw",
+    "update": "Jan'artiw",
+    "delete": "O'shiriw",
+    "upload": "Juklew",
+    "download": "Juklew",
+    "save": "Saqlaw",
+    "cancel": "Bas tartiw"
+  },
+  "languages": {
+    "kk": "Qaraqalpaq",
+    "uz": "Uzbek",
+    "ru": "Ruskiy",
+    "en": "Angliyskiy"
+  },
+  "messages": {
+    "confirmDelete": "Siz bul elementti o'shiriwge isenimlisizba?"
+  },
+  "gallery": {
+    "gallery": "Galleriya",
+    "gallery-p": "Bayramlar, xanalar ham oqiwshilar aktivligi fotosuwretleri arqali mekteb o'mirimizdi u'yrening."
+  },
+  "news-page": {
+    "news-title": "Mekteb Jan'aliqlari",
+    "news-p": "Mektepmiz jámiyetshiliginiń sońǵı jańalıqları, waqıyaları hám daǵazalarınan xabarlı bolıń.",
+    "back-btn": "Jan'aliqlarga qaytuw"
+  },
+  "rules-documents": {
+    "rules-documents-title": "Mekteb Qag'iydaları ham Hu'jjetleri",
+    "rules-documents-p": "Biziń mektepmiz barlıq studentler ushın qawipsiz, húrmetli hám nátiyjeli tálim ortalıǵın támiyinlew ushın anıq qaǵıydalar hám siyasatlardı qollap-quwatlaydı.",
+    "rules-title": "Mekteb Qag'iydaları",
+    "shoolhours-title": "Mekteb saatlari",
+    "documents-title": "Hu'jjetler"
+  },
+  "support-faq": {
+    "support-faq-title": "Ja'rdem ha'm FAQ",
+    "support-faq-p": "Tez-tez beriletuǵın sorawlarǵa juwap tabıń hám mektebmiz haqqında kerekli maǵlıwmatlardı alın'.",
+    "support-title": "Tez-tez soralatug'in sorawlar",
+    "faq-title": "Baylanisiw ushin mag'liwmat",
+    "work-hours": "Jumis waqti"
+  },
+  "education-page": {
+    "education-title": "Ta'lim",
+    "education-p": "Biziń mektepmiz kúshli ilimiy tıykarǵa hám ámeliy kónlikpelerge iye bolǵan hár tárepleme rawajlanǵan studentlerdi rawajlandırıw ushın arnalǵan keń qamtılǵan tálim programmasın usınıs etedi.",
+    "other-activities": "Klasstan tısqarı ilajlar "
+  },
+  "home-page": {
+    "welcome": "Mektepmizge xosh kelipsiz",
+    "welcome-text": "Bilim innovatsiyalar menen ushrasatuǵın hám studentler ertangi kúnniń qıyınshılıqlarına tayarlıq kóretuǵın jay.",
+    "contact-us": "Biz menen baylanısıw",
+    "last-news": "Son'g'i jan'aliqlar",
+    "fast-links": "Tez linkler",
+    "quick-links": {
+        "schedule": "Расписание уроков",
+        "documents": "Школьные документы",
+        "teachers": "Наши учителя",
+        "course": "Доступные курсы",
+        "gallery": "Фотогалерея"
+    }
+}
+}

@@ -5,12 +5,14 @@ import { api } from "../../../api/api";
 import CreatePosition from "../../../features/Position/Create";
 import DeletePosition from "../../../features/Position/Delete";
 import UpdatePosition from "../../../features/Position/Update";
+import { useTranslation } from "react-i18next";
 
 function Position() {
   const [positions, setPositions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+  const { t } = useTranslation(); 
   const currentLang = "ru";
   const getPositions = async (page = 1) => {
     setLoading(true);
@@ -57,7 +59,7 @@ function Position() {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>Positions</Title>
-        <Button onClick={createFn}>Create</Button>
+        <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
 
       {loading ? (
@@ -93,8 +95,8 @@ function Position() {
                 >{el.description[currentLang]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button onClick={() => deleteFn(el.id)}>Delete</Button>
-                    <Button onClick={() => updateFn(el.id)}>Update</Button>
+                    <Button color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>

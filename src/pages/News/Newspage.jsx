@@ -1,69 +1,44 @@
-import React from "react";
-import "./News.css";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import './News.scss'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { AllNews } from './new/AllNews'
+import { SearchInput } from './new/search/SearchInput'
+import { SearchResultsList } from './new/search/SearchResultsList'
 
-const newsData = [
-  {
-    id: 1,
-    img: "/img/home-news-first.jpg",
-    date: "5 мая 2025",
-    title: "Объявлены победители школьной олимпиады",
-    text: "Поздравляем всех участников и победителей нашей ежегодной школьной олимпиады. В этом году мероприятие собрало рекордное…",
-  },
-  {
-    id: 2,
-    img: "/img/home-news-first.jpg",
-    date: "5 мая 2025",
-    title: "Объявлены победители школьной олимпиады",
-    text: "Поздравляем всех участников и победителей нашей ежегодной школьной олимпиады. В этом году мероприятие собрало рекордное…",
-  },
-];
+const Newpage = () => {
+  const [results, setResults] = useState([]);
+  const navigate = useNavigate();
+  const { darkMode } = useOutletContext();
+  const { t } = useTranslation();
 
-const Newspage = () => {
   return (
-    <main>
-      <div className="container">
-        <section className="school-news">
-          <h3 className="school-news-title">Школьные новости</h3>
-          <p className="school-news-p">
-            Будьте в курсе последних новостей, событий и объявлений нашего
-            школьного сообщества.
-          </p>
-
-          <div className="news-search">
-            <img src="/img/search.svg" alt="search" />
-            <input type="text" placeholder="Поиск новостей..." />
-          </div>
-
-          <div className="s-news-cards">
-            {newsData.map((item) => (
-              <div key={item.id} className="s-news-card">
-                <img src={item.img} className="news-img-first" />
-
-                <div className="s-n-card-content">
-                  <h5>
-                    <img
-                      src="/img/black-calendar.svg"
-                      alt="calendar"
-                      className="news-calendar"
-                    />
-                    {item.date}
-                  </h5>
-
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-
-                  <NavLink to={`/news/${item.id}`}>
-                    Читать далее <img src="/img/blue-right-btn.svg" />
-                  </NavLink>
+    <>
+      <main className={`news-dark${darkMode ? ' dark' : ''}`}>
+        <section>
+          <div className='container'>
+            <div className="school-news">
+              <div className="school-news-headline">
+                <h1>{t("news-page.news-title")}</h1>
+                <p>{t("news-page.news-p")}</p>
+              </div>
+              <div className="news-search">
+                <div className="news-search">
+                  <div className="search-bar-container">
+                    <SearchInput setResults={setResults} darkMode={darkMode} />
+                    <SearchResultsList darkMode={darkMode} results={results} onSelect={(item) => navigate(`/news/${item.id}`)} />
+                  </div>
                 </div>
               </div>
-            ))}
+              <div className="news-posts">
+                <AllNews darkMode={darkMode} />
+              </div>
+            </div>
           </div>
         </section>
-      </div>
-    </main>
-  );
-};
+      </main>
+    </>
+  )
+}
 
-export default Newspage;
+export default Newpage

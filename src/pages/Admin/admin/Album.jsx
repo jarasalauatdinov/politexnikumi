@@ -5,12 +5,14 @@ import { api } from "../../../api/api";
 import DeleteALbum from "../../../features/Album/Delete";
 import CreateAlbum from "../../../features/Album/Create";
 import UpdateAlbum from "../../../features/Album/Update";
+import { useTranslation } from "react-i18next";
 
 const Album = () => {
   const [albums, setAlbums] = useState([]);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(); 
 
   async function getAlbums(page = 1) {
     setLoading(true);
@@ -53,7 +55,7 @@ const Album = () => {
     <Stack p={20}>
       <Flex justify="space-between" align="center">
         <Title>Album</Title>
-        <Button onClick={createFn}>Create</Button>
+        <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
 
       {loading ? (
@@ -103,10 +105,10 @@ const Album = () => {
                   <Table.Td>{album.description?.ru || "No description"}</Table.Td>
                   <Table.Td>
                     <Group>
-                      <Button onClick={() => deleteFn(album.id)}>
-                        Delete
+                      <Button color='red' onClick={() => deleteFn(album.id)}>
+                        {t("btn.delete")}
                       </Button>
-                      <Button onClick={() => updateFn(album.id)}>Update</Button>
+                      <Button onClick={() => updateFn(album.id)}>{t("btn.update")}</Button>
                     </Group>
                   </Table.Td>
                 </Table.Tr>

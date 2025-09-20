@@ -5,6 +5,7 @@ import CreateEmployee from '../../../features/Employee/Create';
 import UpdateEmployee from '../../../features/Employee/Update';
 import DeleteEmployee from '../../../features/Employee/Delete';
 import { modals } from '@mantine/modals';
+import { useTranslation } from 'react-i18next';
 
 const Employee = () => {
   const currentLang = "ru";
@@ -12,6 +13,7 @@ const Employee = () => {
   const [loading, setLoading] = useState(false);
   const [lastPage, setLastPage] = useState(1);
   const [page, setPage] = useState(1);
+  const { t } = useTranslation();
 
   const getEmployee = async (page = 1) => {
     setLoading(true);
@@ -60,7 +62,7 @@ const Employee = () => {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>Employee</Title>
-        <Button onClick={createFn}>Create</Button>
+        <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
       {loading ? (
         <Flex justify="center" align="center" style={{ height: "200px" }}>
@@ -75,8 +77,8 @@ const Employee = () => {
               <Table.Th>Name</Table.Th>
               <Table.Th>Phone</Table.Th>
               <Table.Th>Email</Table.Th>
-              {/* <Table.Th>Position</Table.Th> */}
-              {/* <Table.Th>Description</Table.Th> */}
+              <Table.Th>Position</Table.Th>
+              <Table.Th>Description</Table.Th>
               <Table.Th>Birth Date</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
@@ -93,13 +95,13 @@ const Employee = () => {
                 <Table.Td>{el.full_name[currentLang]}</Table.Td>
                 <Table.Td>{el.phone}</Table.Td>
                 <Table.Td>{el.email}</Table.Td>
-                {/* <Table.Td>{el.position.name[currentLang]}</Table.Td> */}
-                {/* <Table.Td>{el.position.description[currentLang]}</Table.Td> */}
+                <Table.Td>{el.position.name[currentLang]}</Table.Td>
+                <Table.Td>{el.position.description[currentLang]}</Table.Td>
                 <Table.Td>{el.birth_date}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button onClick={() => deleteFn(el.id)}>Delete</Button>
-                    <Button onClick={() => updateFn(el.id)}>Update</Button>
+                    <Button color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>

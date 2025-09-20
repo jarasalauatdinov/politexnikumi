@@ -87,7 +87,7 @@ function Document() {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>{t("sidebar.document")}</Title>
-        <Button onClick={createFn}>{t("Upload")}</Button>
+        <Button onClick={createFn}>{t("btn.upload")}</Button>
       </Flex>
       {loading ? (
         <Flex justify="center" align="center" style={{ height: "200px" }}>
@@ -111,18 +111,18 @@ function Document() {
                 <Table.Td>{el.name}</Table.Td>
                 <Table.Td>{el.description}</Table.Td>
                 <Table.Td>
-                  <Button onClick={() => handleDownload(el.id, el.name)}>Download</Button>
+                  <Button onClick={() => handleDownload(el.id, el.name)}>{t("btn.download")}</Button>
                 </Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button onClick={() => deleteFn(el.id)}>{t("Delete")}</Button>
+                    <Button color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
                     <Button
                       onClick={() => {
                         console.log("Update clicked, id:", el.id);
                         updateFn(el.id);
                       }}
                     >
-                      {t("Update")}
+                      {t("btn.update")}
                     </Button>
                   </Flex>
                 </Table.Td>

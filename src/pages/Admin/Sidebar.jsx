@@ -17,7 +17,7 @@ import {
     Check,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { FaQuestion } from "react-icons/fa6"; 
+import { FaQuestion } from "react-icons/fa6";
 
 
 export const Sidebar = () => {
@@ -25,72 +25,67 @@ export const Sidebar = () => {
     const { t } = useTranslation();
     const links = [
         {
-            to: "school", label: t("school"),
+            to: "school", label: t("sidebar.school"),
             icon: <Building size={16} />
         },
         {
-            to: "position", label: t("position"),
+            to: "position", label: t("sidebar.position"),
             icon: <Briefcase size={16} />
         },
         {
-            to: "album", label: t("album"),
+            to: "album", label: t("sidebar.album"),
             icon: <ImageIcon size={16} />
         },
         {
-            to: "user", label: t("user"),
+            to: "users", label: t("sidebar.user"),
             icon: <User size={16} />
         },
         {
-            to: "employee", label: t("employee"),
+            to: "employee", label: t("sidebar.employee"),
             icon: <Users size={16} />
         },
         {
-            to: "news", label: t("news"),
+            to: "news", label: t("sidebar.news"),
             icon: <Newspaper size={16} />
         },
         {
-            to: "document", label: t("document"),
+            to: "document", label: t("sidebar.document"),
             icon: <FileText size={16} />
         },
         {
-            to: "rules", label: t("rules"),
+            to: "rule", label: t("sidebar.rules"),
             icon: <BookOpen size={16} />
         },
         {
-            to: "club", label: t("club"),
+            to: "club", label: t("sidebar.club"),
             icon: <Users size={16} />
         },
         {
-            to: "value", label: t("value"),
+            to: "value", label: t("sidebar.value"),
             icon: <Star size={16} />
         },
         {
             to: "faq", label: "FAQ",
-            icon: <FaQuestion />
+            icon: <FaQuestion size={16} />
         },
         {
-            to: "hours", label: t("choolhours"),
+            to: "schoolHours", label: t("sidebar.schoolhours"),
             icon: <Clock size={16} />
         },
         {
-            to: "target", label: t("target"),
+            to: "target", label: t("sidebar.target"),
             icon: <Target size={16} />
         },
         {
-            to: "history", label: t("history"),
+            to: "history", label: t("sidebar.history"),
             icon: <BookOpen size={16} />
         },
         {
-            to: "information", label: t("information"),
+            to: "information", label: t("sidebar.information"),
             icon: <File size={16} />
         },
         {
-
-            to: "vacancy", label: t("vacancy"),
-            icon: <FileText size={16} />
-        },
-        {
-            to: "admin-schedule", label: t("schedule"),
+            to: "schedule", label: t("sidebar.schedule"),
             icon: <FileText size={16} />
         }
     ];

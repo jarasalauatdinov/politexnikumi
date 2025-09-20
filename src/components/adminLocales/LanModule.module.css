@@ -31,4 +31,13 @@
   .control[data-expanded] .icon {
     transform: rotate(180deg);
   }
+
+  .flag {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
   
+  .flag.kk {
+    transform: scale(1.2);
+  }

@@ -67,7 +67,7 @@ function News() {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>{t("News")}</Title>
-        <Button onClick={createFn}>{t("Create")}</Button>
+        <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
 
       {loading ? (
@@ -107,8 +107,8 @@ function News() {
                     style={{ width: "100px", borderRadius: "8px" }}
                   />
                 </Table.Td>
-                <Table.Td>{el.title?.[language]}</Table.Td>
-                <Table.Td>{el.short_content?.[language]}</Table.Td>
+                <Table.Td>{el.title?.ru}</Table.Td>
+                <Table.Td>{el.short_content?.ru}</Table.Td>
                 <Table.Td
                   style={{
                     maxWidth: "250px",
@@ -130,16 +130,25 @@ function News() {
                   </div>
                   <div>Birth Date: {el.author?.birth_date}</div>
                 </Table.Td>
-                <Table.Td>
+                <Table.Td
+                  style={{
+                    maxWidth: "250px",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
                   {el.tags?.map((tag) => tag.name).join(", ")}
                 </Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
                     <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>
-                      {t("Delete")}
+                      {t("btn.delete")}
                     </Button>
                     <Button size="xs" onClick={() => updateFn(el.id)}>
-                      {t("Update")}
+                      {t("btn.update")}
                     </Button>
                   </Flex>
                 </Table.Td>

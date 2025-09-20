@@ -1,154 +1,299 @@
-#contact {
-    scroll-margin-top: 110px;
+/* Dark Mode */
+.support-dark.dark {
+    background: #0f172a;
   }
-
-.s-faq-title {
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 40px;
-    color: var(--blue);
-    margin-bottom: 19px;
-}
-
-.s-faq-p {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 28px;
-    color: var(--kulren);
-    margin-bottom: 36px;
-}
-
-.faq-list {
+  
+  .support-dark.dark .support-heading h1 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-heading p {
+    color: #cbd5e1;
+  }
+  
+  .support-dark.dark .support-main .support-top {
+    border: 1px solid #334155;
+    background: #1e293b;
+  }
+  
+  .support-dark.dark .support-main .support-top .support-top-headline h4 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-top .support-bottom summary {
+    border-bottom: 1px solid #334155;
+  }
+  
+  .support-dark.dark .support-main .support-top .support-bottom summary p {
+    color: #cbd5e1;
+  }
+  
+  .support-dark.dark .support-main .support-top .support-bottom .detail {
+    border-bottom: 1px solid #334155;
+  }
+  
+  .support-dark.dark .support-main .support-top .support-bottom .detail p {
+    color: #cbd5e1;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us {
+    border: 1px solid #334155;
+    background: #1e293b;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-headline h3 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes {
+    background: #121f36;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-icon {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-info h4 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-info p {
+    color: #cbd5e1;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm {
+    background: #121f36;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-headline h4 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-btm .swork-hour-left h5,
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-btm .swork-hour-right h5 {
+    color: #f1f5f9;
+  }
+  
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-btm .swork-hour-left .swork-hour-ph p,
+  .support-dark.dark .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-btm .swork-hour-right .swork-hour-ph p {
+    color: #cbd5e1;
+  }
+  
+  /* Light Mode */
+  .support {
     display: flex;
     flex-direction: column;
+    gap: 32px;
+    padding: 50px 0;
+  }
+  
+  .support .support-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+  }
+  
+  .support .support-heading h1 {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+    color: #2563eb;
+  }
+  
+  .support .support-heading p {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #64748b;
+  }
+  
+  .support .support-main {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  
+  .support .support-main .support-top {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     width: 100%;
-    border-radius: 16px;
     padding: 25px;
-    border: 1px solid #E2E8F0;
-    margin-bottom: 48px;
-}
-
-.faq-list h4 {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .support .support-main .support-top .support-top-headline h4 {
+    font-family: Inter;
+    font-weight: 700;
     font-size: 24px;
     line-height: 32px;
-    font-weight: 700;
-    color: var(--blue);
+    color: #2563eb;
     display: flex;
+    align-items: center;
     gap: 8px;
-    margin-bottom: 24px;
-}
-
-
-
-.contact-info {
+  }
+  
+  .support .support-main .support-top .support-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .support .support-main .support-top .support-bottom summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #dbeafe;
+    padding: 20px 0;
+  }
+  
+  .support .support-main .support-top .support-bottom summary p {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: #130428;
+  }
+  
+  .support .support-main .support-top .support-bottom .detail {
+    padding: 20px 0;
+    border-bottom: 1px solid #64748b;
+    background-color: rgba(173, 173, 173, 0.082);
+  }
+  
+  .support .support-main .support-top .support-bottom .detail p {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #64748b;
+  }
+  
+  .support .support-main .support-contact-us {
     display: flex;
     flex-direction: column;
     gap: 24px;
     padding: 25px;
     border-radius: 16px;
-    border: 1px solid var(--border);
-}
-
-.contact-info h2 {
+    border: 1px solid #dbeafe;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-headline h3 {
+    font-family: Inter;
+    font-weight: 700;
     font-size: 24px;
-    font-weight: 700;
     line-height: 32px;
-    color: var(--blue);
-}
-
-
-.c-info-card {
+    color: #2563eb;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: #F0F5FF;
-    width: 100%;
-    padding: 20px 16px;
-    border-radius: 12px;
-    width: 100%;
-}
-
-.c-info-cards {
+    gap: 24px;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top {
     display: flex;
     flex-direction: column;
+    gap: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top {
+      flex-direction: row;
+    }
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes {
     width: 100%;
-    gap: 32px;
-}
-
-.c-info-bottom {
-    background-color: #F0F5FF;
-    border-radius: 12px;
-    padding: 24px;
-}
-
-.c-info-card img {
-    width: 40px;
-    margin-bottom: 12px;
-}
-
-.c-info-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.c-info-card a {
-    display: block;
-    font-size: 14px;
-    color: var(--kulren);
-    text-decoration: none;
-    margin-bottom: 4px;
-}
-
-.c-info-bottom {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 16px;
-}
-
-.c-info-b-cards{
+    padding: 24px 0 48px 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    background: #eff6ff;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-icon {
+    color: #2563eb;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-info {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-}
-
-.c-info-b-card h3 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.c-info-b-card p {
-    font-size: 14px;
-    line-height: 20px;
-    color: #4B5563;
-}
-
-
-@media(min-width: 768px) {
-
-
-    .c-info-cards {
-        margin: 0 auto;
-        flex-direction: row;
-        gap: 16px;
-    }
-
-    .c-info-card{
-        min-width: 212px;
-        width: 100%;
-    }
-
-    .c-info-b-cards{
-        flex-direction: row;
-        gap: 70px;
-    }
-}
-
-@media( min-width: 1024px) {
-    .c-info-b-cards{
-        gap: 100px;
-    }
-}
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-info h4 {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    color: #020817;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-top .support-boxes .support-box-info p {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #64748b;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 25px;
+    border-radius: 12px;
+    background: #eff6ff;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-headline h4 {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    color: #130428;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .support-work-hour-btm {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-left,
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-left h5,
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-right h5 {
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #020817;
+  }
+  
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-left .swork-hour-ph p,
+  .support .support-main .support-contact-us .support-contact-us-main .support-contact-main-btm .swork-hour-right .swork-hour-ph p {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #64748b;
+  }
+  

@@ -1,5 +1,4 @@
 import { ActionIcon, Button, Flex, Text } from '@mantine/core';
-import { User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
 import { useContext } from 'react';
@@ -22,23 +21,21 @@ export const Header = ({ sidebarWidth = 180 }) => {
             justify="flex-end"
             gap={20}
         >
-            <LanModule />
+            <LanModule
+                style={{ border: "1px solid gray", background: "red" }}
+            />
 
             <Button
                 onClick={() => logout(() => navigate("/", { replace: true }))}
-                variant="default"
-                style={{ border: "1px solid gray", background: "whitesmoke" }}
+                color="red"
+                variant="light"
                 size="md"
+                leftSection={<MdOutlineLogout />}
             >
-                {t("Log Out")} <MdOutlineLogout />
+                {t("logout")}
             </Button>
 
-            <Flex align="center" gap={10} p={6} style={{ background: "whitesmoke", borderRadius: 6, border: "1px solid gray" }}>
-                <ActionIcon radius={50} p={4}>
-                    <User />
-                </ActionIcon>
-                <Text>ADMIN PANEL</Text>
-            </Flex>
+
         </Flex>
     );
 };

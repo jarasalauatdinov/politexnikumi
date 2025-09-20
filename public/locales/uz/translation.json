@@ -1,0 +1,76 @@
+{
+    "politechnicum": "Politexnikum",
+    "home": "Uy",
+    "about": "Biz haqimizda",
+    "education": "Ta'lim",
+    "rules": "Qoidalar",
+    "news": "Yangiliklar",
+    "support": "Qo'llab-quvvatlash",
+    "contact": "Aloqa",
+    "logout": "Chiqish",
+    "sidebar": {
+        "album": "Album",
+        "schedule": "Jadval",
+        "club": "Klub",
+        "history": "Tarix",
+        "information": "Ma'lumot",
+        "school": "Maktab",
+        "schoolhours": "Maktab soatlari",
+        "target": "Maqsad",
+        "vacancy": "Vakansiya",
+        "value": "Qiymat",
+        "position": "Lavozim",
+        "user": "Foydalanuvchi",
+        "employee": "Xodim",
+        "news": "Yangiliklar",
+        "document": "Hujjat",
+        "rules": "Qoidalar"
+    },
+    "btn": {
+        "create": "Yaratish",
+        "update": "Yangilash",
+        "delete": "O'chirish",
+        "upload": "Yuklash",
+        "download": "Yuklab olish",
+        "save": "Saqlash",
+        "cancel": "Bekor qilish"
+    },
+    "messages": {
+        "confirmDelete": "Haqiqatdan ham ushbu elementni o'chirmoqchimisiz?"
+    },
+    "gallery": {
+        "gallery": "Galleriya",
+        "gallery-p": "Tadbirlar, xonalar va talabalar faoliyati fotosuratlari orqali maktab hayotimizni o'rganing."
+    },
+    "news-page": {
+        "news-title": "Maktab Yangiliklari",
+        "news-p": "Maktabimiz hamjamiyatining so'nggi yangiliklari, voqealari va e'lonlaridan xabardor bo'ling.",
+        "back-btn": "Yangiliklarga qaytish"
+    },
+    "rules-documents": {
+        "rules-documents-title": "Maktab Qoidalari va Hujjatlari",
+        "rules-documents-p": "Bizning maktabimiz barcha talabalar uchun xavfsiz, hurmatli va samarali ta'lim muhitini ta'minlash uchun aniq qoidalar va siyosatlarni qo'llab-quvvatlaydi",
+        "rules-title": "Maktab Qoidalari",
+        "shoolhours-title": "Maktab soatlari",
+        "documents-title": "Hujjatlar"
+    },
+    "support-faq": {
+        "support-faq-title": "Yordam va FAQ",
+        "support-faq-p": "Tez-tez beriladigan savollarga javob toping va maktabimiz haqida kerakli ma'lumotlarni oling.",
+        "support-title": "Tez-tez so'raladigan savollar",
+        "faq-title": "Bog'lanish uchun ma'lumot",
+        "work-hours": "Ish vaqti"
+    },
+    "education-page": {
+        "education-title": "Ta'lim",
+        "education-p": "Bizning maktabimiz kuchli ilmiy asosga va amaliy ko'nikmalarga ega bo'lgan har tomonlama rivojlangan talabalarni rivojlantirish uchun mo'ljallangan keng qamrovli ta'lim dasturini taklif etadi.",
+        "other-activities": "Sinfdan tashqari tadbirlar"
+    },
+    "home-page": {
+        "welcome": "Maktabimizga xush kelibsiz",
+        "welcome-text": "Bilim innovatsiyalar bilan uchrashadigan va talabalar ertangi kunning qiyinchiliklariga tayyorgarlik ko'radigan joy.",
+        "contact-us": "Biz bilan bog'lanish",
+        "last-news": "So'ngi yangiliklar",
+        "fast-links": "Tez havolalar"
+    }
+}

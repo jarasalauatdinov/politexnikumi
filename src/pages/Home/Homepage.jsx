@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Link, NavLink } from "react-router";
 import { api } from "../../api/api";
+import { ArrowRight } from "lucide-react";
+import { useMantineColorScheme } from "@mantine/core";
 
 
 const newCard = [
@@ -35,8 +37,12 @@ const newCard = [
 
 
 
-const Homepage = () => {
+const Homepage = ({ toggleTheme }) => {
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [albums, setAlbums] = useState([]);
+  const {colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === "dark"
   const currentLang = "kk"; 
 
   useEffect(() => {
@@ -51,16 +57,34 @@ const Homepage = () => {
     fetchEmployees();
   }, []);
 
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const { data } = await api.get('/albums');
+        setAlbums(data.data.items ?? []);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAlbums();
+  }, []);
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+  }
+
   return (
     <main>
       <div className="container">
         <section className="home-page">
           <div className="home-place-l">
             <div className="home-place-l-wel">
-              <h3>Добро пожаловать в нашу школу</h3>
+              <h3>2-sanli politexnikumiga qosh kelibsiz</h3>
               <p>
-                Место, где знания встречаются с инновациями, а ученики готовятся
-                к вызовам завтрашнего дня.
+              Bilim hám innovatsiya ushrasatuǵın hám oqıwshılar tayarlanatuǵın jay
+              erteń bolatuǵın qıyınshılıqlarǵa tayarlıq.
               </p>
             </div>
             <div className="home-place-btns">
@@ -80,16 +104,16 @@ const Homepage = () => {
               <div className="home-p-c h-p-card-top ">
                 <img src="/img/cap.svg" alt="" />
                 <div>
-                  <h4>Excellence in Education</h4>
-                  <p>Since 1998</p>
+                  <h4>Bilimlendiriw tarawıdaǵı jetiliskenlik</h4>
+                  <p>1998 jıldan baslap </p>
                 </div>
               </div>
 
               <div className="home-p-c h-p-card-bottom">
                 <img src="/img/peoples.svg" alt="" />
                 <div>
-                  <h4>500+ Students</h4>
-                  <p>Join our community</p>
+                  <h4>1500+ Studentler</h4>
+                  <p>Jámiyetlikimizga qosılıń </p>
                 </div>
               </div>
             </div>
@@ -281,22 +305,50 @@ const Homepage = () => {
           </div>
         </section>
 
-        <section className="photo-gallery">
-          <div className="gallery-top">
-            <h2>Photo Gallery</h2>
-            <Link to="/gallery">
-              View All Photos <img src="/img/black-right-btn.svg" alt="" />
-            </Link>
-          </div>
-          <div className="gallery-bottom">
-            <img src="/img/gallery-one.jpg" alt="" />
-            <img src="/img/gallery-two.jpg" alt="" />
-            <img src="/img/gallery-three.jpg" alt="" />
-            <img src="/img/gallery-four.jpg" alt="" />
-            <img src="/img/gallery-five.jpg" alt="" />
-            <img src="/img/gallery-six.jpg" alt="" />
-          </div>
-        </section>
+        <div className="photo-gallery">
+              <div className="photo-gallery-top">
+                <h1>Photo Gallery</h1>
+                <Link onClick={handleClick} to={"/gallery"}>
+                  <button>
+                    View All Photos <ArrowRight size={14} color='#CBD5E1' />
+                  </button>
+                </Link>
+              </div>
+
+              <div className="photo-gallery-main">
+                {loading ? (
+                  Array.from({ length: 8 }).map((_, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        width: '100%',
+                        height: '150px',
+                        borderRadius: '16px',
+                        background: '#334155',
+                        opacity: 0.3,
+                      }}
+                    />
+                  ))
+                ) : (
+                  albums
+                    .flatMap(album => album.photos ?? [])
+                    .slice(0, 6)
+                    .map(photo => (
+                      <img
+                        key={photo.id}
+                        src={photo.path}
+                        alt={photo.name}
+                        style={{
+                          width: '100%',
+                          height: '250px',
+                          objectFit: 'cover',
+                          borderRadius: '16px',
+                        }}
+                      />
+                    ))
+                )}
+              </div>
+            </div>
       </div>
     </main>
   );

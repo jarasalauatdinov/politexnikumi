@@ -1,107 +1,84 @@
-import React from "react";
-import "./Education.css";
+import React, { useEffect, useState } from 'react'
+import './Education.scss'
+import { Clock } from 'lucide-react'
+import { useOutletContext } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { api } from '../../api/api'
+import { Flex, Loader } from '@mantine/core'
 
 const Educationpage = () => {
+  const { darkMode } = useOutletContext();
+  const [education, setEducation] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const language = i18n.language || 'ru';
+
+  async function getEducation() {
+    setLoading(true);
+    try {
+      const { data } = await api.get('/main/education');
+      setEducation(data.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getEducation();
+  }, []);
+
   return (
-    <main>
+    <main className={`education-dark${darkMode ? ' dark' : ''}`}>
+    <section>
       <div className="container">
         <div className="education">
-          <section className="education-top">
-            <h3>Образование</h3>
-
+          <div className="education-headline">
+            <h1>{t("education-page.education-title")}</h1>
             <p>
-              Наша школа предлагает комплексную образовательную программу,
-              разработанную для развития всесторонне развитых учеников с прочной
-              академической основой и практическими навыками.
+              {t("education-page.education-p")}
             </p>
-          </section>
-
-          <section className="education-activities">
-            <h3>Внеклассные активности</h3>
-
-            <div className="education-cards">
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="e-card">
-                <img src="/img/Chess-club.svg" alt="" />
-
-                <div className="e-cards">
-                  <h4>Chess Club</h4>
-                  <p>Develop strategic thinking and problem-solving skills</p>
-                  <div className="e-card-a">
-                    <img src="/img/mini-clock.svg" alt="" />
-                    <a href="#">Mondays and Wednesdays, 15:00 - 16:30</a>
-                  </div>
-                </div>
-              </div>
+          </div>
+          <div className="education-activities">
+            <div className="edu-activity-heading">
+              <h3>{t("education-page.other-activities")}</h3>
             </div>
-          </section>
+            {loading ? (
+              <Flex justify="center" align="center" style={{ height: "200px" }}>
+                <Loader variant="dots" size="lg" />
+              </Flex>
+            ) : (
+              <div className="edu-activity-main">
+                {education.activities?.map((el) => (
+                  <div className="activities-box">
+                    <img
+                      className="actities-img"
+                      src={el.photo.url}
+                      alt={el.photo.name}
+                    />
+                    <div className="activities-box-right">
+                      <div className="act-box-top">
+                        <h4>{el.name[language]}</h4>
+                        <p>
+                          {el.text[language]}
+                        </p>
+                      </div>
+                      <p>
+                        <Clock size={10} /> {el.schedule[language]}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </main>
+    </section>
+  </main >
+
   );
 };
 

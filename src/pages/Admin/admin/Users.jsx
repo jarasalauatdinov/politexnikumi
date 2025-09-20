@@ -60,7 +60,7 @@ function Users() {
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
         <Title>{t("sidebar.user")}</Title>
-        <Button onClick={createFn}>{t("actions.create")}</Button>
+        <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
 
       {loading ? (
@@ -91,8 +91,8 @@ function Users() {
                 <Table.Td>{el.phone}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button onClick={() => deleteFn(el.id)}>{t("actions.delete")}</Button>
-                    <Button onClick={() => updateFn(el.id)}>{t("actions.update")}</Button>
+                    <Button color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>

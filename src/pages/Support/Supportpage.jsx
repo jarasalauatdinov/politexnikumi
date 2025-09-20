@@ -1,134 +1,172 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import "./Support.css";
-import { api } from "../../api/api";
-
+import { ChevronDown, CircleQuestionMark, Mail, MapPin, Phone } from 'lucide-react';
+import './support.css'
+import { useOutletContext } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { api } from '../../api/api';
+import { Flex, Loader } from '@mantine/core';
 const Supportpage = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
-  const location = useLocation();
-  const [school, setSchool] = useState([]);
-  const [faqs, setFaqs] = useState([]);
-  const currentLang = "kk";
+    const { darkMode } = useOutletContext();
+    const [faqs, setFaqs] = useState([]);
+    const [schools, setSchools] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const { t, i18n } = useTranslation();
+    const language = i18n.language || 'ru';
 
-  useEffect(() => {
-  if (location.hash) {
-    const el = document.querySelector(location.hash);
-    if (el){
-      el.scrollIntoView({ behavior: "smooth"});
+    async function getFaqs() {
+        setLoading(true);
+        try {
+            const { data } = await api.get('/faqs');
+            setFaqs(data.data.items);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     }
-  }
-}, [location]);
 
-  useEffect(() => {
-    async function fetchSchool() {
-      try {
-        const { data } = await api.get("/schools/1"); 
-        setSchool(data.data);
-      } catch (err) {
-        console.error("Error fetching school:", err);
-      }
+    async function getSchools() {
+        setLoading(true);
+        try {
+            const { data } = await api.get('/schools/1');
+            setSchools(Array.isArray(data.data) ? data.data : [data.data]);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     }
-    fetchSchool();
-  }, []);
 
-  useEffect(() => {
-    async function fetchFaqs() {
-      try {
-        const { data }  = await api.get("/faqs");
-        setFaqs(data.data.items);
-      } catch (err) {
-        console.error("Error fetching faqs:", err)
-      }
-    }
-    fetchFaqs();
-  }, []);
+    useEffect(() => {
+        getFaqs();
+        getSchools();
+    }, [])
 
-
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
-  return (
-    <main>
-      <div className="container">
-      <section className="support">
-          <h3 className="s-faq-title">Поддержка и FAQ</h3>
-          <p className="s-faq-p">
-            Найдите ответы на часто задаваемые вопросы и получите необходимую
-            информацию о нашей школе.
-          </p>
-
-          <div className="faq-list">
-            <h4>
-              <img src="/img/question-mark.svg" alt="" />
-              Часто задаваемые вопросы
-            </h4>
-
-            {faqs.length > 0 ? (
-              faqs.map((faq, index) => (
-                <div key={faq.id} className="accordion-item">
-                  <button onClick={() => toggleAccordion(index)}>
-                    {faq.question?.[currentLang]}
-                    <span
-                      className={`arrow ${
-                        activeIndex === index ? "open" : ""
-                      }`}
-                    >
-                      <img src="/img/bottom.svg" alt="" />
-                    </span>
-                  </button>
-                  {activeIndex === index && (
-                    <div className="accordion-content">
-                      <p>{faq.answer?.[currentLang]}</p>
+    return (
+        <>
+            <main className={`support-dark${darkMode ? ' dark' : ''}`}>
+                    <div className='container'>
+                        <div className="support">
+                            <div className="support-heading">
+                                <h1>{t("support-faq.support-faq-title")}</h1>
+                                <p>{t("support-faq.support-faq-p")}</p>
+                            </div>
+                            <div className="support-main">
+                                <div className="support-top">
+                                    <div className="support-top-headline">
+                                        <h4>
+                                            <CircleQuestionMark size={20} /> {t("support-faq.support-title")}
+                                        </h4>
+                                    </div>
+                                    {loading ? (
+                                        <Flex justify="center" align="center" h={200}>
+                                            <Loader />
+                                        </Flex>
+                                    ) : (
+                                        <div className="support-bottom">
+                                            {faqs.map((el) => (
+                                                <details name='support' key={el.id}>
+                                                    <summary>
+                                                        <p>
+                                                            {el.question[language]}
+                                                        </p>
+                                                        <ChevronDown size={16} />
+                                                    </summary>
+                                                    <div className="detail">
+                                                        <p>
+                                                            {el.answer[language]}
+                                                        </p>
+                                                    </div>
+                                                </details>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="support-contact-us">
+                                    <div className="support-contact-us-headline">
+                                        <h3>
+                                            {t("support-faq.faq-title")}
+                                        </h3>
+                                    </div>
+                                    <div className="support-contact-us-main">
+                                        {schools.map((el) => (
+                                            <div className="support-contact-main-top">
+                                                <div className="support-map support-boxes">
+                                                    <div className="support-box-icon">
+                                                        <MapPin size={40} />
+                                                    </div>
+                                                    <div className="support-box-info">
+                                                        <h4>Адрес</h4>
+                                                        <p>{el.location}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="support-phone support-boxes">
+                                                    <div className="support-box-icon">
+                                                        <Phone size={40} />
+                                                    </div>
+                                                    <div className="support-box-info">
+                                                        <h4>Телефон</h4>
+                                                        <p>
+                                                            {el.phone}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="support-email support-boxes">
+                                                    <div className="support-box-icon">
+                                                        <Mail size={40} />
+                                                    </div>
+                                                    <div className="support-box-info">
+                                                        <h4>Email</h4>
+                                                        <p>
+                                                            support@politechnicum.edu
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        <div className="support-contact-main-btm">
+                                            <div className="support-work-hour-headline">
+                                                <h4>
+                                                    {t("support-faq.work-hours")}
+                                                </h4>
+                                            </div>
+                                            <div className="support-work-hour-btm">
+                                                <div className="swork-hour-left">
+                                                    <h5>
+                                                        Администрация
+                                                    </h5>
+                                                    <div className="swork-hour-ph">
+                                                        <p>
+                                                            Понедельник - Пятница: 8:00 - 17:00
+                                                        </p>
+                                                        <p>
+                                                            Суббота - Воскресенье: Закрыто
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="swork-hour-right">
+                                                    <h5>
+                                                        Учебные часы
+                                                    </h5>
+                                                    <div className="swork-hour-ph">
+                                                        <p>
+                                                            Понедельник - Пятница: 8:00 - 15:30
+                                                        </p>
+                                                        <p>
+                                                            Суббота - Воскресенье: Закрыто
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p>Загрузка FAQ...</p>
-            )}
-          </div>
-        </section>
-
-        <section className="contact-info" id="contact">
-  <h2>Контактная информация</h2>
-
-  {school ? (
-    <div className="c-info-cards">
-      <div className="c-info-card">
-        <img src="/img/map.svg" alt="" />
-        <h3>Адрес</h3>
-        <p>{school?.location}</p>
-      </div>
-
-      <div className="c-info-card">
-        <img src="/img/call.svg" alt="" />
-        <h3>Телефон</h3>
-        <div className="c-i-card-phone">
-          <a href={`tel:${school?.phone}`}>{school?.phone}</a>
-        </div>
-      </div>
-
-      <div className="c-info-card">
-        <img src="/img/email.svg" alt="" />
-        <h3>Название школы</h3>
-        <p>{school?.name?.[currentLang]}</p>
-      </div>
-
-      <div className="c-info-card">
-        <img src="/img/info.svg" alt="" />
-        <h3>Описание</h3>
-        <p>{school?.description?.[currentLang]}</p>
-      </div>
-    </div>
-  ) : (
-    <p>Загрузка...</p>
-  )}
-</section>
-  
-      </div>
-    </main>
-  );
-};
+            </main>
+        </>
+    )
+}
 
 export default Supportpage;

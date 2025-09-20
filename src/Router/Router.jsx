@@ -1,149 +1,87 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../components/Layout";
+import { Suspense, lazy } from "react";
+import PageLoader from "../components/loader/PageLoader";
 
-import Homepage from "../pages/Home/Homepage";
-import Newspage from "../pages/News/Newspage";
-import Rulespage from "../pages/Rules/Rulespage";
-import Schoolpage from "../pages/School/Schoolpage";
-import Lessonpage from "../pages/Lesson/Lessonpage";
-import Supportpage from "../pages/Support/Supportpage";
-import Notfoundpage from "../pages/NotFound/Notfoundpage";
-import Educationpage from "../pages/Education/Educationpage";
+const Layout = lazy(() => import("../components/Layout"));
 
-import MissionVision from "../pages/School/about-us/MissionVision";
-import OurHistory from "../pages/School/about-us/OurHistory";
-import CoreValues from "../pages/School/about-us/CoreValues";
-import Newpage from "../pages/News/new/Newpage";
+const Homepage = lazy(() => import("../pages/Home/Homepage"));
+const Gallery = lazy(() => import("../pages/Home/Gallery"));
+const SeeGallery = lazy(() => import("../pages/Home/SeeGallery"));
+const Schoolpage = lazy(() => import("../pages/School/Schoolpage"));
+const Lessonpage = lazy(() => import("../pages/Lesson/Lessonpage"));
+const Educationpage = lazy(() => import("../pages/Education/Educationpage"));
+const Rulespage = lazy(() => import("../pages/Rules/Rulespage"));
+const Newspage = lazy(() => import("../pages/News/Newspage"));
+const ReadNews = lazy(() => import("../pages/News/new/ReadNews"))
+const Supportpage = lazy(() => import("../pages/Support/Supportpage"));
+const Notfoundpage = lazy(() => import("../pages/NotFound/Notfoundpage"));
 
-import Admin from "../pages/Admin/admin/admin";
-import Users from "../pages/Admin/admin/Users";
-import SchoolHours from "../pages/Admin/client/SchoolHours";
-import Register from "../pages/Admin/auth/register";
-import Position from "../pages/Admin/admin/Position";
-import Login from "../pages/Admin/auth/Login";
-import Rules from "../pages/Admin/admin/Rules";
-import News from "../pages/Admin/admin/News";
-import School from "../pages/Admin/admin/School";
-import Album from "../pages/Admin/admin/Album";
-import Main from "../pages/Admin/admin/Main";
-import Document from "../pages/Admin/admin/Document";
-import Employee from "../pages/Admin/admin/Employee";
-import Value from "../pages/Admin/admin/Value";
-import Club from "../pages/Admin/admin/Club";
-import Faqs from "../pages/Admin/admin/Faqs";
-import Gallery from "../pages/Home/Gallery";
-import Schedule from "../pages/Admin/admin/Schedule";
-import Information from "../pages/Admin/admin/Information";
-import History from "../pages/Admin/admin/History";
-import Target from "../pages/Admin/admin/Target";
+const MissionVision = lazy(() => import("../pages/School/about-us/MissionVision"));
+const OurHistory = lazy(() => import("../pages/School/about-us/OurHistory"));
+const CoreValues = lazy(() => import("../pages/School/about-us/CoreValues"));
 
+const Admin = lazy(() => import("../pages/Admin/admin/admin"));
+const Users = lazy(() => import("../pages/Admin/admin/Users"));
+const Position = lazy(() => import("../pages/Admin/admin/Position"));
+const Rules = lazy(() => import("../pages/Admin/admin/Rules"));
+const News = lazy(() => import("../pages/Admin/admin/News"));
+const School = lazy(() => import("../pages/Admin/admin/School"));
+const Album = lazy(() => import("../pages/Admin/admin/Album"));
+const Document = lazy(() => import("../pages/Admin/admin/Document"));
+const Employee = lazy(() => import("../pages/Admin/admin/Employee"));
+const Value = lazy(() => import("../pages/Admin/admin/Value"));
+const Club = lazy(() => import("../pages/Admin/admin/Club"));
+const Faqs = lazy(() => import("../pages/Admin/admin/Faqs"));
+const GalleryAdmin = lazy(() => import("../pages/Admin/admin/Album"));
+const Schedule = lazy(() => import("../pages/Admin/admin/Schedule"));
+const Information = lazy(() => import("../pages/Admin/admin/Information"));
+const History = lazy(() => import("../pages/Admin/admin/History"));
+const Target = lazy(() => import("../pages/Admin/admin/Target"));
+const SchoolHours = lazy(() => import("../pages/Admin/admin/SchoolHours"));
+
+const Login = lazy(() => import("../pages/Admin/auth/Login"));
+const Register = lazy(() => import("../pages/Admin/auth/register"));
 
 export const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />,
-
-  },
-  {
-    path: "/register",
-    element: <Register />
-  },
-  {
-    path: "/admin",
-    element: <Admin />,
-    children: [
-      {
-        path: "school",
-        element: <School />,
-      },
-      {
-        path: "position",
-        element: <Position />
-      },
-      {
-        path: "rule",
-        element: <Rules />
-      },
-      {
-        path: "Album",
-        element: <Album />,
-      },
-      {
-        path: "users",
-        element: <Users />,
-      },
-      {
-        path: "news",
-        element: <News />,
-      },
-      {
-        path: "main",
-        element: <Main />
-      },
-      {
-        path: "employee",
-        element: <Employee />,
-      },
-      {
-        path: "school",
-        element: <School />
-      },
-      {
-        path: "document",
-        element: <Document />,
-      },
- 
-      {
-        path: "value",
-        element: <Value />,
-      },
-      {
-        path: "club",
-        element: <Club />,
-      },
-      {
-        path: "FAQ",
-        element: <Faqs />,
-      },
-      {
-        path: "schoolhours",
-        element: <SchoolHours />,
-      },
-      {
-        path: "target",
-        element: <Target />,
-      },
-      {
-        path: "history",
-        element: <History />,
-      },
-      {
-        path: "information",
-        element: <Information />,
-      },
-    
-      {
-        path: "schedule",
-        element: <Schedule />,
-      },
-    ],
-  },
-
-
-  {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Layout />
+      </Suspense>
+    ),
     children: [
-      { path: "/", 
-        element: <Homepage />,
-        children: [
-         { path: "gallery", element: <Gallery /> }
-        ]
-
-       },
       {
-        path: "/about",
-        element: <Schoolpage />,
+        index: true,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Homepage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "gallery",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Gallery />
+          </Suspense>
+        ),
+      },
+      {
+        path: "gallery/:id",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SeeGallery />
+          </Suspense>
+        ),
+      },
+      {
+        path: "about",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Schoolpage />
+          </Suspense>
+        ),
         children: [
           { index: true, element: <MissionVision /> },
           { path: "mission-vision", element: <MissionVision /> },
@@ -151,12 +89,96 @@ export const router = createBrowserRouter([
           { path: "core-values", element: <CoreValues /> },
         ],
       },
-      { path: "/lessons", element: <Lessonpage /> },
-      { path: "/education", element: <Educationpage /> },
-      { path: "/rules", element: <Rulespage /> },
-      { path: "/news", element: <Newspage /> },
-      { path: "news/:id", element: <Newpage /> },
-      { path: "/support", element: <Supportpage /> },
+      {
+        path: "lessons",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Lessonpage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "education",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Educationpage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "rules",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Rulespage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "news",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Newspage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "news/:id",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ReadNews />
+          </Suspense>
+        ),
+      },
+      {
+        path: "support",
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Supportpage />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: "login",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: "register",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Register />
+      </Suspense>
+    ),
+  },
+  {
+    path: "admin",
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Admin />
+      </Suspense>
+    ),
+    children: [
+      { path: "school", element: <School /> },
+      { path: "position", element: <Position /> },
+      { path: "rule", element: <Rules /> },
+      { path: "album", element: <Album /> },
+      { path: "users", element: <Users /> },
+      { path: "news", element: <News /> },
+      { path: "employee", element: <Employee /> },
+      { path: "document", element: <Document /> },
+      { path: "value", element: <Value /> },
+      { path: "club", element: <Club /> },
+      { path: "faq", element: <Faqs /> },
+      { path: "schoolhours", element: <SchoolHours /> },
+      { path: "target", element: <Target /> },
+      { path: "history", element: <History /> },
+      { path: "information", element: <Information /> },
+      { path: "schedule", element: <Schedule /> },
     ],
   },
   { path: "*", element: <Notfoundpage /> },

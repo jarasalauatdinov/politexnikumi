@@ -1,201 +1,213 @@
-import React, { useEffect, useState } from "react";
-import "./Rules.css";
-import { api } from "../../api/api";
+import React, { useEffect, useState } from 'react'
+import '../rules/rules.scss'
+import { ChevronDown, Clock, Download, FileText, Shield } from 'lucide-react';
+import { useOutletContext } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { api } from '../../api/api';
+import { Flex, Loader, Skeleton } from '@mantine/core';
+import axios from 'axios';
 
-const Rulespage = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+const Rules = () => {
+  const { darkMode } = useOutletContext();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
   const [rules, setRules] = useState([]);
-  const currentLang = "kk"; // 
+  const [schoolhours, setSchoolHours] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [documents, setDocuments] = useState([]);
+
+  async function fetchRules() {
+    setLoading(true);
+    try {
+      const { data } = await api.get('/rules');
+      setRules(data.data.items);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchSchoolHours() {
+    setLoading(true);
+    try {
+      const { data } = await api.get('/school-hours');
+      setSchoolHours(data.data.items);
+    } catch (error) {
+      console.error('Error fetching school hours:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchDocument() {
+    setLoading(true);
+    try {
+      const { data } = await api.get('/documents');
+      setDocuments(data.data.items);
+    } catch (error) {
+      console.error('Error fetching documents:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    async function fetchRules() {
-      try {
-        const { data } = await api.get("/rules"); // endpointni o‘zingiz qo‘yasiz
-        setRules(data.data.items);
-      } catch (err) {
-        console.error("Error fetching rules:", err);
-      }
-    }
     fetchRules();
+    fetchSchoolHours();
+    fetchDocument();
   }, []);
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
+  const handleDownload = async (downloadUrl, fileName) => {
+    try {
+      const response = await axios.get(downloadUrl, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName || 'document');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
+
+
   return (
-    <main>
-      <div className="container">
-        <section className="rules-top">
-          <h3>School Rules and Documents</h3>
-          <p>
-            Our school maintains clear rules and policies to ensure a safe,
-            respectful, and productive learning environment for all students.
-          </p>
-        </section>
-
-        <section className="school-content">
-          <div className="school-rules">
-            <h4>
-              <img src="/img/shield.svg" alt="" />
-              School Rules
-            </h4>
-            {rules.map((rule, index) => (
-              <div key={rule.id} className="accordion-item">
-                <button onClick={() => toggleAccordion(index)}>
-                  {rule.title?.[currentLang]}
-                  <span
-                    className={`arrow ${activeIndex === index ? "open" : ""}`}
-                  >
-                    <img src="/img/bottom.svg" alt="" />
-                  </span>
-                </button>
-                {activeIndex === index && (
-                  <div className="accordion-content">
-                    <p>{rule.text?.[currentLang]}</p>
+    <>
+      <main className={`rules-dark${darkMode ? ' dark' : ''}`}>
+        <section>
+          <div className='container'>
+            <div className="rules-documents">
+              <div className="rules-documents-heading">
+                <h1>
+                  {t("rules-documents.rules-documents-title")}
+                </h1>
+                <p>
+                  {t("rules-documents.rules-documents-p")}
+                </p>
+              </div>
+              <div className="school-rules">
+                <div className="rules-left">
+                  <div className="rules-left-heading">
+                    <h3>
+                      <Shield size={24} className='rules-icon' />
+                      {t("rules-documents.rules-title")}
+                    </h3>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  {loading ? (
+                    <Flex justify="center" align="center" style={{ height: "200px" }}>
+                      <Loader variant="dots" />
+                    </Flex>
+                  ) : (
+                    <div className="rules-left-details">
+                      {
+                        rules.map((el) => (
+                          <details name='rules'>
+                            <summary>
+                              <p>
+                                {el.title[language]}
+                              </p>
+                              <ChevronDown size={16} color='#130428' />
+                            </summary>
+                            <div className="detail">
+                              <p>
+                                {el.text[language]}
+                              </p>
+                            </div>
+                          </details>
+                        ))
+                      }
 
-          <div className="school-hours">
-            <h3>
-              <img src="/img/black-clock.svg" alt="" />
-              School Hours
-            </h3>
-
-            <div className="s-hours-titles">
-              <div className="s-hours-p">
-                <h4>Regular School Days</h4>
-                <p>Monday - Friday: 8:00 AM - 3:30 PM</p>
-              </div>
-              <div className="s-hours-p">
-                <h4>Administration Office</h4>
-                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
-              </div>
-              <div className="s-hours-p">
-                <h4>Library</h4>
-                <p>Monday - Friday: 8:00 AM - 4:30 PM</p>
-              </div>
-              <div className="s-hours-p">
-                <h4>Extracurricular Activities</h4>
-                <p>Monday - Friday: 3:45 PM - 5:30 PM</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="school-documents">
-          <h3>School Documents</h3>
-
-          <div className="school-d-cards">
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>School Charter</h4>
-                <p>Official school charter document</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>1.2 MB • PDF</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
+                    </div>
+                  )}
+                </div>
+                <div className="rules-right">
+                  <div className="rules-right-heading">
+                    <h3>
+                      <Clock size={24} className='rules-icon' />
+                      {t("rules-documents.shoolhours-title")}
+                    </h3>
+                  </div>
+                  {loading ? (
+                    <Flex justify="center" align="center" style={{ height: "200px" }}>
+                      <Loader variant="dots" />
+                    </Flex>
+                  ) : (
+                    <div className="rules-main">
+                      {schoolhours.map((el) => (
+                        <div className="school-times">
+                          <h4>
+                            {el.title[language]}
+                          </h4>
+                          <h4>Workday</h4>
+                          <p>
+                            {el.workday[language]}
+                          </p>
+                          <h4>Holiday</h4>
+                          <p>
+                            {el.holiday[language]}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>Student Handbook</h4>
-                <p>Complete guide for students</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>3.5 MB • PDF</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
+              <div className="school-documents">
+                <div className="documents-heading">
+                  <h3>{t("rules-documents.documents-title")}</h3>
                 </div>
-              </div>
-            </div>
+                <div className="documents-boxes">
+                  {loading ? (
+                    <Flex justify="center" align="center" style={{ height: "200px" }}>
+                      <Loader variant="dots" />
+                    </Flex>
+                  ) : (
 
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>Parent Guide</h4>
-                <p>Information for parents</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>2.8 MB • PDF</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>Academic Calendar</h4>
-                <p>School year calendar with important dates</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>0.8 MB • PDF</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>Enrollment Forms</h4>
-                <p>Forms required for new student enrollment</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>1.5 MB • ZIP</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="school-d-card">
-              <img src="/img/documents.svg" alt="" className="s-d-card-d" />
-
-              <div className="s-d-card-right">
-                <h4>Code of Conduct</h4>
-                <p>Detailed code of conduct for students</p>
-
-                <div className="s-d-card-bottom">
-                  <h5>1.1 MB • PDF</h5>
-                  <button>
-                    <img src="/img/download.svg" alt="" />
-                    Download
-                  </button>
+                    <div className="documents-left">
+                      {documents.map((el) => (
+                        <div className="documents-box">
+                          <div className="doc-box-icon">
+                            <div className="icon-doc">
+                              <FileText size={32} />
+                            </div>
+                          </div>
+                          <div className="doc-right">
+                            <div className="doc-right-name">
+                              <h4>{el.name}</h4>
+                              <p>
+                                {el.description}
+                              </p>
+                            </div>
+                            <div className="doc-downlowad">
+                              <p className='doc-size'>
+                                {el.size} • {el.type}
+                              </p>
+                              <button onClick={() => handleDownload(el.download_url, el.name)}>
+                                <Download size={16} />{t("actions.download")}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </section>
-      </div>
-    </main>
-  );
-};
+      </main >
+    </>
+  )
+}
 
-export default Rulespage;
+export default Rules;
