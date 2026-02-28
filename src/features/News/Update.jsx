@@ -1,130 +1,137 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../api/api";
+import { Loader, Flex, Stack } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { Flex, Loader, Stack } from "@mantine/core";
-import { Check, X } from "lucide-react";
+import { Check, X } from "tabler-icons-react";
 import { modals } from "@mantine/modals";
 import FormNews from "./Form";
 
 const UpdateNews = ({ id, getNews }) => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
 
-    const fetchNewsById = async () => {
-        setLoading(true);
-        try {
-            const response = await api.get(`/news/${id}`);
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Error fetching news:", error);
-            notifications.show({
-                title: "Error",
-                message: "Failed to fetch news!",
-                color: "red",
-                icon: <X />,
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchNewsById();
-    }, [id]);
-
-    const updateFn = async (values) => {
-        setLoading(true);
-        try {
-            const formData = new FormData();
-
-            ["en", "ru", "uz", "kk"].forEach((lang) => {
-                formData.append(`title[${lang}]`, values.title[lang]);
-                formData.append(`short_content[${lang}]`, values.short_content[lang]);
-                formData.append(`content[${lang}]`, values.content[lang]);
-            });
-
-            if (values.cover_image instanceof File) {
-                formData.append("cover_image", values.cover_image);
-            }
-
-            if (values.author_id) {
-                formData.append("author_id", Number(values.author_id));
-            }
-
-            if (values.tags?.length) {
-                values.tags.forEach((tagId) =>
-                    formData.append("tags[]", Number(tagId))
-                );
-            }
-
-            formData.append("_method", "PUT");
-
-            await api.post(`/news/update/${id}`, formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-
-            if (getNews) {
-                await getNews();
-                modals.closeAll();
-            }
-
-            notifications.show({
-                title: "Success",
-                message: "News updated successfully!",
-                color: "teal",
-                icon: <Check />,
-            });
-        } catch (error) {
-            console.error("Error updating news:", error);
-            notifications.show({
-                title: "Error",
-                message: error.response?.data?.message || "Failed to update news!",
-                color: "red",
-                icon: <X />,
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (loading || !data) {
-        return (
-            <Flex justify="center" align="center" style={{ height: "200px" }}>
-                <Loader variant="dots" size="lg" />
-            </Flex>
-        );
+  const getData = async () => {
+    setLoading(true);
+    try {
+      const res = await api.get(`/news/${id}`);
+      setData(res.data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch data!",
+        color: "red",
+        icon: <X />,
+      });
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const updateFn = async (values) => {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+
+      // multilingual fields
+      ["kk", "uz", "ru", "en"].forEach((lang) => {
+        formData.append(`title[${lang}]`, values.title[lang]);
+        formData.append(`short_content[${lang}]`, values.short_content[lang]);
+        formData.append(`content[${lang}]`, values.content[lang]);
+      });
+
+      // delete old images
+      if (values.delete_cover_images?.length) {
+        values.delete_cover_images.forEach((imgId) => {
+          formData.append("delete_cover_images[]", imgId);
+        });
+      }
+
+      // new uploaded images
+      if (values.cover_images?.length) {
+        values.cover_images.forEach((file) => {
+          if (file instanceof File) {
+            formData.append("cover_images[]", file);
+          }
+        });
+      }
+
+      formData.append("author_id", values.author_id);
+      values.tags.forEach((t) => formData.append("tags[]", t));
+      formData.append("_method", "PUT");
+
+      await api.post(`/news/update/${id}`, formData);
+
+      notifications.show({
+        title: "Success",
+        message: "News updated successfully",
+        color: "teal",
+        icon: <Check />,
+      });
+
+      if (getNews) await getNews();
+      modals.closeAll();
+    } catch (error) {
+      notifications.show({
+        title: "Error",
+        message: "Something went wrong while updating",
+        color: "red",
+        icon: <X />,
+      });
+      console.error("Update error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!data) {
     return (
-        <Stack>
-            <FormNews
-                submitFn={updateFn}
-                initialValues={{
-                    title: {
-                        en: data.title?.en || "",
-                        ru: data.title?.ru || "",
-                        uz: data.title?.uz || "",
-                        kk: data.title?.kk || "",
-                    },
-                    short_content: {
-                        en: data.short_content?.en || "",
-                        ru: data.short_content?.ru || "",
-                        uz: data.short_content?.uz || "",
-                        kk: data.short_content?.kk || "",
-                    },
-                    content: {
-                        en: data.content?.en || "",
-                        ru: data.content?.ru || "",
-                        uz: data.content?.uz || "",
-                        kk: data.content?.kk || "",
-                    },
-                    cover_image: null, // yangi fayl tanlansa
-                    author_id: data.author?.id?.toString() || "",
-                    tags: data.tags?.map((t) => t.id.toString()) || [],
-                }}
-            />
-        </Stack>
+      <Flex justify="center" align="center" style={{ height: "200px" }}>
+        <Loader variant="dots" size="lg" />
+      </Flex>
     );
+  }
+
+  return (
+    <Stack>
+      <FormNews
+        submitFn={updateFn}
+        loading={loading}
+        initialValues={{
+          title: {
+            kk: data?.title?.kk || "",
+            uz: data?.title?.uz || "",
+            ru: data?.title?.ru || "",
+            en: data?.title?.en || "",
+          },
+          short_content: {
+            kk: data?.short_content?.kk || "",
+            uz: data?.short_content?.uz || "",
+            ru: data?.short_content?.ru || "",
+            en: data?.short_content?.en || "",
+          },
+          content: {
+            kk: data?.content?.kk || "",
+            uz: data?.content?.uz || "",
+            ru: data?.content?.ru || "",
+            en: data?.content?.en || "",
+          },
+          author_id: data?.author?.id?.toString() || null,
+          tags: data?.tags?.map((t) => t.id.toString()) || [],
+          cover_images: [], // yangi fayllar
+          delete_cover_images: [],
+          old_images: data?.cover_images?.map((img) => ({
+            id: img.id,
+            url: img.path, // ✅ path ishlatish kerak!
+          })) || [],
+        }}
+      />
+    </Stack>
+  );
 };
 
 export default UpdateNews;

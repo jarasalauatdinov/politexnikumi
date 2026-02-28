@@ -1,40 +1,22 @@
 {
-  "Kiriw": "Kiriw",
-  "Úy": "Úy",
-  "Texnikum": "Texnikum",
-  "Sabaqliq": "Sabaqliq",
-  "Tálim": "Tálim",
-  "Qaǵiydalar": "Qaǵiydalar",
-  "Jańaliqlar": "Jańaliqlar",
-  "Jardem": "Jardem",
-
-  "politechnicum": "Politexnikum",
-  "home": "U'y",
-  "about": "Mektep haqqinda",
-  "education": "Ta'lim",
-  "rules": "Qag'iydalar",
-  "news": "Jan'aliqlar",
-  "support": "Qollaw",
+  "kiriw": "Kiriw",
+  "uy": "Úy",
+  "texnikum": "Texnikum",
+  "sabaqliq": "Sabaqliq",
+  "talim": "Tálim",
+  "qagiydalar": "Qaǵiydalar",
+  "janaliqlar": "Jańaliqlar",
+  "jardem": "Jardem",
+  "politechnicum": "Texnikum",
   "contact": "Baylanis",
   "logout": "Shig'iw",
-  "sidebar": {
-    "album": "Albom",
-    "schedule": "Raspisanie",
-    "club": "Klub",
-    "history": "Tariyx",
-    "information": "Mag'lumat",
-    "school": "Mekteb",
-    "schoolhours": "Mekteb saatlari",
-    "target": "Maqset",
-    "vacancy": "Vakansiya",
-    "value": "Qiymet",
-    "position": "Lawazim",
-    "user": "Paydalanuwshi",
-    "employee": "Jumisshi",
-    "news": "Jan'aliqlar",
-    "document": "Hu'jjet",
-    "rules": "Qag'iydalar"
-  },
+  "title-education": "Bilimlendiriw tarawıdaǵı jetiliskenlik",
+  "title-born": "1998-jıldan baslap",
+  "title-students": "1680+ Studentler",
+  "title-community": "Jámiyetlikimizga qosılıń",
+  "rules-doc": "Qaǵiydalar & Hujjetler",
+  "news-event": "Jańaliqlar &  Waqıyalar",
+
   "btn": {
     "create": "Jaratiw",
     "update": "Jan'artiw",
@@ -42,7 +24,14 @@
     "upload": "Juklew",
     "download": "Juklew",
     "save": "Saqlaw",
-    "cancel": "Bas tartiw"
+    "cancel": "Bas tartiw",
+    "find": "Ko'brek tabiw",
+    "see": "Barin ko'riw",
+    "schedule": "Sabaqlar kestesi",
+    "documents": "Mektep hújjetleri",
+    "teachers": "Biziń muǵallimler",
+    "course": "Bar kurslar",
+    "gallery": "Fotogalereya"
   },
   "languages": {
     "kk": "Qaraqalpaq",
@@ -53,14 +42,75 @@
   "messages": {
     "confirmDelete": "Siz bul elementti o'shiriwge isenimlisizba?"
   },
+
+  "home": {
+    "salemberdik": "Nókis qalası 2-sanli texnikumiga qosh kelibsiz",
+    "salem-text": "Bilim innovatsiyalar menen ushrasatuǵın hám oqiwshilar ertangi kúnniń qıyınshılıqlarına tayarlıq kóretuǵın jer.",
+    "contact-us": "Biz menen baylanısıw",
+    "last-news": "Sońǵı jańalıqlar",
+    "find-more": "Biz haqqımizda",
+    "fast-links": "Tez linkler",
+    "events": "Kelesi waqıyalar",
+    "teachers-text": "Studentlerimizge eń joqarı sapalı bilim hám qollap-quwatlawdı támiyinlewge umtılıp atırǵan pidayı oqıtıwshılarımız jámááti menen tanısıń.",
+    "our-teachers": "Bizdiń muǵallimlerimiz"
+  },
+
+  "about": {
+    "title": "Biziń texnikum haqqında",
+    "our-history": "Bizniń tariyxımız",
+    "core-values": "Tiykarǵı qádiriyatlar",
+    "mission-vision": "Missiya hám kózqaras",
+    "our-mission": "Biziń missiya hám kózqarasımız",
+    "school-lidership": "Mektep administraciyası",
+    "our-facilities": "Bizlerdiń obyektlerimiz",
+    "school-title": "Mektebimiz 1998-jıldan baslap sapalı bilim berip kelmekte. Biz tek ǵana akademiyalıq emes, al biliw, sonday-aq, sın kózqarastan pikirlew, dóretiwshilik hám sociallıq oqıwshılarımızdıń kónlikpesin arttırıw.",
+    "school-p": "Biz hár bir oqıwshınıń ózine tán qábiletlerge ie ekenligine isenemiz. hám biziń missiyamız olarǵa usı qábiletlerdi ashıw hám rawajlandırıwǵa járdem beriwden ibarat talantı tolıq.",
+    "director-name": "Kanglıbekov Kuatbay Dauletbaevich",
+    "principal": "Direktor",
+    "our-director": "Kanglıbekov Kuatbay Dauletbaevich bilimlendiriw tarawında 25 jıldan aslam tájiriybege ie bolıp, mektebimizdi kózqaras hám pidayılıq penen basqarıp kelmekte.",
+    "academic-name": "Xabibullaev Qudaybergen Allambergenovich",
+    "academic-director": "Oqıw isleri boyınsha direktorı orınbasari",
+    "academic-p": "Xabibullaev Qudaybergen Allambergenovich joqarı standartlar hám innovaciyalıq oqıtıw usılların támiyinleytuǵın oqıw baǵdarlamalarımızdı qadaǵalaydı.",
+    "affairs-name": "Dauletniyazov Islam Dauletbaevich",
+    "affairs": "Óndiris isleri boyınsha direktor orınbasarı",
+    "affairs-p": "Dauletniyazov Islam Dauletbaevich oqıwshılardıń jumısın muwapıqlastıradı hám barlıq oqıwshılar ushın qolaylı ortalıqtı támiyinleydi.",
+    "modern": "Zamanagóy klaslar",
+    "modern-p": "Oqıwshılardıń tájiriybesin arttırıw ushın eń sońǵı texnologiyalar menen támiyinlengen.",
+    "library": "Kitapxana",
+    "library-p": "Kitaplardıń úlken toplamı, sanlı resurslar hám tınısh oqıw orınları.",
+    "labs": "Kompyuter laboratoriyaları",
+    "labs-p": "Eń sońģi programmalıq hám texnikalıq támiynatqa iye kompyuter xanaları.",
+    "sports": "Sport obektleri",
+    "sports-p": "Hár qıylı shınıǵıwlar hám fizikalıq tárbiya ushın jabıq hám ashıq sport obektleri."
+  }, 
+
+
+
   "gallery": {
-    "gallery": "Galleriya",
-    "gallery-p": "Bayramlar, xanalar ham oqiwshilar aktivligi fotosuwretleri arqali mekteb o'mirimizdi u'yrening."
+    "gallery-title": "Galleriya",
+    "gallery-p": "Bayramlar, xanalar ham oqiwshilar aktivligi fotosuwretleri arqali mekteb o'mirimizdi u'yrening.",
+    "view-all-photos": "Barliq fotosuwretleri ko'riw"
   },
   "news-page": {
     "news-title": "Mekteb Jan'aliqlari",
     "news-p": "Mektepmiz jámiyetshiliginiń sońǵı jańalıqları, waqıyaları hám daǵazalarınan xabarlı bolıń.",
-    "back-btn": "Jan'aliqlarga qaytuw"
+    "back-btn": "Jan'aliqlarga qaytuw",
+    "read-more": "Kóbirek oqıw"
+  },
+  "schedule-page": {
+    "schedule-title": "Sabaq kestesi",
+    "schedule-text": "Kerekli klass ushin sabaq kestesin qolaylı formatta PDF júklep alıń.",
+    "download-schedule-title": "Sabaq kesteni júklep alıń",
+    "download-schedule-text": "Kesteni júklep alıw ushın klass hám formattı tańlań",
+    "select-class": "Klassti tanlan':",
+    "selected-class": "Tan'lang'an klass:",
+    "not-selected": "tanlanbag'an",
+    "download-schedule": "Kesteni juklew",
+    "last-update": "Son'g'i keste jan'artiliwi:",
+    "errors": "Eger qandayda bir qátelik tapsańız, akademiyalıq bólimge xabarlasıń.",
+    "available-schedules": "Bar kesteler",
+    "available-schedules-p": "Júklep alıw múmkin bolǵan barlıq kesteler dizimi",
+    "click-to-download": "Ju'klew ushin basin'"
   },
   "rules-documents": {
     "rules-documents-title": "Mekteb Qag'iydaları ham Hu'jjetleri",
@@ -81,18 +131,25 @@
     "education-p": "Biziń mektepmiz kúshli ilimiy tıykarǵa hám ámeliy kónlikpelerge iye bolǵan hár tárepleme rawajlanǵan studentlerdi rawajlandırıw ushın arnalǵan keń qamtılǵan tálim programmasın usınıs etedi.",
     "other-activities": "Klasstan tısqarı ilajlar "
   },
-  "home-page": {
-    "welcome": "Mektepmizge xosh kelipsiz",
-    "welcome-text": "Bilim innovatsiyalar menen ushrasatuǵın hám studentler ertangi kúnniń qıyınshılıqlarına tayarlıq kóretuǵın jay.",
-    "contact-us": "Biz menen baylanısıw",
-    "last-news": "Son'g'i jan'aliqlar",
-    "fast-links": "Tez linkler",
-    "quick-links": {
-        "schedule": "Расписание уроков",
-        "documents": "Школьные документы",
-        "teachers": "Наши учителя",
-        "course": "Доступные курсы",
-        "gallery": "Фотогалерея"
-    }
+
+
+
+  "sidebar": {
+    "album": "Albom",
+    "schedule": "Raspisanie",
+    "club": "Klub",
+    "history": "Tariyx",
+    "information": "Mag'lumat",
+    "school": "Mekteb",
+    "schoolhours": "Mekteb saatlari",
+    "target": "Maqset",
+    "vacancy": "Vakansiya",
+    "value": "Qadriyatlar",
+    "position": "Lawazim",
+    "user": "Paydalanuwshi",
+    "employee": "Jumisshi",
+    "news": "Jan'aliqlar",
+    "document": "Hu'jjet",
+    "rules": "Qag'iydalar"
 }
 }

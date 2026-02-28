@@ -4,9 +4,12 @@ import { modals } from "@mantine/modals";
 import { api } from "../../api/api";
 import { notifications } from "@mantine/notifications";
 import { Check, X } from "tabler-icons-react";
+import { useTranslation } from "react-i18next";
 
 const DeleteSchedule = ({ id, AdminSchedule, setAdminSchedule, getAdminSchedule }) => {
     const [loading, setLoading] = useState(false);
+      const { t } = useTranslation();
+    
 
     const deleteFn = async () => {
         setLoading(true);
@@ -50,9 +53,9 @@ const DeleteSchedule = ({ id, AdminSchedule, setAdminSchedule, getAdminSchedule 
         <Stack>
             <Text>Are you sure you want to delete this position?</Text>
             <Flex gap={10} justify="flex-end">
-                <Button onClick={() => modals.closeAll()}>Cancel</Button>
+                <Button onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
                 <Button color="red" onClick={deleteFn}>
-                    Delete
+                    {t("btn.delete")}
                 </Button>
             </Flex>
         </Stack>

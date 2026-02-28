@@ -101,8 +101,8 @@ const FormSchool = ({ submitFn, initialValues, loading }) => {
                 />
 
                 <Flex justify="end" gap={10}>
-                    <Button color="gray" onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
-                    <Button loading={loading} type="submit">{t("actions.save")}</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button loading={loading} type="submit">{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

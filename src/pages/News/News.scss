@@ -1,51 +1,12 @@
-.news-dark.dark {
-  background: #0F172A;
-
-  .school-news {
-      .school-news-headline {
-          h1 {
-              color: #F1F5F9;
-          }
-
-          p {
-              color: #CBD5E1;
-          }
-      }
-  }
-}
-
-.read-news-dark.dark {
-  background: #0F172A;
-
-
-  .news-main {
-      img {
-          opacity: 70%;
-      }
-
-      h1 {
-          color: #F1F5F9;
-      }
-
-      p {
-          color: #CBD5E1;
-      }
-
-      .data-author {
-          color: #CBD5E1;
-      }
-  }
-
-  .back-btn {
-      color: #F1F5F9;
-  }
-}
-
 .school-news {
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: 60px 0;
+
+  .m_e615b15f {
+    min-height: 405px;
+  }
 
   .school-news-headline {
       display: flex;
@@ -121,4 +82,36 @@
   color: #020817;
 }
 
+
+
+.read-news {
+    .news-main {
+      .extra-images {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+  
+        .extra-img {
+          max-width: 100%;
+          height: 300px;
+          overflow: hidden;
+          border-radius: 8px;
+          cursor: pointer;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+  
+          &:hover img {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+  }
+  
 

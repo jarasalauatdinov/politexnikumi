@@ -6,6 +6,7 @@ import CreatePosition from "../../../features/Position/Create";
 import DeletePosition from "../../../features/Position/Delete";
 import UpdatePosition from "../../../features/Position/Update";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 function Position() {
   const [positions, setPositions] = useState([]);
@@ -13,7 +14,8 @@ function Position() {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const { t } = useTranslation(); 
-  const currentLang = "ru";
+  const language = i18next.language;language
+
   const getPositions = async (page = 1) => {
     setLoading(true);
     try {
@@ -84,7 +86,7 @@ function Position() {
             {positions.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.name[currentLang]}</Table.Td>
+                <Table.Td>{el.name[language]}</Table.Td>
                 <Table.Td
                   style={{
                     maxWidth: "300px",
@@ -92,7 +94,7 @@ function Position() {
                     wordBreak: "break-word",
                     overflowWrap: "anywhere",
                   }}
-                >{el.description[currentLang]}</Table.Td>
+                >{el.description[language]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
                     <Button color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

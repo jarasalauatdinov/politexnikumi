@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import { Button, Flex, Stack, Table, Title, Loader, Text, Pagination, Textarea } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { api } from "../../../api/api";
-import { useTranslation } from "react-i18next";
-import CreateInformation from "../../../features/Information/Create";
-import UpdateInformation from "../../../features/Information/Update";
 import DeleteInformation from "../../../features/Information/Delete";
+import UpdateInformation from "../../../features/Information/Update";
+import CreateInformation from "../../../features/Information/Create";
+import { useTranslation } from "react-i18next";
+import { notifications } from "@mantine/notifications";
+import i18next from "i18next";
 
 const Information = () => {
   const [information, setInformation] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
   const { t } = useTranslation();
+  const language = i18next.language
 
   const getInformation = async (page = 1) => {
     setLoading(true);
@@ -22,7 +24,12 @@ const Information = () => {
       setInformation(data.data.items);
       setLastPage(data.data.pagination.last_page);
     } catch (error) {
-      console.error("Error fetching information:", error);
+      console.error("Error fetching information:", error)
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch information!",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
@@ -34,24 +41,19 @@ const Information = () => {
 
   const createFn = () => {
     modals.open({
-      children:
-        <CreateInformation
-          getInformation={getInformation} />,
+      children: <CreateInformation getInformation={getInformation} />,
     });
   };
 
   const updateFn = (id) => {
     modals.open({
-      children:
-        <UpdateInformation
-          id={id}
-          getInformation={getInformation} />,
+      children: <UpdateInformation id={id} getInformation={getInformation} />,
     });
   };
 
   const deleteFn = (id) => {
     modals.open({
-      children: (
+      children: ( 
         <DeleteInformation
           id={id}
           information={information}
@@ -65,7 +67,7 @@ const Information = () => {
     <>
       <Stack p={20} w="100%">
         <Flex justify="space-between" align="center">
-          <Title>{t("Information")}</Title>
+          <Title>{t("sidebar.information")}</Title>
           <Button onClick={createFn}>{t("btn.create")}</Button>
         </Flex>
 
@@ -96,9 +98,9 @@ const Information = () => {
               {information.map((el) => (
                 <Table.Tr key={el.id}>
                   <Table.Td>{el.id}</Table.Td>
-                  <Table.Td>{el.title[currentLang]}</Table.Td>
+                  <Table.Td>{el.title[language]}</Table.Td>
                   <Table.Td>{el.count}</Table.Td>
-                  <Table.Td>{el.description[currentLang]}</Table.Td>
+                  <Table.Td>{el.description[language]}</Table.Td>
                   <Table.Td>
                     <Flex gap={10}>
                       <Button color="red" size="xs" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

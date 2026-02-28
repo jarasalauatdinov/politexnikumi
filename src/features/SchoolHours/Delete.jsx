@@ -44,9 +44,9 @@ const DeleteSchoolHourse = ({ id, schoolhours, setSchoolHours, getSchoolHours })
         <Stack>
             <Text>{t("messages.confirmDelete")}</Text>
             <Flex gap={10} justify="flex-end">
-                <Button color="gray" onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
+                <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
                 <Button loading={loading} color="red" onClick={deleteFn}>
-                    {t("actions.delete")}
+                    {t("btn.delete")}
                 </Button>
             </Flex>
         </Stack>

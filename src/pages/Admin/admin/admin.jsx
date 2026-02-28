@@ -23,7 +23,7 @@ const Admin = () => {
     }
 
     if (!isAuth) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/admin/login" />;
     }
 
     return (

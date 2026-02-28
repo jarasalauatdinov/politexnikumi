@@ -1,8 +1,10 @@
 import { useForm } from "@mantine/form";
 import { Button, Textarea, Stack, Flex, TextInput } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { useTranslation } from "react-i18next";
 
-const FormTarget = ({ submitFn, initialValues }) => {
+const FormTarget = ({ submitFn, initialValues, loading }) => {
+    const { t } = useTranslation();
     const form = useForm({
         initialValues,
     });
@@ -60,8 +62,8 @@ const FormTarget = ({ submitFn, initialValues }) => {
                     {...form.getInputProps("description.en")}
                 />
                 <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Отмена</Button>
-                    <Button type="submit">Сохранить</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit" loading={loading}>{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

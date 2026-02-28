@@ -1,8 +1,11 @@
 import { useForm } from "@mantine/form";
 import { Button, TextInput, Textarea, Stack, Flex } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { useTranslation } from "react-i18next";
 
 const FormHistory = ({ submitFn, initialValues }) => {
+    const { t } = useTranslation();
+
     const form = useForm({
         initialValues,
     });
@@ -45,8 +48,8 @@ const FormHistory = ({ submitFn, initialValues }) => {
                 />
 
                 <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Отмена</Button>
-                    <Button type="submit">Сохранить</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit">{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

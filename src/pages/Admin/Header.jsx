@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanModule } from '../../components/adminLocales/LanModule';
+import { LanModule } from '../../components/LanAdmin/LanModule';
 import { MdOutlineLogout } from 'react-icons/md';
 
 export const Header = ({ sidebarWidth = 180 }) => {

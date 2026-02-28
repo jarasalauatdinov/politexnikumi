@@ -28,6 +28,8 @@ const UpdateDocument = ({ id, getDocuments }) => {
         }
     };
 
+
+
     useEffect(() => {
         getDocument();
     }, [id]);
@@ -36,13 +38,12 @@ const UpdateDocument = ({ id, getDocuments }) => {
         setLoading(true);
         try {
             const formData = new FormData();
-            formData.append("name", body.name?.trim() || "");
-            formData.append("description", body.description?.trim() || "");
+
+            formData.append("name", body.name || "");
+            formData.append("description", body.description || "");
 
             if (body.file instanceof File) {
                 formData.append("file", body.file);
-            } else if (data?.file) {
-                formData.append("file", data.file);
             }
 
             formData.append("_method", "PUT");
@@ -50,7 +51,6 @@ const UpdateDocument = ({ id, getDocuments }) => {
             await api.post(`/documents/update/${id}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-
 
             if (getDocuments) {
                 await getDocuments();
@@ -68,7 +68,7 @@ const UpdateDocument = ({ id, getDocuments }) => {
             console.error("Error updating Document:", error);
             notifications.show({
                 title: "Error",
-                message: "Failed to update Document!",
+                message: error.response?.data?.message || "Failed to update Document!",
                 color: "red",
                 icon: <X />,
             });
@@ -78,7 +78,8 @@ const UpdateDocument = ({ id, getDocuments }) => {
     };
 
 
-    if (loading || !data) {
+
+    if (loading && !data) {
         return (
             <Flex justify="center" align="center" style={{ height: "200px" }}>
                 <Stack align="center">
@@ -90,10 +91,12 @@ const UpdateDocument = ({ id, getDocuments }) => {
 
     return (
         <FormDocument
+            key={data?.id}
             submitFn={updateFn}
+            loading={loading}
             initialValues={{
-                name: data.name || "",
-                description: data.description || "",
+                name: data?.name || "",
+                description: data?.description || "",
                 file: null,
             }}
         />

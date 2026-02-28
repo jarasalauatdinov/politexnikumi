@@ -6,6 +6,7 @@ import DeleteALbum from "../../../features/Album/Delete";
 import CreateAlbum from "../../../features/Album/Create";
 import UpdateAlbum from "../../../features/Album/Update";
 import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const Album = () => {
   const [albums, setAlbums] = useState([]);
@@ -13,6 +14,7 @@ const Album = () => {
   const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation(); 
+  const language = i18next.language
 
   async function getAlbums(page = 1) {
     setLoading(true);

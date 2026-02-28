@@ -4,13 +4,18 @@ import { Button, Flex, Stack, Table, Title, Loader, Text, Pagination, Textarea }
 import { modals } from "@mantine/modals";
 import { api } from "../../../api/api";
 import { useTranslation } from 'react-i18next';
+import CreateHistory from '../../../features/History/Create';
+import UpdateHistory from '../../../features/History/Update';
+import DeleteHistory from '../../../features/History/Delete';
+import i18next from 'i18next';
+
 const History = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const { t } = useTranslation();
-  const currentLang = "ru";
+  const language = i18next.language;
 
   const getHistory = async (page = 1) => {
     setLoading(true);
@@ -89,7 +94,7 @@ const History = () => {
                 <Table.Tr key={el.id}>
                   <Table.Td>{el.id}</Table.Td>
                   <Table.Td>{el.year}</Table.Td>
-                  <Table.Td>{el.text[currentLang]}</Table.Td>
+                  <Table.Td>{el.text[language]}</Table.Td>
                   <Table.Td>
                     <Flex gap={10}>
                       <Button size='xs' color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

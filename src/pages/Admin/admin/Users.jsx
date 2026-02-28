@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { Button, Flex, Pagination, Stack, Table, Title, Loader } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import { showNotification } from '@mantine/notifications';
+import { notifications } from '@mantine/notifications';
 import { api } from "../../../api/api";
-import { useTranslation } from "react-i18next";
 import CreateUsers from "../../../features/User/Create";
 import DeleteUsers from "../../../features/User/Delete";
 import UpdateUsers from "../../../features/User/Update";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const currentLang = "ru";
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+  const language = i18next.language;
 
   const getUsers = async (page = 1) => {
     setLoading(true);
@@ -24,9 +26,9 @@ function Users() {
       setLastPage(data.data.pagination.last_page);
     } catch (error) {
       console.error(error);
-      showNotification({
+      notifications.show({
         title: "Error",
-        message: "Users could not be loaded",
+        message: "Failed to fetch users!",
         color: "red",
       });
     } finally {
@@ -86,13 +88,13 @@ function Users() {
             {users.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.full_name[currentLang]}</Table.Td>
+                <Table.Td>{el.full_name[language]}</Table.Td>
                 <Table.Td>{el.birth_date}</Table.Td>
                 <Table.Td>{el.phone}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
-                    <Button onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
+                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button size="xs" onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>

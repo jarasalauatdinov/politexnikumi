@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ActionIcon, Button, Menu, Select } from "@mantine/core";
-import "./Toggle.css";
+import "../Toggle.css";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { FiSun } from "react-icons/fi";
 import { Languages } from "lucide-react";
@@ -42,10 +42,10 @@ const Navbar = () => {
   };
 
   const languages = [
-    { value: "kk", label: "QARAQALPAQ" },
-    { value: "ru", label: "РУССКИЙ" },
-    { value: "en", label: "ENGLISH" },
-    { value: "uz", label: "UZBEK" },
+    { label: 'Karakalpak', image: '/img/kk-flag.png', value: 'kk' },
+    { label: 'Uzbek', image: 'https://flagcdn.com/uz.svg', value: 'uz' },
+    { label: 'Russian', image: 'https://flagcdn.com/ru.svg', value: 'ru' },
+    { label: 'English', image: 'https://flagcdn.com/us.svg', value: 'en' },
   ];
 
 
@@ -59,7 +59,7 @@ const Navbar = () => {
           <Link to="/" className="nav-logo-icon">
             <img src="/img/politex.png" alt="" className="logo" />
           </Link>
-          <Link className="nav-logo" to="/">Politexnikum</Link>
+          <Link className="nav-logo" to="/">Texnikumi </Link>
         </div>
 
         <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
@@ -70,7 +70,7 @@ const Navbar = () => {
                 className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t(["Úy", "Texnikum", "Sabaqliq", "Tálim", "Qaǵiydalar", "Jańaliqlar", "Jardem"][idx])}
+                {t(["uy", "texnikum", "sabaqliq", "talim", "qagiydalar", "janaliqlar", "jardem"][idx])}
               </NavLink>
             </li>
           ))}
@@ -90,10 +90,23 @@ const Navbar = () => {
                     key={lang.value}
                     onClick={() => i18n.changeLanguage(lang.value)}
                   >
-                    {lang.label}
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <img
+                        src={lang.image}
+                        alt={lang.label}
+                        style={{
+                          width: "20px",
+                          height: "14px",
+                          objectFit: "cover",
+                          borderRadius: "3px"
+                        }}
+                      />
+                      <span className="lang-select">{lang.label}</span>
+                    </div>
                   </Menu.Item>
                 ))}
               </Menu.Dropdown>
+
             </Menu>
           </div>
 
@@ -121,8 +134,8 @@ const Navbar = () => {
             )}
           </button>
 
-          <Link className="nav-call" to="/login">
-            {t("Kiriw")}
+          <Link className="nav-call" to="/admin/login">
+            {t("kiriw")}
           </Link>
         </div>
       </nav>

@@ -13,6 +13,7 @@ const UploadDocument = ({ getDocuments }) => {
         setLoading(true);
         try {
             const formData = new FormData();
+
             formData.append("name", body.name);
             formData.append("description", body.description);
 
@@ -38,10 +39,9 @@ const UploadDocument = ({ getDocuments }) => {
 
         } catch (error) {
             console.error("Error uploading document:", error);
-
             notifications.show({
                 title: "Error",
-                message: "Failed to upload document!",
+                message: error.response?.data?.message || "Failed to upload document!",
                 color: "red",
                 icon: <X />,
             });
@@ -53,24 +53,20 @@ const UploadDocument = ({ getDocuments }) => {
 
 
 
+
     return (
         <div>
-            {loading ? (
-                <Flex justify="center" align="center" style={{ height: "200px" }}>
-                    <Loader variant="dots" size="lg" />
-                </Flex>
-            ) : (
-                <Stack>
-                    <FormDocument
-                        submitFn={createFn}
-                        initialValues={{
-                            name: '',
-                            description: '',
-                            file: null,
-                        }}
-                    />
-                </Stack>
-            )}
+            <Stack>
+                <FormDocument
+                    submitFn={createFn}
+                    initialValues={{
+                        name: "",
+                        description: "",
+                        file: null,
+                    }}
+                    loading={loading}
+                />
+            </Stack>
         </div>
     );
 };

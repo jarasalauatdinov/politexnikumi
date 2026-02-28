@@ -4,8 +4,10 @@ import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { Check, X } from "tabler-icons-react";
 import { api } from "../../api/api";
+import { useTranslation } from "react-i18next";
 
 const DeleteClub = ({ id, club, setClub, getClubs }) => {
+    const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
 
     const deleteFn = async () => {
@@ -50,9 +52,9 @@ const DeleteClub = ({ id, club, setClub, getClubs }) => {
         <Stack>
             <Text>Are you sure you want to delete this club?</Text>
             <Flex gap={10} justify="flex-end">
-                <Button onClick={() => modals.closeAll()}>Cancel</Button>
+                <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
                 <Button color="red" onClick={deleteFn}>
-                    Delete
+                    {t("btn.save")}
                 </Button>
             </Flex>
         </Stack>

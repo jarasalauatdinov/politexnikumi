@@ -1,82 +1,153 @@
 {
-    "politechnicum": "Polytechnicum",
-    "home": "Home",
-    "about": "About",
-    "education": "Education",
-    "rules": "Rules",
+  "kiriw": "Login",
+  "uy": "Home",
+  "texnikum": "About",
+  "sabaqliq": "Lesson",
+  "talim": "Education",
+  "qagiydalar": "Rules",
+  "janaliqlar": "News",
+  "jardem": "Support",
+  "politechnicum": "Polytechnicum",
+  "contact": "Contact",
+  "logout": "Log Out",
+  "title-education": "Excellence in the field of education",
+  "title-born": "Since 1995",
+  "title-students": "1680+ Students",
+  "title-community": "Join our community",
+  "rules-doc": "Rules & Documents",
+  "news-event": "News &  Events",
+
+  "btn": {
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "upload": "Upload",
+    "download": "Download",
+    "save": "Save",
+    "cancel": "Cancel",
+    "find": "Find out more",
+    "see": "See all",
+   "schedule": "Lesson schedule",
+    "documents": "School documents",
+    "teachers": "Our teachers",
+    "course": "Available courses",
+    "gallery": "Photo Gallery"
+    
+  },
+  "languages": {
+    "kk": "Karakalpak",
+    "uz": "Uzbek",
+    "ru": "Russian",
+    "en": "English"
+  },
+  "messages": {
+    "confirmDelete": "Are you sure you want to delete this item?"
+  },
+
+  "home": {
+    "salemberdik": "Welcome to Nukus Polytechnic No 2",
+    "salem-text": "Education is a place where students encounter innovations and prepare for tomorrow's challenges.",
+    "contact-us": "Contact us",
+    "last-news": "Latest News",
+    "find-more": "Learn more",
+    "fast-links": "Quick links",
+    "upcoming-events": "Next events",
+    "our-teachers": "Our teachers",
+    "teachers-text":" Meet the team of dedicated teachers who strive to provide our students with the highest quality of education and support."
+  },
+
+  "about": {
+    "title": "About our polytechnic",
+    "our-history": "Our history",
+    "core-values": "Core values",
+    "mission-vision": "Mission & Vision",
+    "our-mission": "Our Mission & Vision",
+    "school-lidership": "School Leadership",
+    "our-facilities": "Our Facilities",
+    "school-title": "Our school has been providing quality education since 1998. We are developing not only academic but also cognitive, critical thinking, creative, and social skills for our students.",
+    "school-p": "We believe that every student has unique abilities, and our mission is to help them discover and develop these abilities.",
+    "director-name": "Kanglibekov Kuatbay Dauletbaevich",
+    "principal": "Director",
+    "our-director": "Kanglibekov Kuatbay Dauletbaevich has more than 25 years of experience in the field of education and has been managing our school with vision and dedication.",
+    "academic-name": "Khabibullaev Kudaybergen Allambergenovich",
+    "academic-director": "Deputy Director for Academic Affairs",
+    "academic-p": "Khabibullaev Kudaybergen Allambergenovich supervises our educational programs that ensure high standards and innovative teaching methods.",
+    "affairs-name": "Dauletniyazov Islam Dauletbaevich",
+    "affairs": "eputy Director for Production Affairs",
+    "affairs-p": "Dauletniyazov Islam Dauletbaevich coordinates the work of students and ensures a comfortable environment for all students.",
+    "modern": "Modern Classrooms",
+    "modern-p": "Equipped with the latest technology to enhance the learning experience.",
+    "library": "Library",
+    "library-p": "A vast collection of books, digital resources, and quiet study spaces.",
+    "labs": "Computer Labs",
+    "labs-p": "State-of-the-art computer labs with the latest software and hardware.",
+    "sports": "Sports Facilities",
+    "sports-p": "Indoor and outdoor sports facilities for various activities and physical education."
+  },
+
+  "gallery": {
+    "gallery-title": "Gallery",
+    "gallery-p": "Explore our school life through photos of events, rooms, and student activities.",
+    "view-all-photos": "View all photos"
+  },
+  "news-page": {
+    "news-title": "School News",
+    "news-p": "Stay updated with the latest news, events, and announcements from our school community.",
+    "back-btn": "Back to News",
+    "read-more": "Read more"
+  },
+  "schedule-page": {
+    "schedule-title": "Class schedule",
+    "schedule-text": "Download the lesson schedule for the desired class in a convenient PDF format..",
+    "download-schedule-title": "Download the class schedule",
+    "download-schedule-text": "Select a class and format to download the schedule",
+    "select-class": "Select a class:",
+    "selected-class": "Class selected:",
+    "not-selected": "not selected",
+    "download-schedule": "Download schedule",
+    "last-update": "Latest schedule update:",
+    "errors": "If you find any errors, please contact the academic department.",
+    "available-schedules": "Available schedules",
+    "available-schedules-p": "List of all schedules available for download",
+    "click-to-download": "Click to download"
+  },
+  "rules-documents": {
+    "rules-documents-title": "School Rules and Documents",
+    "rules-documents-p": "Our school maintains clear rules and policies to ensure a safe, respectful, and productive learning environment for all students.",
+    "rules-title": "School Rules",
+    "shoolhours-title": "School Hours",
+    "documents-title": "Documents"
+  },
+  "support-faq": {
+    "support-faq-title": "Support and FAQ",
+    "support-faq-p": "Find answers to frequently asked questions and get the information you need about our school.",
+    "support-title": "Frequently Asked Questions",
+    "faq-title": "Contact information",
+    "work-hours": "Opening hours"
+  },
+  "education-page": {
+    "education-title": "Education",
+    "education-p": "Our school offers a comprehensive educational program designed to develop well-rounded students with a strong academic foundation and practical skills.",
+    "other-activities": "Extracurricular activities"
+  },
+
+
+  "sidebar": {
+    "album": "Album",
+    "schedule": "Schedule",
+    "club": "Club",
+    "history": "History",
+    "information": "Information",
+    "school": "School",
+    "schoolhours": "School Hours",
+    "target": "Target",
+    "vacancy": "Vacancy",
+    "value": "Value",
+    "position": "Position",
+    "user": "User",
+    "employee": "Employee",
     "news": "News",
-    "support": "Support",
-    "contact": "Contact",
-    "logout": "Log Out",
-    "sidebar": {
-        "album": "Album",
-        "schedule": "Schedule",
-        "club": "Club",
-        "history": "History",
-        "information": "Information",
-        "school": "School",
-        "schoolhours": "School Hours",
-        "target": "Target",
-        "vacancy": "Vacancy",
-        "value": "Value",
-        "position": "Position",
-        "user": "User",
-        "employee": "Employee",
-        "news": "News",
-        "document": "Document",
-        "rules": "Rules"
-    },
-    "btn": {
-        "create": "Create",
-        "update": "Update",
-        "delete": "Delete",
-        "upload": "Upload",
-        "download": "Download",
-        "save": "Save",
-        "cancel": "Cancel"
-    },
-    "languages": {
-        "kk": "Karakalpak",
-        "uz": "Uzbek",
-        "ru": "Russian",
-        "en": "English"
-    },
-    "messages": {
-        "confirmDelete": "Are you sure you want to delete this item?"
-    },
-    "gallery": {
-        "gallery-title": "Gallery",
-        "gallery-p": "Explore our school life through photos of events, rooms, and student activities."
-    },
-    "news-page": {
-        "news-title": "School News",
-        "news-p": "Stay updated with the latest news, events, and announcements from our school community.",
-        "back-btn": "Back to News"
-    },
-    "rules-documents": {
-        "rules-documents-title": "School Rules and Documents",
-        "rules-documents-p": "Our school maintains clear rules and policies to ensure a safe, respectful, and productive learning environment for all students.",
-        "rules-title": "School Rules",
-        "shoolhours-title": "School Hours",
-        "documents-title": "Documents"
-    },
-    "support-faq": {
-        "support-faq-title": "Support and FAQ",
-        "support-faq-p": "Find answers to frequently asked questions and get the information you need about our school.",
-        "support-title": "Frequently Asked Questions",
-        "faq-title": "Contact information",
-        "work-hours": "Opening hours"
-    },
-    "education-page": {
-        "education-title": "Education",
-        "education-p": "Our school offers a comprehensive educational program designed to develop well-rounded students with a strong academic foundation and practical skills.",
-        "other-activities": "Extracurricular activities"
-    },
-    "home-page": {
-        "welcome": "Welcome to our school",
-        "welcome-text": "A place where knowledge meets innovation and students prepare for the challenges of tomorrow.",
-        "contact-us": "Contact us",
-        "last-news": "Latest news",
-        "fast-links": "Quick links"
-    }
+    "document": "Document",
+    "rules": "Rules"
+}
 }

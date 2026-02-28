@@ -93,8 +93,8 @@ const FormClub = ({ submitFn, initialValues, loading }) => {
                 />
 
                 <Flex justify="end" gap={10}>
-                    <Button color="gray" onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
-                    <Button type="submit" loading={loading}>{t("actions.save")}</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit" loading={loading}>{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

@@ -62,33 +62,10 @@ const FormSchoolHours = ({ submitFn, initialValues, loading }) => {
                     {...form.getInputProps("workday.en")}
                 />
 
-                <Textarea
-                    label="Holiday (kk)"
-                    placeholder="Holiday"
-                    minRows={2}
-                    {...form.getInputProps("holiday.kk")}
-                />
-                <Textarea
-                    label="Holiday (uz)"
-                    placeholder="Holiday"
-                    minRows={2}
-                    {...form.getInputProps("holiday.uz")}
-                />
-                <Textarea
-                    label="Holiday (ru)"
-                    placeholder="Holiday"
-                    minRows={2}
-                    {...form.getInputProps("holiday.ru")}
-                />
-                <Textarea
-                    label="Holiday (en)"
-                    placeholder="Holiday"
-                    minRows={2}
-                    {...form.getInputProps("holiday.en")}
-                />
+         
                 <Flex justify="end" gap={10}>
-                    <Button color="gray" onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
-                    <Button type="submit" loading={loading}>{t("actions.save")}</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit" loading={loading}>{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

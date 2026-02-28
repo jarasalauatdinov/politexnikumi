@@ -88,13 +88,7 @@ const UpdateSchoolHourse = ({ id, getSchoolHours }) => {
                     uz: data?.workday.uz,
                     en: data?.workday.en,
                     kk: data?.workday.kk,
-                },
-                holiday: {
-                    ru: data?.holiday.ru,
-                    uz: data?.holiday.uz,
-                    en: data?.holiday.en,
-                    kk: data?.holiday.kk,
-                },
+                }
             }}
         />
     );

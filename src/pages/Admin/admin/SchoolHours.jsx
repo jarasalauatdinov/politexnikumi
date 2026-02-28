@@ -8,13 +8,16 @@ import { notifications } from '@mantine/notifications';
 import CreateSchoolHours from '../../../features/SchoolHours/Create';
 import UpdateSchoolHourse from '../../../features/SchoolHours/Update';
 import DeleteSchoolHourse from '../../../features/SchoolHours/Delete';
+import i18next from 'i18next';
+
+
 const SchoolHours = () => {
   const [schoolhours, setSchoolHours] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
+  const language = i18next.language;
 
   const getSchoolHours = async (page = 1) => {
     setLoading(true);
@@ -88,7 +91,6 @@ const SchoolHours = () => {
               <Table.Th>Id</Table.Th>
               <Table.Th>Title</Table.Th>
               <Table.Th>Work day</Table.Th>
-              <Table.Th>Holiday</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
           </Table.Thead>
@@ -96,9 +98,8 @@ const SchoolHours = () => {
             {schoolhours.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.title[currentLang]}</Table.Td>
-                <Table.Td>{el.workday[currentLang]}</Table.Td>
-                <Table.Td>{el.holiday[currentLang]}</Table.Td>
+                <Table.Td>{el.title[language]}</Table.Td>
+                <Table.Td>{el.workday[language]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
                     <Button color="red" size='xs' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

@@ -73,8 +73,8 @@ const FormAlbum = ({ submitFn, initialValues, loading }) => {
                     onChange={(files) => form.setFieldValue("photos", files)}
                 />
                 <Flex justify="end" gap={10}>
-                    <Button color="gray" onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
-                    <Button type="submit" loading={loading}>{t("actions.save")}</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit" loading={loading}>{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

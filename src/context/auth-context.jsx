@@ -1,81 +1,65 @@
 import { createContext, useState, useEffect } from "react";
 import { api } from "../api/api";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isAuth, setIsAuth] = useState(false);
-    const [loading, setLoading] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    async function login({ phone, password }) {
-        try {
-            const { data, status } = await api.post("/auth/login", { phone, password });
-            if (status === 200) {
-                localStorage.setItem("access_token", data.data.access_token);
-                localStorage.setItem("refresh_token", data.data.refresh_token);
+  const login = async ({ phone, password }) => {    
+    try {
+      const res = await api.post("/auth/login", { phone, password });
+      const tokens = res.data.data;
 
-                api.defaults.headers.common[
-                    "Authorization"
-                ] = `Bearer ${data.data.access_token}`;
+      localStorage.setItem("access_token", tokens.access_token);
+      localStorage.setItem("refresh_token", tokens.refresh_token);
+      api.defaults.headers.common["Authorization"] = `Bearer ${tokens.access_token}`;
 
-                setIsAuth(true);
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error("Login error:", error);
-            return false;
-        }
+      setIsAuth(true);
+      return true;
+    } catch (err) {
+      console.error("Login error:", err);
+      return false;
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await api.post("/auth/logout");
+    } catch (err) {
+      console.error("Logout error:", err);
     }
 
-    async function logout(callback) {
-        try {
-            await api.post("/auth/logout");
-        } catch (error) {
-            console.error("Logout error:", error);
-        }
+    localStorage.clear();
+    delete api.defaults.headers.common["Authorization"];
+    setIsAuth(false);
+  };
 
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-
-        delete api.defaults.headers.common["Authorization"];
-
+  const getMe = async () => {
+    try {
+      await api.get("/auth/get-me");
+      setIsAuth(true);
+      } catch {
         setIsAuth(false);
-
-        if (callback) {
-            callback();
-        } else {
-            window.location.href = "/login";
-        }
+    } finally {
+      setLoading(false);
     }
-
-    async function getMe() {
-        try {
-            const { status } = await api.get("/auth/get-me");
-            if (status === 200) {
-                setIsAuth(true);
-            }
-        } catch (error) {
-            console.error("GetMe error:", error);
-            setIsAuth(false);
-        } finally {
-            setLoading(false);
-        }
-    }
+  };
 
     useEffect(() => {
-        const token = localStorage.getItem("access_token");
-        if (token) {
-            api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            getMe();
-        } else {
-            setLoading(false);
-        }
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        getMe();
+      } else {
+        setLoading(false);
+      }
     }, []);
 
-    return (
-        <AuthContext.Provider value={{ isAuth, loading, login, logout, getMe }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ isAuth, loading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

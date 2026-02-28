@@ -1,15 +1,17 @@
 import React from "react";
 import "./footer.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const {t} = useTranslation();
   return (
     <footer>
       <div className="footer-container">
         <section className="footer-first">
           <h3>
             <img src="/img/politex.png" alt="logo" className="logo" />
-            Politexnikum
+            Politexnikumi
           </h3>
 
           <p>
@@ -25,23 +27,21 @@ const Footer = () => {
         </section>
 
         <section className="footer-second">
-          <h3>Quick Links</h3>
+          <h3>{t("home.fast-links")}</h3>
 
           <ul className="footer-navs">
-            <NavLink to="/about">About Us</NavLink>
-            <NavLink to="/lessons">Lesson</NavLink>
-            <NavLink to="/education">Education</NavLink>
+            <NavLink className="f-navs-a" to="/about">{t("texnikum")}</NavLink>
+            <NavLink className="f-navs-a" to="/education">{t("talim")}</NavLink>
             <nav>
-      <NavLink to="/news">News</NavLink> |{" "}
-      <NavLink to="/school">Events</NavLink>
-    </nav>
-            <NavLink to="/support">Support</NavLink>
-            <NavLink to="/rules">Rules & Documents</NavLink>
+              <NavLink className="f-navs-a" to="/news">{t("news-event")}</NavLink> 
+            </nav>
+            <NavLink className="f-navs-a" to="/support">{t("jardem")}</NavLink>
+            <NavLink className="f-navs-a" to="/rules">{t("rules-doc")}</NavLink>
           </ul>
         </section>
 
         <section className="footer-third">
-          <h3>Contact Us</h3>
+          <h3>{t("home.contact-us")}</h3>
           <div className="footer-location">
             <p>
               <img src="/img/map.svg" alt="" />
@@ -61,7 +61,7 @@ const Footer = () => {
 
       <section className="footer-bottom">
         <div className="footer-end">
-          <p>© 2025 Politexnikum. Все права защищены.</p>
+          <p>© 2025 Texnikum. Все права защищены.</p>
         </div>
       </section>
     </footer>

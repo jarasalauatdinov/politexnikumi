@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Button, FileInput, Flex, Select, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -58,22 +59,22 @@ const FormEmployee = ({ submitFn, initialValues, loading }) => {
         <form onSubmit={form.onSubmit(handleSubmit)}>
             <Stack>
                 <TextInput
-                    label="Karakalpak (kk)"
+                    label="Full Name (kk)"
                     placeholder="Full Name"
                     {...form.getInputProps("full_name.kk")}
                 />
                 <TextInput
-                    label="Uzbek (uz)"
+                    label="Full Name (uz)"
                     placeholder="Full Name"
                     {...form.getInputProps("full_name.uz")}
                 />
                 <TextInput
-                    label="Russian (ru)"
+                    label="Full Name (ru)"
                     placeholder="Full Name"
                     {...form.getInputProps("full_name.ru")}
                 />
                 <TextInput
-                    label="English (en)"
+                    label="Full Name (en)"
                     placeholder="Full Name"
                     {...form.getInputProps("full_name.en")}
                 />
@@ -118,10 +119,10 @@ const FormEmployee = ({ submitFn, initialValues, loading }) => {
 
                 <Flex justify="end" gap={10}>
                     <Button color="gray" onClick={() => modals.closeAll()}>
-                        {t("actions.cancel")}
+                        {t("btn.cancel")}
                     </Button>
                     <Button loading={loading} type="submit">
-                        {t("actions.save")}
+                        {t("btn.save")}
                     </Button>
                 </Flex>
             </Stack>

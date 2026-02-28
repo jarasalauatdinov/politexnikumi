@@ -4,8 +4,8 @@ import classes from './LanModule.module.css';
 import { useTranslation } from 'react-i18next';
 
 const data = [
-    { label: 'Karakalpak', image: 'https://kkmi.uz/wp-content/uploads/2024/08/qq.jpg', value: 'kk' },
-    { label: 'Uzbek', image: 'https://flagcdn.com/uz.svg', value: 'uz' },
+    { label: 'Karakalpak', image: '/img/kaa-flag.png', value: 'kk' },
+    { label: 'Uzbek', image: '/img/uzb-flag.png', value: 'uz' },
     { label: 'Russian', image: 'https://flagcdn.com/ru.svg', value: 'ru' },
     { label: 'English', image: 'https://flagcdn.com/us.svg', value: 'en' },
 ];

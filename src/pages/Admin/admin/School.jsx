@@ -4,12 +4,13 @@ import { modals } from '@mantine/modals';
 import UpdateSchool from '../../../features/School/Update';
 import { api } from '../../../api/api';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 const School = () => {
   const [schools, setSchools] = useState([]);
   const [loading, setLoading] = useState(false);
-  const currentLang = 'ru';
   const { t } = useTranslation();
+  const language = i18next.languagelanguage
 
   async function getSchools() {
     setLoading(true);
@@ -64,11 +65,11 @@ const School = () => {
             {schools
               .map((school) => (
                 <Table.Tr key={school.id}>
-                  <Table.Td>{school.name?.[currentLang] || "No name"}</Table.Td>
-                  <Table.Td>{school.history?.[currentLang] || "No history"}</Table.Td>
+                  <Table.Td>{school.name?.[language] || "No name"}</Table.Td>
+                  <Table.Td>{school.history?.[language] || "No history"}</Table.Td>
                   <Table.Td>{school.phone}</Table.Td>
                   <Table.Td>{school.location}</Table.Td>
-                  <Table.Td>{school.description?.[currentLang] || "No description"}</Table.Td>
+                  <Table.Td>{school.description?.[language] || "No description"}</Table.Td>
                   <Table.Td>
                     <Group>
                       <Button onClick={() => updateFn(school.id)}>{t("btn.update")}</Button>

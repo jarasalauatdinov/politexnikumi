@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
@@ -18,19 +18,10 @@ const Login = () => {
   const [phone, setPhone] = useState("998901234567");
   const [password, setPassword] = useState("password");
   const [loading, setLoading] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const theme = localStorage.getItem("theme") || "light";
 
   const { login } = useContext(AuthContext);
   const nav = useNavigate();
-
-  useEffect(() => {
-    // Navbar toggle qilganda theme yangilansin
-    const observer = new MutationObserver(() => {
-      setTheme(localStorage.getItem("theme") || "light");
-    });
-    observer.observe(document.documentElement, { attributes: true });
-    return () => observer.disconnect();
-  }, []);
 
   const isDark = theme === "dark";
 
@@ -38,22 +29,15 @@ const Login = () => {
     setLoading(true);
     try {
       const success = await login({ phone, password });
-      if (success) {
-        notifications.show({
-          title: "Success",
-          message: "Login successful",
-          color: "teal",
-          icon: <Check />,
-        });
-        nav("/admin");
-      } else {
-        notifications.show({
-          title: "Error",
-          message: "Login failed! Please check your credentials.",
-          color: "red",
-          icon: <X />,
-        });
-      }
+      notifications.show({
+        title: success ? "Success" : "Error",
+        message: success
+          ? "Login successful"
+          : "Login failed! Please check your credentials.",
+        color: success ? "teal" : "red",
+        icon: success ? <Check /> : <X />,
+      });
+      if (success) nav("/admin/app");
     } catch (error) {
       console.error(error);
       notifications.show({

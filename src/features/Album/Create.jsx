@@ -17,6 +17,11 @@ const CreateAlbum = ({ getAlbums }) => {
             formData.set("title[uz]", body.uz);
             formData.set("title[ru]", body.ru);
             formData.set("title[en]", body.en);
+            formData.set("description[kk]", body.kk)
+            formData.set("description[uz]", body.uz)
+            formData.set("description[ru]", body.ru)
+            formData.set("description[en]", body.en)
+
 
             if (Array.isArray(body.photos)) {
                 body.photos.forEach((file) => {

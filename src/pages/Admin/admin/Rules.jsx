@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import CreateRules from "../../../features/Rule/Create";
 import DeleteRules from "../../../features/Rule/Delete";
 import UpdateRules from "../../../features/Rule/Update";
+import i18next from "i18next";
 
 function AdminRules() {
     const [rules, setRules] = useState([]);
@@ -13,7 +14,7 @@ function AdminRules() {
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const { t } = useTranslation();
-    const currentLang = "ru";
+    const language = i18next.language;
 
     async function getRules() {
         setLoading(true);
@@ -93,8 +94,8 @@ function AdminRules() {
                         {rules.map((el) => (
                             <Table.Tr key={el.id}>
                                 <Table.Td>{el.id}</Table.Td>
-                                <Table.Td>{el.title[currentLang]}</Table.Td>
-                                <Table.Td>{el.text[currentLang]}</Table.Td>
+                                <Table.Td>{el.title[language]}</Table.Td>
+                                <Table.Td>{el.text[language]}</Table.Td>
                                 <Table.Td>
                                     <Flex gap={10}>
                                         <Button color="red" size="xs" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

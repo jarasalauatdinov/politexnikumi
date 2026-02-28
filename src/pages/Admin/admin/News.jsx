@@ -40,25 +40,20 @@ function News() {
 
   function createFn() {
     modals.open({
-      children: <CreateNews getNews={() => getNews(page)} />,
+      children: <CreateNews getNews={getNews} />,
     });
   }
 
   function updateFn(id) {
     modals.open({
-      children: <UpdateNews id={id} getNews={() => getNews(page)} />,
+      children: <UpdateNews id={id} getNews={getNews} />,
     });
   }
 
   const deleteFn = (id) => {
     modals.open({
       children: (
-        <DeleteNews
-          id={id}
-          news={news}
-          setNews={setNews}
-          getNews={getNews}
-        />
+        <DeleteNews id={id} news={news} setNews={setNews} getNews={getNews} />
       ),
     });
   };
@@ -66,7 +61,7 @@ function News() {
   return (
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
-        <Title>{t("News")}</Title>
+        <Title>{t("sidebar.news")}</Title>
         <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
 
@@ -76,10 +71,7 @@ function News() {
         </Flex>
       ) : (
         <Table
-          style={{
-            fontSize: "12px",
-            tableLayout: "auto",
-          }}
+          style={{ fontSize: "12px", tableLayout: "auto" }}
           highlightOnHover
           withTableBorder
           withColumnBorders
@@ -107,8 +99,8 @@ function News() {
                     style={{ width: "100px", borderRadius: "8px" }}
                   />
                 </Table.Td>
-                <Table.Td>{el.title?.ru}</Table.Td>
-                <Table.Td>{el.short_content?.ru}</Table.Td>
+                <Table.Td>{el.title?.[language]}</Table.Td>
+                <Table.Td>{el.short_content?.[language]}</Table.Td>
                 <Table.Td
                   style={{
                     maxWidth: "250px",
@@ -130,17 +122,13 @@ function News() {
                   </div>
                   <div>Birth Date: {el.author?.birth_date}</div>
                 </Table.Td>
-                <Table.Td
-                  style={{
-                    maxWidth: "250px",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {el.tags?.map((tag) => tag.name).join(", ")}
+                <Table.Td>
+                  {el.tags?.map((tag) => (
+                    <div key={tag.id}>
+                      <div>Name: {tag.name}</div>
+                      <div>Description: {tag.description}</div>
+                    </div>
+                  ))}
                 </Table.Td>
                 <Table.Td>
                   <Flex gap={10}>

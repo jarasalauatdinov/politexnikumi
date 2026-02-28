@@ -6,14 +6,15 @@ import { useTranslation } from "react-i18next";
 import CreateClub from "../../../features/Club/Create";
 import DeleteClub from "../../../features/Club/Delete";
 import UpdateClub from "../../../features/Club/Update";
+import i18next from "i18next";
 
 const Club = () => {
   const [club, setClub] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
   const { t } = useTranslation();
+  const language = i18next.language;
 
   const getClubs = async (page = 1) => {
     setLoading(true);
@@ -102,9 +103,9 @@ const Club = () => {
             {club.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.name[currentLang]}</Table.Td>
-                <Table.Td>{el.text[currentLang]}</Table.Td>
-                <Table.Td>{el.schedule[currentLang]}</Table.Td>
+                <Table.Td>{el.name[language]}</Table.Td>
+                <Table.Td>{el.text[language]}</Table.Td>
+                <Table.Td>{el.schedule[language]}</Table.Td>
                 <Table.Td>{el.photo.path}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>

@@ -2,8 +2,11 @@ import { Button, FileInput, Flex, Stack, Textarea, TextInput } from '@mantine/co
 import { useForm } from '@mantine/form'
 import { modals } from '@mantine/modals';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 const FormUsers = ({ submitFn, initialValues }) => {
+    const { t } = useTranslation();
+
     const form = useForm({
         initialValues,
     });
@@ -55,8 +58,8 @@ const FormUsers = ({ submitFn, initialValues }) => {
                     {...form.getInputProps("phone")}
                 />
                 <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()}>Отмена</Button>
-                    <Button type="submit">Сохранить</Button>
+                    <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                    <Button type="submit">{t("btn.save")}</Button>
                 </Flex>
             </Stack>
         </form>

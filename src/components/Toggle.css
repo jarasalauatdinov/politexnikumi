@@ -1,28 +1,29 @@
 :root[data-theme="dark"] p {
-  color: #c9c9c9;
+  color: #c9c9c9 !important;
 }
 
 :root[data-theme="dark"] h3 {
-  color: ghostwhite;
+  color: ghostwhite !important;
 }
 
 :root[data-theme="dark"] h4 {
-  color: white;
+  color: white !important;
 }
 
 :root[data-theme="dark"] a {
-  color: ghostwhite;
+  color: ghostwhite !important;
 }
 
 :root[data-theme="dark"] input {
-  background-color: #2e2e2e;
-  border: none;
+  background-color: #2e2e2e !important;
+  border: none !important;
+  color: ghostwhite;
 }
 
 
 [data-theme="light"] body {
-  background-color: white;
-  color: black;
+  background-color: white !important;
+  color: black !important;
 }
 
 [data-theme="light"] .sidebar {
@@ -92,6 +93,10 @@
 
 [data-theme="dark"] .home-news-r-p a {
   color: ghostwhite;
+}
+
+[data-theme="dark"] .home-news-r-p a:hover{
+  background-color: #08131d
 }
 
 [data-theme="dark"] .home-n-r-head {
@@ -208,12 +213,7 @@
 }
 
 [data-theme="dark"] .school-rules {
-  background-color: #222;
   border: none;
-}
-
-[data-theme="dark"] .accordion-item button {
-  color: ghostwhite;
 }
 
 [data-theme="dark"] .school-hours {
@@ -260,6 +260,7 @@
 [data-theme="dark"] .news-search{
   background-color: #2e2e2e;
   border: none;
+  border-radius: 100%;
 }
 
 [data-theme="dark"] .nav-right-lang {
@@ -276,10 +277,135 @@
 }
 
 :root[data-theme="dark"] .home-place-btn-r {
-  color: black;
+  color: black !important;
 }
 
 :root[data-theme="dark"] .about-tabs a{
   color: black;
   font-weight: 500;
+}
+
+[data-theme="dark"] .rules-left {
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .rules-right{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .documents-box{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .input-wrapper{
+  background-color: #2e2e2e !important;
+}
+
+[data-theme="dark"] .download-schedule-container {
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .dostupniy-schedule{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] h1{
+  color: ghostwhite !important;
+}
+
+[data-theme="dark"] .education-activities{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .activities-box{
+  background-color: #333 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .m_1b7284a3{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .support-top{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"]  .support-contact-us{
+  background-color: #222 !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .support-boxes{
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] .support-contact-main-btm{
+  background-color: #333 !important;
+}
+
+[data-theme="dark"] h5{
+  color: ghostwhite !important;
+}
+
+[data-theme="dark"] .tabs{
+  background-color: #2b3046 !important
+}
+
+[data-theme="dark"] .tab.active{
+  background-color: #DBEAFE !important
+}
+
+[data-theme="dark"] .tab {
+  color: ghostwhite;
+}
+
+[data-theme="dark"] .tab-content {
+  background-color: #222 !important;;
+  border: none !important;
+}
+
+[data-theme="dark"] .leader-card{
+  background-color: #222 !important;
+}
+
+[data-theme="dark"] .facilyties-card{
+  background-color: #222 !important;
+}
+
+[data-theme="dark"] label{
+  color: ghostwhite !important;
+}
+
+[data-theme="dark"] .home-page:hover{
+  background-color: #222229;
+}
+
+[data-theme="dark"] .mantine-Menu-dropdown{
+  background-color: #666;
+  border: none; 
+}
+
+[data-theme="dark"] .lang-select{
+  color: #1c2628 !important;
+}
+
+[data-theme="dark"] .m_88b62a41{
+  background-color: #666;
+  border: none;
+}
+
+[data-theme="dark"] .result-list{
+  background-color: #666;
+}
+
+[data-theme="dark"] .back-btn{
+  color: ghostwhite;
 }

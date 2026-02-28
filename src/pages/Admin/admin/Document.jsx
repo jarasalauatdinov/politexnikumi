@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Button, Flex, Loader, Pagination, Stack, Table, Title } from "@mantine/core";
 import { modals } from "@mantine/modals";
@@ -6,14 +7,16 @@ import UploadDocument from "../../../features/Document/Upload";
 import DeleteDocument from "../../../features/Document/Delete";
 import UpdateDocument from "../../../features/Document/Update";
 import { useTranslation } from "react-i18next";
+import { notifications } from "@mantine/notifications";
+import axios from "axios";
 
 function Document() {
   const [documents, setDocuments] = useState([]);
-  const currentLang = "ru";
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const [downloadingId, setDownloadingId] = useState(null);
 
   async function getDocuments() {
     setLoading(true);
@@ -25,7 +28,7 @@ function Document() {
       console.error("Error fetching news:", error)
       notifications.show({
         title: "Error",
-        message: "Failed to fetch news!",
+        message: "Failed to fetch documents!",
         color: "red",
       });
     } finally {
@@ -61,27 +64,28 @@ function Document() {
     });
   };
 
-  const handleDownload = async (id, fileName) => {
+  const handleDownload = async (downloadUrl, fileName, id) => {
+    setDownloadingId(id);
     try {
-      const response = await api.get(`/documents/download/${id}`, {
-        responseType: "blob",
-      });
+      const response = await axios.get(downloadUrl, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'application/pdf' });
 
-      const blob = new Blob([response.data]);
       const url = window.URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = url;
-      link.setAttribute("download", fileName || "document");
+      link.setAttribute('download', fileName || 'document');
       document.body.appendChild(link);
       link.click();
       link.remove();
 
-      window.URL.revokeObjectURL(url);
+      setTimeout(() => window.URL.revokeObjectURL(url), 1000);
     } catch (error) {
-      console.error("Download failed:", error);
+      console.error(error);
+    } finally {
+      setDownloadingId(null);
     }
   };
+
 
   return (
     <Stack p={20} w="100%">
@@ -94,7 +98,15 @@ function Document() {
           <Loader variant="dots" />
         </Flex>
       ) : (
-        <Table highlightOnHover withTableBorder withColumnBorders>
+        <Table
+          style={{
+            fontSize: '12px',
+            tableLayout: 'auto',
+          }}
+          highlightOnHover
+          withTableBorder
+          withColumnBorders
+        >
           <Table.Thead>
             <Table.Tr>
               <Table.Th>Id</Table.Th>
@@ -111,12 +123,20 @@ function Document() {
                 <Table.Td>{el.name}</Table.Td>
                 <Table.Td>{el.description}</Table.Td>
                 <Table.Td>
-                  <Button onClick={() => handleDownload(el.id, el.name)}>{t("btn.download")}</Button>
+                  <Button
+                    size="xs"
+                    w={100}
+                    variant="outline"
+                    onClick={() => handleDownload(el.download_url, el.name, el.id)}
+                  >
+                    {downloadingId === el.id ? <Loader size="xs" /> : t("btn.download")}
+                  </Button>
                 </Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
                     <Button
+                      size="xs"
                       onClick={() => {
                         console.log("Update clicked, id:", el.id);
                         updateFn(el.id);

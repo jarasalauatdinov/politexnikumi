@@ -6,14 +6,16 @@ import UpdateEmployee from '../../../features/Employee/Update';
 import DeleteEmployee from '../../../features/Employee/Delete';
 import { modals } from '@mantine/modals';
 import { useTranslation } from 'react-i18next';
+import { notifications } from '@mantine/notifications';
+import i18next from 'i18next';
 
 const Employee = () => {
-  const currentLang = "ru";
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState(false);
   const [lastPage, setLastPage] = useState(1);
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
+  const language = i18next.language
 
   const getEmployee = async (page = 1) => {
     setLoading(true);
@@ -23,6 +25,11 @@ const Employee = () => {
       setLastPage(data.data.pagination.last_page);
     } catch (error) {
       console.error("Error fetching Employee:", error);
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch employee!",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
@@ -34,42 +41,54 @@ const Employee = () => {
 
   const createFn = () => {
     modals.open({
-      children:
-        <CreateEmployee getEmployee={getEmployee} />,
+      children: <CreateEmployee getEmployee={getEmployee} />,
     })
   }
 
   const updateFn = (id) => {
     modals.open({
-      children:
+      children: (
         <UpdateEmployee
           id={id}
           getEmployee={getEmployee}
         />
+      ),
     })
   }
+
   const deleteFn = (id) => {
     modals.open({
-      children:
+      children: (
         <DeleteEmployee
           id={id}
           employee={employee}
           setEmployee={setEmployee}
         />
+      ),
     });
   }
+
   return (
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
-        <Title>Employee</Title>
+        <Title>{t("sidebar.employee")}</Title>
         <Button onClick={createFn}>{t("btn.create")}</Button>
       </Flex>
+
       {loading ? (
         <Flex justify="center" align="center" style={{ height: "200px" }}>
           <Loader variant="dots" />
         </Flex>
       ) : (
-        <Table highlightOnHover withTableBorder withColumnBorders>
+        <Table
+          style={{
+            fontSize: '12px',
+            tableLayout: 'auto',
+          }}
+          highlightOnHover
+          withTableBorder
+          withColumnBorders
+        >
           <Table.Thead>
             <Table.Tr>
               <Table.Th>ID</Table.Th>
@@ -87,21 +106,27 @@ const Employee = () => {
             {employee.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td><img style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%"
-                }} src={el.photo?.path} alt={el.full_name[currentLang]} /></Table.Td>
-                <Table.Td>{el.full_name[currentLang]}</Table.Td>
+                <Table.Td>
+                  <img
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%"
+                    }}
+                    src={el.photo?.path}
+                    alt={el.full_name[language]}
+                  />
+                </Table.Td>
+                <Table.Td>{el.full_name[language]}</Table.Td>
                 <Table.Td>{el.phone}</Table.Td>
                 <Table.Td>{el.email}</Table.Td>
-                <Table.Td>{el.position.name[currentLang]}</Table.Td>
-                <Table.Td>{el.position.description[currentLang]}</Table.Td>
+                <Table.Td>{el.position?.name[language]}</Table.Td>
+                <Table.Td>{el.position?.description[language]}</Table.Td>
                 <Table.Td>{el.birth_date}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
-                    <Button color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
-                    <Button onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
+                    <Button size='xs' color='red' onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>
+                    <Button size='xs' onClick={() => updateFn(el.id)}>{t("btn.update")}</Button>
                   </Flex>
                 </Table.Td>
               </Table.Tr>
@@ -109,6 +134,7 @@ const Employee = () => {
           </Table.Tbody>
         </Table>
       )}
+
       <Flex justify="center" mt="md">
         <Pagination total={lastPage} value={page} onChange={setPage} />
       </Flex>

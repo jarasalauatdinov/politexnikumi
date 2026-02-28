@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import { Button, Flex, Stack, Table, Title, Loader, Text, Pagination, Textarea } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { api } from "../../../api/api";
+import CreateTarget from "../../../features/Target/Create";
+import UpdateTarget from "../../../features/Target/Update";
+import DeleteTarget from "../../../features/Target/Delete";
 import { useTranslation } from "react-i18next";
+import { notifications } from "@mantine/notifications";
+import i18next from "i18next";
 
 const Target = () => {
   const [target, setTarget] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const { t } = useTranslation();
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
+  const { t } = useTranslation();
+  const language = i18next.language;
 
   const getTarget = async (page = 1) => {
     setLoading(true);
@@ -20,6 +25,11 @@ const Target = () => {
       setLastPage(data.data.pagination.last_page);
     } catch (error) {
       console.error("Error fetching target:", error);
+      notifications.show({
+        title: "Error",
+        message: "Failed to fetch target!",
+        color: "red",
+      });
     } finally {
       setLoading(false);
     }
@@ -57,7 +67,7 @@ const Target = () => {
   return (
     <Stack p={20} w="100%">
       <Flex justify="space-between" align="center">
-        <Title>{t("Target")}</Title>
+        <Title>{t("sidebar.target")}</Title>
         <Button onClick={() => createFn()}>{t("btn.create")}</Button>
       </Flex>
 
@@ -87,8 +97,8 @@ const Target = () => {
             {target.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.name[currentLang]}</Table.Td>
-                <Table.Td>{el.description[currentLang]}</Table.Td>
+                <Table.Td>{el.name[language]}</Table.Td>
+                <Table.Td>{el.description[language]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
                     <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

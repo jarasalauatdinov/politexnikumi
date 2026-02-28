@@ -1,76 +1,145 @@
 {
-    "politechnicum": "Politexnikum",
-    "home": "Uy",
-    "about": "Biz haqimizda",
-    "education": "Ta'lim",
-    "rules": "Qoidalar",
+  "kiriw": "Kirish",
+  "uy": "Uy",
+  "texnikum": "Texnikum",
+  "sabaqliq": "Darslik",
+  "talim": "Talim",
+  "qagiydalar": "Qoidalar",
+  "janaliqlar": "Yangiliklar",
+  "jardem": "Yordam",
+  "politechnicum": "Texnikum",
+  "contact": "Bog‘lanish",
+  "logout": "Chiqish",
+  "title-education": "Bilimlendiriw tarauыndag‘ы jetiskenlik",
+  "title-born": "1995-yildan boshlab",
+  "title-students": "1680+ Talabalar",
+  "title-community": "Jamiyatimizga qo‘shiling",
+  "rules-doc": "Qoidalar & Hujjatlar",
+  "news-event": "Yangiliklar & Tadbirlar",
+
+  "btn": {
+    "create": "Yaratish",
+    "update": "Yangilash",
+    "delete": "O'chirish",
+    "upload": "Yuklash",
+    "download": "Yuklab olish",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "find": "Ko'proq olish",
+    "see": "Barchasini ko'rish",
+    "schedule": "Dars jadvali",
+    "documents": "Maktab hujjatlari",
+    "teachers": "O‘qituvchilarimiz",
+    "course": "Mavjud kurslar",
+    "gallery": "Fotogalereya"
+  },
+  "messages": {
+    "confirmDelete": "Haqiqatdan ham ushbu elementni o'chirmoqchimisiz?"
+  },
+
+  "home": {
+    "salemberdik": "Nukus shahri 2-sonli texnikumiga xush kelibsiz",
+    "salem-text": "Ta’lim - bu talabalar innovatsiyalarga duch keladigan va ertangi kun muammolariga tayyorlanadigan joy.",
+    "contact-us": "Biz bilan bog‘lanish",
+    "last-news": "So‘nggi yangiliklar",
+    "find-more": "Batafsil",
+    "fast-links": "Tezkor havolalar",
+    "upcoming-events": "Keyingi voqealar",
+    "our-teachers": "Bizni ustozlarimiz",
+    "teachers-text": "Talabalarimizga eng yuqori sifatli ta’lim va qo‘llab-quvvatlashni ta’minlashga intilayotgan fidoyi o‘qituvchilarimiz jamoasi bilan tanishing."
+  },
+
+  "about": {
+    "title": "Bizning texnikum haqida",
+    "our-history": "Bizning tariximiz",
+    "core-values": "Asosiy qadriyatlar",
+    "mission-vision": "Missiya & Tasvirlash",
+    "our-mission": "Bizlarning Missiyamiz & Tasvirlashimiz",
+    "school-lidership": "Maktab rahbariyati",
+    "our-facilities": "Bizning imkonyatlar",
+    "school-title": "Maktabimiz 1998-yildan buyon sifatli ta’lim berib kelmoqda. Biz o‘quvchilarimizning nafaqat akademik, balki kognitiv, tanqidiy fikrlash, ijodiy va ijtimoiy ko‘nikmalarini ham rivojlantirmoqdamiz.",
+    "school-p": "Biz har bir o‘quvchining noyob qobiliyatlari borligiga ishonamiz va bizning vazifamiz ularga bu qobiliyatlarni kashf etish va rivojlantirishga yordam berishdir.",
+    "director-name": "Kanglıbekov Kuatbay Dauletbaevich",
+    "principal": "Direktor",
+    "our-director": "Kanglibekov Kuatbay Dauletbaevich ta’lim sohasida 25 yildan ortiq tajribaga ega bo‘lib, maktabimizni yondashuv va fidoyilik bilan boshqarib kelmoqda",
+    "academic-name": "Xabibullayev Qudaybergen Allambergenovich",
+    "academic-director": "O‘quv ishlari bo‘yicha direktor o‘rinbosari",
+    "academic-p": "Xabibullayev Qudaybergen Allambergenovich yuqori standartlar va innovatsion o‘qitish usullarini ta’minlaydigan o‘quv dasturlarimizni nazorat qiladi",
+    "affairs-name": "Dauletniyazov Islam Dauletbaevich",
+    "affairs": "Ishlab chiqarish ishlari bo‘yicha direktor o‘rinbosari",
+    "affairs-p": "Dauletniyazov Islam Dauletbaevich o‘quvchilar faoliyatini muvofiqlashtiradi va barcha o‘quvchilar uchun qulay muhitni ta’minlaydi",
+    "modern": "Zamonaviy sinflar",
+    "modern-p": "O‘quv tajribasini yaxshilash uchun eng so‘nggi texnologiyalar bilan jihozlangan.",
+    "library": "Kutubxona",
+    "library-p": "Kitoblarning ulkan kolleksiyasi, raqamli resurslar va tinch o‘quv joylari.",
+    "labs": "Kompyuter laboratoriyalari",
+    "labs-p": "Eng so‘nggi dasturiy va apparat ta’minotiga ega zamonaviy kompyuter laboratoriyalari.",
+    "sports": "Sport inshootlari",
+    "sports-p": "Har xil mashg‘ulotlar va jismoniy tarbiya uchun yopiq va ochiq sport inshootlari."
+  },
+
+  "gallery": {
+    "gallery-title": "Galleriya",
+    "gallery-p": "Tadbirlar, xonalar va talabalar faoliyati fotosuratlari orqali maktab hayotimizni o'rganing.",
+    "view-all-photos": "Barcha fotosuratlarni ko'rish"
+  },
+  "news-page": {
+    "news-title": "Maktab Yangiliklari",
+    "news-p": "Maktabimiz hamjamiyatining so'nggi yangiliklari, voqealari va e'lonlaridan xabardor bo'ling.",
+    "back-btn": "Yangiliklarga qaytish",
+    "read-more": "Ko'proq o'qish"
+  },
+  "schedule-page": {
+    "schedule-title": "Dars jadvali",
+    "schedule-text": "Kerakli sinf uchun dars jadvalini qulay formatda PDF yuklab oling.",
+    "download-schedule-title": "Dars jadvalini yuklab oling",
+    "download-schedule-text": "Jadvalni yuklab olish uchun sinf va formatni tanlang",
+    "select-class": "Sinfni tanlang:",
+    "selected-class": "Tanlangan sinf:",
+    "not-selected": "tanlanmagan",
+    "download-schedule": "Jadvalni yuklash",
+    "last-update": "So'nggi jadval yangilanishi:",
+    "errors": "Agar biron bir xato topsangiz, akademik bo'limga murojaat qiling.",
+    "available-schedules": "Mavjud jadvallar",
+    "available-schedules-p": "Yuklab olish mumkin bo'lgan barcha jadvallar ro'yxati",
+    "click-to-download": "Yuklash uchun bosing"
+  },
+  "rules-documents": {
+    "rules-documents-title": "Maktab Qoidalari va Hujjatlari",
+    "rules-documents-p": "Bizning maktabimiz barcha talabalar uchun xavfsiz, hurmatli va samarali ta'lim muhitini ta'minlash uchun aniq qoidalar va siyosatlarni qo'llab-quvvatlaydi",
+    "rules-title": "Maktab Qoidalari",
+    "shoolhours-title": "Maktab soatlari",
+    "documents-title": "Hujjatlar"
+  },
+  "support-faq": {
+    "support-faq-title": "Yordam va FAQ",
+    "support-faq-p": "Tez-tez beriladigan savollarga javob toping va maktabimiz haqida kerakli ma'lumotlarni oling.",
+    "support-title": "Tez-tez so'raladigan savollar",
+    "faq-title": "Bog'lanish uchun ma'lumot",
+    "work-hours": "Ish vaqti"
+  },
+  "education-page": {
+    "education-title": "Ta'lim",
+    "education-p": "Bizning maktabimiz kuchli ilmiy asosga va amaliy ko'nikmalarga ega bo'lgan har tomonlama rivojlangan talabalarni rivojlantirish uchun mo'ljallangan keng qamrovli ta'lim dasturini taklif etadi.",
+    "other-activities": "Sinfdan tashqari tadbirlar"
+  },
+
+  "sidebar": {
+    "album": "Album",
+    "schedule": "Jadval",
+    "club": "Klub",
+    "history": "Tarix",
+    "information": "Ma'lumot",
+    "school": "Maktab",
+    "schoolhours": "Maktab soatlari",
+    "target": "Maqsad",
+    "vacancy": "Vakansiya",
+    "value": "Qiymat",
+    "position": "Lavozim",
+    "user": "Foydalanuvchi",
+    "employee": "Xodim",
     "news": "Yangiliklar",
-    "support": "Qo'llab-quvvatlash",
-    "contact": "Aloqa",
-    "logout": "Chiqish",
-    "sidebar": {
-        "album": "Album",
-        "schedule": "Jadval",
-        "club": "Klub",
-        "history": "Tarix",
-        "information": "Ma'lumot",
-        "school": "Maktab",
-        "schoolhours": "Maktab soatlari",
-        "target": "Maqsad",
-        "vacancy": "Vakansiya",
-        "value": "Qiymat",
-        "position": "Lavozim",
-        "user": "Foydalanuvchi",
-        "employee": "Xodim",
-        "news": "Yangiliklar",
-        "document": "Hujjat",
-        "rules": "Qoidalar"
-    },
-    "btn": {
-        "create": "Yaratish",
-        "update": "Yangilash",
-        "delete": "O'chirish",
-        "upload": "Yuklash",
-        "download": "Yuklab olish",
-        "save": "Saqlash",
-        "cancel": "Bekor qilish"
-    },
-    "messages": {
-        "confirmDelete": "Haqiqatdan ham ushbu elementni o'chirmoqchimisiz?"
-    },
-    "gallery": {
-        "gallery": "Galleriya",
-        "gallery-p": "Tadbirlar, xonalar va talabalar faoliyati fotosuratlari orqali maktab hayotimizni o'rganing."
-    },
-    "news-page": {
-        "news-title": "Maktab Yangiliklari",
-        "news-p": "Maktabimiz hamjamiyatining so'nggi yangiliklari, voqealari va e'lonlaridan xabardor bo'ling.",
-        "back-btn": "Yangiliklarga qaytish"
-    },
-    "rules-documents": {
-        "rules-documents-title": "Maktab Qoidalari va Hujjatlari",
-        "rules-documents-p": "Bizning maktabimiz barcha talabalar uchun xavfsiz, hurmatli va samarali ta'lim muhitini ta'minlash uchun aniq qoidalar va siyosatlarni qo'llab-quvvatlaydi",
-        "rules-title": "Maktab Qoidalari",
-        "shoolhours-title": "Maktab soatlari",
-        "documents-title": "Hujjatlar"
-    },
-    "support-faq": {
-        "support-faq-title": "Yordam va FAQ",
-        "support-faq-p": "Tez-tez beriladigan savollarga javob toping va maktabimiz haqida kerakli ma'lumotlarni oling.",
-        "support-title": "Tez-tez so'raladigan savollar",
-        "faq-title": "Bog'lanish uchun ma'lumot",
-        "work-hours": "Ish vaqti"
-    },
-    "education-page": {
-        "education-title": "Ta'lim",
-        "education-p": "Bizning maktabimiz kuchli ilmiy asosga va amaliy ko'nikmalarga ega bo'lgan har tomonlama rivojlangan talabalarni rivojlantirish uchun mo'ljallangan keng qamrovli ta'lim dasturini taklif etadi.",
-        "other-activities": "Sinfdan tashqari tadbirlar"
-    },
-    "home-page": {
-        "welcome": "Maktabimizga xush kelibsiz",
-        "welcome-text": "Bilim innovatsiyalar bilan uchrashadigan va talabalar ertangi kunning qiyinchiliklariga tayyorgarlik ko'radigan joy.",
-        "contact-us": "Biz bilan bog'lanish",
-        "last-news": "So'ngi yangiliklar",
-        "fast-links": "Tez havolalar"
-    }
+    "document": "Hujjat",
+    "rules": "Qoidalar"
+  }
 }

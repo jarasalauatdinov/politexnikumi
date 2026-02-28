@@ -1,13 +1,14 @@
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Button, Flex, Stack, Text, Loader } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { api } from "../../api/api";
 import { notifications } from "@mantine/notifications";
 import { Check, X } from "tabler-icons-react";
+import { useTranslation } from "react-i18next";
 
 const DeleteTarget = ({ id, target, setTarget, getTarget }) => {
     const [loading, setLoading] = useState(false);
-    const { t } = useTransition();
+    const { t } = useTranslation();
 
     const deleteFn = async () => {
         setLoading(true);
@@ -39,21 +40,13 @@ const DeleteTarget = ({ id, target, setTarget, getTarget }) => {
         }
     };
 
-    if (loading) {
-        return (
-            <Flex justify="center" align="center" style={{ height: "150px" }}>
-                <Loader variant="dots" />
-            </Flex>
-        );
-    }
-
     return (
         <Stack>
-            <Text>Are you sure you want to delete this position?</Text>
+            <Text>{t("messages.confirmDelete")}</Text>
             <Flex gap={10} justify="flex-end">
-                <Button onClick={() => modals.closeAll()}>{t("actions.cancel")}</Button>
-                <Button color="red" onClick={deleteFn}>
-                    Delete
+                <Button color="gray" onClick={() => modals.closeAll()}>{t("btn.cancel")}</Button>
+                <Button loading={loading} color="red" onClick={deleteFn}>
+                    {t("btn.delete")}
                 </Button>
             </Flex>
         </Stack>

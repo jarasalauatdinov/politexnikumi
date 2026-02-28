@@ -1,151 +1,3 @@
-.about-dark.dark {
-    background-color: #0F172A;
-
-    .about-our-school {
-        .about-school-left {
-            h1 {
-                color: #F1F5F9;
-            }
-
-            .school-inf-ph {
-                p {
-                    color: #CBD5E1;
-                }
-            }
-        }
-    }
-
-    .tabs {
-        background: #1E293B;
-
-        .tab {
-            color: #CBD5E1;
-
-            &.active {
-                color: #F1F5F9;
-                background: #121f36;
-            }
-
-            &:hover {
-                color: #F1F5F9;
-                background: #121f36;
-            }
-        }
-    }
-
-    .tab-content {
-        border: 1px solid #334155;
-        background: #1E293B;
-
-
-
-        &.active {
-            h3 {
-                color: #F1F5F9;
-            }
-
-            .tab-content-ph {
-                .about-history {
-                    border-left: 2px solid #cbd5e1de;
-
-                    .history-year {
-                        p {
-                            color: #CBD5E1;
-                        }
-                    }
-
-                    .history-text {
-                        color: #cbd5e1a6;
-                    }
-                }
-
-                span {
-                    color: #CBD5E1;
-                }
-
-                p {
-                    color: #CBD5E1;
-                }
-            }
-        }
-    }
-
-    .leadership {
-        .leadership-headline {
-            h1 {
-                color: #F1F5F9;
-            }
-        }
-
-        .leadership-cards {
-            .leader-card {
-                background: #1E293B;
-
-                .leader-card-top {
-                    .avatar {
-                        background: #121f36;
-                        color: #F1F5F9;
-                    }
-
-                    .whois {
-                        h4 {
-                            color: #F1F5F9;
-                        }
-
-                        p {
-                            color: #CBD5E1;
-                        }
-                    }
-                }
-
-                .leader-card-btm {
-                    p {
-                        color: #CBD5E1;
-                    }
-                }
-            }
-        }
-    }
-
-    .facilityes {
-        .facilyties-top {
-
-            h1 {
-                color: #F1F5F9;
-            }
-        }
-
-        .facilyties-bottom {
-
-            .facilyties-cards-top,
-            .facilyties-card-bottom {
-                .facilyties-card {
-                    background: #1E293B;
-
-                    .fac-card-top {
-                        color: #F1F5F9;
-
-                        h3 {
-                            color: #F1F5F9;
-                        }
-                    }
-
-                    .fac-card-btm {
-                        p {
-                            color: #CBD5E1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-main {
-    padding: 48px 0;
-    background-color: rgba(245, 245, 245, 0.251);
-}
-
 .about-our-school {
     display: flex;
     flex-direction: column;
@@ -171,12 +23,11 @@ main {
         gap: 27px;
 
         h1 {
-            font-family: Inter;
+            font-family: "Inter", sans-serif;
             font-weight: 700;
             font-style: Bold;
             font-size: 36px;
             line-height: 40px;
-            color: #111827;
         }
 
         .school-inf-ph {
@@ -185,12 +36,10 @@ main {
             gap: 30px;
 
             p {
-                font-family: Inter;
+                font-family: "Inter", sans-serif;
                 font-weight: 400;
-                font-style: Regular;
                 font-size: 18px;
                 line-height: 28px;
-                color: #4B5563;
             }
         }
     }
@@ -213,29 +62,28 @@ main {
 }
 
 .tabs {
-    max-width: 348px;
-    height: 40px;
+    max-width: 524px;
     display: flex;
     background: #EFF6FF;
     border-radius: 50px;
     justify-content: space-between;
     padding: 4px;
+    margin-top: 90px;
 
     .tab {
         background-color: transparent;
         border: none;
         border-radius: 50px;
         padding: 8px 12px;
-        width: auto;
+        width: 100%;
         cursor: pointer;
-        font-family: Inter;
+        font-family: "Inter", sans-serif;
         font-weight: 500;
         font-style: Medium;
         font-size: 14px;
         line-height: 20px;
         text-align: center;
         vertical-align: middle;
-        color: #64748B;
 
         &.active {
             border-radius: 16px;
@@ -264,6 +112,7 @@ main {
     background: #FFF;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     padding: 33px;
+    margin-bottom: 90px;
 
     &.active {
         display: flex;
@@ -271,7 +120,7 @@ main {
         gap: 18px;
 
         h3 {
-            font-family: Inter;
+            font-family: "Inter", sans-serif;
             font-weight: 700;
             font-style: Bold;
             font-size: 24px;
@@ -286,7 +135,7 @@ main {
             gap: 20px;
 
             .about-history {
-                border-left: 2px solid #4B5563;
+                border-left: 2px solid (--kulren);
                 padding-left: 10px;
                 display: flex;
                 flex-direction: column;
@@ -294,41 +143,46 @@ main {
 
                 .history-year {
                     p {
-                        font-family: Inter;
+                        font-family: "Inter", sans-serif;
                         font-weight: 700;
                         font-style: Bold;
                         font-size: 16px;
                         line-height: 24px;
-                        color: #4B5563;
+                        color: var(--kulren);
                     }
                 }
 
                 .history-text {
-                    font-family: Inter;
+                    font-family: "Inter", sans-serif;
                     font-weight: 500;
-                    font-style: Regular;
                     font-size: 16px;
                     line-height: 24px;
-                    color: #4B5563;
+                    color: var(--kulren);
                 }
+
             }
 
             span {
-                font-family: Inter;
+                font-family: "Inter", sans-serif;
                 font-weight: 700;
                 font-style: Bold;
                 font-size: 16px;
                 line-height: 24px;
-                color: #4B5563;
+                color: (--kulren);
             }
 
             p {
-                font-family: Inter;
+                font-family: "Inter", sans-serif;
                 font-weight: 400;
-                font-style: Regular;
                 font-size: 16px;
                 line-height: 24px;
-                color: #4B5563;
+                color: (--kulren);
+            }
+
+            .about-history {
+                img {
+                    width: 230px;
+                }
             }
         }
     }
@@ -338,99 +192,119 @@ main {
     display: flex;
     flex-direction: column;
     gap: 32px;
-
+    margin-bottom: 90px;
+  
     .leadership-headline {
-        h1 {
-            font-family: Inter;
-            font-weight: 700;
-            font-style: Bold;
-            font-size: 30px;
-            color: #111827;
-            line-height: 36px;
-        }
+      text-align: center;
+  
+      h1 {
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 30px;
+        color: #111827;
+        line-height: 36px;
+      }
     }
-
+  
     .leadership-cards {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-
-        @media (min-width: 768px) {
-            flex-direction: row;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+  
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+      }
+  
+      .leader-card {
+        position: relative;
+        background: #fff;
+        text-align: center;
+        padding: 32px 24px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        overflow: hidden;
+  
+        &:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
         }
-
-        .leader-card {
-            border-radius: 16px;
-            background: #FFF;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            width: 100%;
-            height: auto;
-            padding: 24px 25px;
+  
+        &::before {
+          content: "";
+          position: absolute;
+          width: 180px;
+          height: 180px;
+          background: #3d65fb0f;
+          left: -120px;
+          bottom: -120px;
+          border-radius: 50%;
+          opacity: 0;
+          transition: all 0.6s ease;
+          z-index: 0;
+        }
+  
+        &:hover::before {
+          left: -50px;
+          bottom: -50px;
+          opacity: 1;
+        }
+  
+        .leader-card-top {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 18px;
+          margin-bottom: 16px;
+  
+          .avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e0ecff, #dbeafe);
             display: flex;
-            flex-direction: column;
-            gap: 26px;
             align-items: center;
             justify-content: center;
-
-            .leader-card-top {
-                display: flex;
-                flex-direction: column;
-                gap: 22px;
-                align-items: center;
-
-                .avatar {
-                    width: 96px;
-                    height: 96px;
-                    border-radius: 9999px;
-                    background: #DBEAFE;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #2563EB;
-                }
-
-                .whois {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 6px;
-
-                    h4 {
-                        font-family: Inter;
-                        font-weight: 600;
-                        font-style: Semi Bold;
-                        font-size: 24px;
-                        line-height: 24px;
-                        letter-spacing: -0.6px;
-                        text-align: center;
-                        color: #111827;
-                    }
-
-                    p {
-                        font-family: Inter;
-                        font-weight: 400;
-                        font-style: Regular;
-                        font-size: 14px;
-                        line-height: 20px;
-                        text-align: center;
-                        color: #4B5563;
-                    }
-                }
+            color: #2563eb;
+            transition: all 0.4s ease;
+          }
+  
+          .whois {
+            h4 {
+              font-weight: 600;
+              font-size: 22px;
+              color: #111827;
             }
-
-            .leader-card-btm {
-                p {
-                    font-family: Inter;
-                    font-weight: 400;
-                    font-style: Regular;
-                    font-size: 16px;
-                    line-height: 24px;
-                    text-align: center;
-                    color: #4B5563;
-                }
+  
+            p {
+              color: #6e9f80 !important;
+              font-size: 15px;
             }
+          }
         }
+  
+        .leader-card-btm {
+          position: relative;
+          z-index: 1;
+  
+          p {
+            color: var(--kulren);
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+        
+      &:hover .avatar {
+        background: linear-gradient(135deg, #2563eb, #3be3f6);
+        color: white;   
+        transform: scale(1.1);
+      }
+      }
     }
-}
+  }
 
 .facilityes {
     display: flex;
@@ -440,7 +314,7 @@ main {
     .facilyties-top {
 
         h1 {
-            font-family: Inter;
+            font-family: "Inter", sans-serif;
             font-weight: 700;
             font-style: Bold;
             font-size: 30px;
@@ -462,13 +336,14 @@ main {
         .facilyties-card-bottom {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 14px;
 
             @media (min-width: 1440px) {
                 flex-direction: row;
             }
 
             .facilyties-card {
+                position: relative;
                 width: 100%;
                 height: 100%;
                 padding: 25px;
@@ -477,18 +352,45 @@ main {
                 box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
                 display: flex;
                 flex-direction: column;
-                gap: 26px;
+                gap: 14px;
+                transition: all 0.4s ease;
+                overflow: hidden;
+
+        &:hover{
+            transform:  translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12)
+        }
+
+        &::before{
+            position: absolute;
+            background: #3d65fb0f;
+            left: -120px;
+            bottom: -120px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 0;
+        }
+
+        &:hover::before{
+            left: -50px;
+            bottom: -50px;
+            opacity: 1;
+        }
+
+
 
                 .fac-card-top {
+                    position: relative;
+                    z-index: 1;
                     display: flex;
                     flex-direction: column;
                     gap: 14px;
                     color: #2563EB;
 
                     h3 {
-                        font-family: Inter;
+                        font-family: "Inter", sans-serif;
                         font-weight: 600;
-                        font-style: Semi Bold;
                         font-size: 24px;
                         line-height: 24px;
                         letter-spacing: -0.6px;
@@ -498,16 +400,33 @@ main {
 
                 .fac-card-btm {
                     p {
-                        font-family: Inter;
+                        font-family: "Inter", sans-serif;
                         font-weight: 400;
-                        font-style: Regular;
                         font-size: 16px;
                         line-height: 24px;
-                        color: #4B5563;
+                        color: var(--kulren);
                     }
                 }
+
+                .avatar {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 10%;
+                    background: linear-gradient(135deg, #e0ecff, #dbeafe);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.4s ease;
+                  }
+
+                  &:hover .avatar {
+                    background: linear-gradient(135deg, #25b3eb, #3b82f6);
+                    color: white;   
+                    transform: scale(1.1);
+                  }
             }
         }
+      
     }
 }
 
@@ -525,7 +444,7 @@ main {
 
     h4 {
         color: #FFF;
-        font-family: Inter;
+        font-family: "Inter", sans-serif;
         font-size: 30px;
         font-style: normal;
         font-weight: 700;

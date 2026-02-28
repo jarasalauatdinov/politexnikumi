@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './school.scss'
 import { Award, Book, BookOpen, Command, Monitor, School, Users } from 'lucide-react'
-import { useOutletContext } from 'react-router-dom'
 import { api } from '../../api/api'
 import { Flex, Loader } from '@mantine/core'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from   'react-i18next'
+import ScrollReveal from '../../components/ScrollReveal'
+
 
 const SchoolPage = () => {
   const [active, setActive] = useState("mission")
-  const { darkMode } = useOutletContext();
   const [about, setAbout] = useState({});
   const [loading, setLoading] = useState(false);
   const { t, i18n } = useTranslation();
@@ -32,56 +32,53 @@ const SchoolPage = () => {
 
   return (
     <>
-      <main className={`about-dark${darkMode ? ' dark' : ''}`} >
-        <section>
-          <div className='container'>
+      <main>
+        <div className='container'>
+          <ScrollReveal delay={0.2}>
+          <section>
             <div className="about-our-school">
               <div className="about-school-left">
-                <h1>About Our School</h1>
+                <h1>{t("about.title")}</h1>
                 <div className="school-inf-ph">
                   <p>
-                    Our school has been providing quality education since 1998. We
-                    focus on developing not only academic knowledge but also critical
-                    thinking, creativity, and social skills in our students.
+                   {t("about.school-title")}
                   </p>
                   <p>
-                    We believe that every student has unique talents and abilities, and our
-                    mission is to help them discover and develop these talents to their fullest
-                    potential.
+                    {t("about.school-p")}
                   </p>
                 </div>
               </div>
               <div className="about-school-right">
-                <img src="/school.png" alt="School" />
+                <img src="/img/about-img.jpg" alt="" />
               </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div className='container'>
+          </section>
+          </ScrollReveal>
+          <ScrollReveal delay={0.8}>
+          <section>
             <div className="tabs-wrapper">
               <div className="tabs">
                 <button
                   className={`tab ${active === "mission" ? "active" : ""}`}
                   onClick={() => setActive("mission")}
                 >
-                  Mission & Vision
+                  {t("about.mission-vision")}
                 </button>
                 <button
                   className={`tab ${active === "history" ? "active" : ""}`}
                   onClick={() => setActive("history")}
                 >
-                  Our History
+                  {t("about.our-history")}
                 </button>
                 <button
                   className={`tab ${active === "values" ? "active" : ""}`}
                   onClick={() => setActive("values")}
                 >
-                  Core Values
+                  {t("about.core-values")}
                 </button>
               </div>
               <div className={`tab-content ${active === "mission" ? "active" : ""}`}>
-                <h3>Our Mission & Vision</h3>
+                <h3>{t("about.our-mission")}</h3>
                 {loading ? (
                   <Flex justify="center" align="center" style={{ height: "200px" }}>
                     <Loader size={50} color="blue" />
@@ -98,18 +95,10 @@ const SchoolPage = () => {
                     ))}
                   </div>
                 )}
-                <div className="tab-content-ph">
-                  <p>
-                    <span>Vision:</span> To be recognized as a center of
-                    educational excellence that prepares
-                    students to thrive in a rapidly changing
-                    world and make positive contributions
-                    to society.
-                  </p>
-                </div>
+          
               </div>
               <div className={`tab-content ${active === "history" ? "active" : ""}`}>
-                <h3>Our History</h3>
+                <h3>{t("about.our-history")}</h3>
                 {loading ? (
                   <Flex justify="center" align="center" style={{ height: "200px" }}>
                     <Loader size={50} color="blue" />
@@ -128,7 +117,7 @@ const SchoolPage = () => {
                 )}
               </div>
               <div className={`tab-content ${active === "values" ? "active" : ""}`}>
-                <h3>Core Values</h3>
+                <h3>{t("about.core-values")}</h3>
                 {loading ? (
                   <Flex justify="center" align="center" style={{ height: "200px" }}>
                     <Loader size={50} color="blue" />
@@ -136,8 +125,8 @@ const SchoolPage = () => {
                 ) : (
                   <div className="tab-content-ph">
                     {about.values?.map((el) => (
-                      <div className='our-target about-history' key={el.id}>
-                        <div className="target-name history-year">
+                      <div className='about-history' key={el.id}>
+                        <div>
                           <p>{el.name[language]}</p>
                         </div>
                       </div>
@@ -146,13 +135,13 @@ const SchoolPage = () => {
                 )}
               </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div className='container'>
+          </section>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+          <section>
             <div className="leadership">
               <div className="leadership-headline">
-                <h1>School Leadership</h1>
+                <h1>{t("about.school-lidership")}</h1>
               </div>
               <div className="leadership-cards">
                 <div className="principal-leadership leader-card">
@@ -161,15 +150,13 @@ const SchoolPage = () => {
                       <Users size={48} />
                     </div>
                     <div className="whois">
-                      <h4>John Smith</h4>
-                      <p>Principal</p>
+                      <h4>{t("about.director-name")}</h4>
+                      <p>{t("about.principal")}</p>
                     </div>
                   </div>
                   <div className="leader-card-btm">
                     <p>
-                      With over 20 years of experience in
-                      education, Mr. Smith leads our school with
-                      vision and dedication.
+                    {t("about.our-director")}
                     </p>
                   </div>
                 </div>
@@ -180,15 +167,13 @@ const SchoolPage = () => {
                       <BookOpen size={48} />
                     </div>
                     <div className="whois">
-                      <h4>Maria Johnson</h4>
-                      <p>Academic Director</p>
+                      <h4>{t("about.academic-name")}</h4>
+                      <p>{t("about.academic-director")}</p>
                     </div>
                   </div>
                   <div className="leader-card-btm">
                     <p>
-                      Dr. Johnson oversees our academic
-                      programs, ensuring high standards and
-                      innovative teaching methods.
+                     {t("about.academic-p")}
                     </p>
                   </div>
                 </div>
@@ -199,51 +184,51 @@ const SchoolPage = () => {
                       <Award size={48} />
                     </div>
                     <div className="whois">
-                      <h4>Robert Davis</h4>
-                      <p>Student Affairs</p>
+                      <h4>{t("about.affairs-name")}</h4>
+                      <p>{t("about.affairs")}</p>
                     </div>
                   </div>
                   <div className="leader-card-btm">
                     <p>
-                      Mr. Davis coordinates student activities and
-                      ensures a supportive environment for all
-                      students.
+                      {t("about.affairs-p")}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div className='container'>
+          </section>
+            </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+          <section>
             <div className="facilityes">
               <div className="facilyties-top">
-                <h1>Our Facilities</h1>
+                <h1>{t("about.our-facilities")}</h1>
               </div>
               <div className="facilyties-bottom">
                 <div className="facilyties-cards-top">
                   <div className="facilyties-card">
                     <div className="fac-card-top">
-                      <School size={32} />
-                      <h3>Modern Classrooms</h3>
+                      <div className='avatar'>
+                        <School size={32} />
+                      </div>
+                      <h3>{t("about.modern")}</h3>
                     </div>
                     <div className="fac-card-btm">
                       <p>
-                        Equipped with the latest technology to
-                        enhance the learning experience.
+                        {t("about.modern-p")}
                       </p>
                     </div>
                   </div>
                   <div className="facilyties-card">
                     <div className="fac-card-top">
-                      <Book size={32} />
-                      <h3>Library</h3>
+                      <div className="avatar">
+                        <Book size={32} />
+                      </div>
+                      <h3>{t("about.library")}</h3>
                     </div>
                     <div className="fac-card-btm">
                       <p>
-                        A vast collection of books, digital
-                        resources, and quiet study spaces.
+                      {t("about.library-p")}
                       </p>
                     </div>
                   </div>
@@ -252,33 +237,36 @@ const SchoolPage = () => {
                 <div className="facilyties-card-bottom">
                   <div className="facilyties-card">
                     <div className="fac-card-top">
-                      <Monitor size={32} />
-                      <h3>Computer Labs</h3>
+                      <div className="avatar">
+                        <Monitor size={32} />
+                      </div>
+                      <h3>{t("about.labs")}</h3>
                     </div>
                     <div className="fac-card-btm">
                       <p>
-                        State-of-the-art computer labs with the
-                        latest software and hardware.
+                          {t("about.labs-p")}
                       </p>
                     </div>
                   </div>
                   <div className="facilyties-card">
                     <div className="fac-card-top">
+                      <div className="avatar">
                       <Command size={32} />
-                      <h3>Sports Facilities</h3>
+                      </div>  
+                      <h3>{t("about.sports")}</h3>
                     </div>
                     <div className="fac-card-btm">
                       <p>
-                        Indoor and outdoor sports facilities for
-                        various activities and physical education.
+                        {t("about.sports-p")}
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+          </ScrollReveal>
+        </div>
       </main>
     </>
   )

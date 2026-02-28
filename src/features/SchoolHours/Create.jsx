@@ -48,7 +48,6 @@ const CreateSchoolHours = ({ getSchoolHours }) => {
                     initialValues={{
                         title: { kk: "", uz: "", ru: "", en: "" },
                         workday: { kk: "", uz: "", ru: "", en: "" },
-                        holiday: { kk: "", uz: "", ru: "", en: "" },
                     }}
                 />
             </Stack>

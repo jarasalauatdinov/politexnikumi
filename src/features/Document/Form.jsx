@@ -2,9 +2,11 @@ import { Button, FileInput, Flex, Stack, Textarea, TextInput } from "@mantine/co
 import { useForm } from "@mantine/form";
 import { modals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 const FormDocument = ({ submitFn, initialValues, loading }) => {
     const { t } = useTranslation();
+
     const form = useForm({
         initialValues: {
             name: initialValues?.name || "",
@@ -12,6 +14,16 @@ const FormDocument = ({ submitFn, initialValues, loading }) => {
             file: initialValues?.file || null,
         },
     });
+
+    useEffect(() => {
+        if (initialValues) {
+            form.setValues({
+                name: initialValues.name || "",
+                description: initialValues.description || "",
+                file: initialValues.file || null,
+            });
+        }
+    }, [initialValues]);
 
     async function handleSubmit(values) {
         await submitFn(values);
@@ -23,14 +35,12 @@ const FormDocument = ({ submitFn, initialValues, loading }) => {
                 <TextInput
                     label="Name"
                     placeholder="Name"
-                    required
                     {...form.getInputProps("name")}
                 />
 
                 <Textarea
                     label="Description"
                     placeholder="Description"
-                    required
                     {...form.getInputProps("description")}
                 />
 
@@ -42,10 +52,12 @@ const FormDocument = ({ submitFn, initialValues, loading }) => {
                 />
 
                 <Flex justify="end" gap={10}>
-                    <Button onClick={() => modals.closeAll()} color="gray">
-                        {t("actions.cancel")}
+                    <Button  onClick={() => modals.closeAll()} color="gray">
+                        {t("btn.cancel")}
                     </Button>
-                    <Button type="submit" loading={loading}>{t("actions.save")}</Button>
+                    <Button type="submit" loading={loading}>
+                        {t("btn.save")}
+                    </Button>
                 </Flex>
             </Stack>
         </form>

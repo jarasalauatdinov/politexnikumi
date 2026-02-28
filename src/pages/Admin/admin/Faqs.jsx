@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import CreateFaqs from "../../../features/FAQ/Create";
 import UpdateFaqs from "../../../features/FAQ/Update";
 import DeleteFaqs from "../../../features/FAQ/Delete";
+import i18next from "i18next";
 
 
 const Faqs = () => {
@@ -13,8 +14,8 @@ const Faqs = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const currentLang = "ru";
   const { t } = useTranslation();
+  const language = i18next.language;
 
   const getFaqs = async (page = 1) => {
     setLoading(true);
@@ -90,8 +91,8 @@ const Faqs = () => {
             {faqs.map((el) => (
               <Table.Tr key={el.id}>
                 <Table.Td>{el.id}</Table.Td>
-                <Table.Td>{el.question[currentLang]}</Table.Td>
-                <Table.Td>{el.answer[currentLang]}</Table.Td>
+                <Table.Td>{el.question[language]}</Table.Td>
+                <Table.Td>{el.answer[language]}</Table.Td>
                 <Table.Td>
                   <Flex gap={10}>
                     <Button size="xs" color="red" onClick={() => deleteFn(el.id)}>{t("btn.delete")}</Button>

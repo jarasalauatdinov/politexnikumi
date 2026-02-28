@@ -1,5 +1,6 @@
 import { Card, Flex, Group, Image, Text } from '@mantine/core'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 
 function formatDate(dateString) {
@@ -9,7 +10,7 @@ function formatDate(dateString) {
 }
 
 export const OneNews = ({ id, image, title, body, date, darkMode }) => {
-    console.log('Image prop:', image);
+   const { t } = useTranslation();
 
     return (
         <div className={`one-news${darkMode ? ' dark' : ''}`}>
@@ -17,7 +18,6 @@ export const OneNews = ({ id, image, title, body, date, darkMode }) => {
                 style={{
                     background: darkMode ? '#121f36' : '#fff',
                     color: darkMode ? '#F1F5F9' : '#020817',
-                    border: darkMode ? '1px solid #1e293b' : '1px solid #334155',
                 }}
                 shadow="sm"
                 pb={25}
@@ -32,7 +32,7 @@ export const OneNews = ({ id, image, title, body, date, darkMode }) => {
                             radius="md"
                             width={366}
                             height={192}
-                            src={image.path || `https://picsum.photos/366/192?random=${id}`}
+                            src={image?.path}
                             alt={title}
                         />
                     </Flex>
@@ -52,7 +52,7 @@ export const OneNews = ({ id, image, title, body, date, darkMode }) => {
 
                 <Link to={`/news/${id}`}>
                     <Flex align="center" gap={7} mt={10}>
-                        Читать далее <ArrowRight size={16} />
+                        {t("btn.see")} <ArrowRight size={16} />
                     </Flex>
                 </Link>
             </Card>

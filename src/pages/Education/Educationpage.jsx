@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Education.scss'
 import { Clock } from 'lucide-react'
-import { useOutletContext } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { api } from '../../api/api'
 import { Flex, Loader } from '@mantine/core'
 
 const Educationpage = () => {
-  const { darkMode } = useOutletContext();
   const [education, setEducation] = useState([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -31,8 +29,7 @@ const Educationpage = () => {
   }, []);
 
   return (
-    <main className={`education-dark${darkMode ? ' dark' : ''}`}>
-    <section>
+    <main>
       <div className="container">
         <div className="education">
           <div className="education-headline">
@@ -76,7 +73,6 @@ const Educationpage = () => {
           </div>
         </div>
       </div>
-    </section>
   </main >
 
   );

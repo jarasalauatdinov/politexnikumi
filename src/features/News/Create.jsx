@@ -1,81 +1,87 @@
 import React, { useState } from "react";
-import { Loader, Flex, Stack } from "@mantine/core";
+import { Stack } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { api } from "../../api/api";
 import FormNews from "./Form";
 
 const CreateNews = ({ getNews }) => {
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    async function createFn(body) {
-        setLoading(true);
-        try {
-            const formData = new FormData();
+  async function createFn(body) {
+    setLoading(true);
+    try {
+      const formData = new FormData();
 
-            ["kk", "uz", "ru", "en"].forEach((lang) => {
-                formData.append(`title[${lang}]`, body.title[lang] || "");
-                formData.append(`short_content[${lang}]`, body.short_content[lang] || "");
-                formData.append(`content[${lang}]`, body.content[lang] || "");
-            });
+      formData.append("title[kk]", body.title.kk);
+      formData.append("title[uz]", body.title.uz);
+      formData.append("title[ru]", body.title.ru);
+      formData.append("title[en]", body.title.en);
 
-            if (body.author_id) {
-                formData.append("author_id", Number(body.author_id));
-            }
+      formData.append("short_content[kk]", body.short_content.kk);
+      formData.append("short_content[uz]", body.short_content.uz);
+      formData.append("short_content[ru]", body.short_content.ru);
+      formData.append("short_content[en]", body.short_content.en);
 
-            if (body.tags?.length) {
-                body.tags.forEach((tag) => formData.append("tags[]", Number(tag)));
-            }
+      formData.append("content[kk]", body.content.kk);
+      formData.append("content[uz]", body.content.uz);
+      formData.append("content[ru]", body.content.ru);
+      formData.append("content[en]", body.content.en);
 
-            if (body.cover_image) {
-                formData.append("cover_image", body.cover_image);
-            }
+      if (body.author_id) {
+        formData.append("author_id", body.author_id);
+      }
 
-            await api.post("/news/create", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
+      if (body.tags?.length) {
+        body.tags.forEach((tag) => formData.append("tags[]", tag));
+      }
 
-            notifications.show({
-                title: "✅ Success",
-                message: "News created successfully",
-                color: "green",
-            });
+      if (body.cover_images?.length) {
+        body.cover_images.forEach((file) => {
+          formData.append("cover_image", file);
+        });
+      }
 
-            if (getNews) await getNews();
-            modals.closeAll();
-        } catch (error) {
-            console.error("Error creating news:", error);
-            notifications.show({
-                title: "❌ Error",
-                message: "Could not create news",
-                color: "red",
-            });
-        } finally {
-            setLoading(false);
-        }
+      await api.post("/news/create", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      notifications.show({
+        title: "Success",
+        message: "News created successfully",
+        color: "green",
+      });
+
+      if (getNews) await getNews();
+      modals.closeAll();
+    } catch (error) {
+      console.error("Error creating news:", error);
+      notifications.show({
+        title: "Error",
+        message: error.response?.data?.message || "Could not create news",
+        color: "red",
+      });
+    } finally {
+      setLoading(false);
     }
+  }
 
-    return (
-        <Stack style={{ minHeight: "300px", justifyContent: "center" }}>
-            {loading ? (
-                <Flex justify="center" align="center" style={{ height: "200px" }}>
-                    <Loader variant="dots" size="lg" />
-                </Flex>
-            ) : (
-                <FormNews
-                    submitFn={createFn}
-                    initialValues={{
-                        title: { kk: "", uz: "", ru: "", en: "" },
-                        short_content: { kk: "", uz: "", ru: "", en: "" },
-                        content: { kk: "", uz: "", ru: "", en: "" },
-                        author_id: "",
-                        tags: [],
-                        cover_image: null,
-                    }}
-                />
-            )}
-        </Stack>
-    );
+  return (
+    <Stack style={{ minHeight: "300px", justifyContent: "center" }}>
+      <FormNews
+        submitFn={createFn}
+        loading={loading}
+        initialValues={{
+          title: { kk: "", uz: "", ru: "", en: "" },
+          short_content: { kk: "", uz: "", ru: "", en: "" },
+          content: { kk: "", uz: "", ru: "", en: "" },
+          author_id: "",
+          tags: [],
+          cover_images: [],
+        }}
+      />
+    </Stack>
+  );
 };
 
 export default CreateNews;
